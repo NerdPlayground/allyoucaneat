@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block content %}
+<main>
+    <form id="registration-form" action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div id="form-field">
+                {{field.label}}<br/>
+                {{field}}
+            </div>
+        {% endfor %}
+        <input id="registration-button" type="submit" value="Register"/>
+    </form>
+</main>
+{% endblock %}

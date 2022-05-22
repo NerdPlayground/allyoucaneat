@@ -61,7 +61,9 @@ ROOT_URLCONF = 'allyoucaneat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,8 +131,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configure Django App for Heroku.
-django_heroku.settings(locals())
+# custom user
+AUTH_USER_MODEL= "custom_user.User"
 
 # allow external access
 CORS_ALLOW_ALL_ORIGINS= True
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())

@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block content %}
+<main>
+    <form id="authentication-form" action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div id="form-field">
+                {{field.label}}<br/>
+                {{field}}
+            </div>
+        {% endfor %}
+        <input id="authentication-button" type="submit" value="Register"/>
+    </form>
+</main>
+{% endblock %}
