@@ -1,3 +1,4 @@
+import uuid
 from django.db import models 
 from django.utils import timezone 
 from django.utils.translation import gettext_lazy as _ 
@@ -42,6 +43,11 @@ class User(AbstractUser,PermissionsMixin):
     admin-compliant permissions. 
     Username and password are required. Other fields are optional. 
     """ 
+    id= models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     username_validator = UnicodeUsernameValidator() 
     username = models.CharField( 
         _('username'), 

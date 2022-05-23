@@ -10,6 +10,11 @@ class Product(models.Model):
     name= models.CharField(max_length=255)
 
 class Content(models.Model):
+    id= models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     name= models.CharField(max_length=255)
     product= models.ForeignKey(
         "products.Product",
@@ -18,6 +23,11 @@ class Content(models.Model):
     )
 
 class Price(models.Model):
+    id= models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     value= models.IntegerField()
     type= models.CharField(max_length=255)
     product= models.ForeignKey(
