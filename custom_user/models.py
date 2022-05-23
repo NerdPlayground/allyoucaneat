@@ -102,3 +102,6 @@ class User(AbstractUser,PermissionsMixin):
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    def __str__(self):
+        return "%s %s" %(self.first_name,self.last_name)
