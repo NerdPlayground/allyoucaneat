@@ -1,3 +1,21 @@
 from django.contrib import admin
+from receipts.models import Receipt
 
-# Register your models here.
+class ReceiptAdmin(admin.ModelAdmin):
+    list_display= [
+        "id","order","customer",
+        "vendor","paid","created_on"
+    ]
+    search_fields= ["customer"]
+    list_filter= ["vendor"]
+
+    def has_add_permission(self,request):
+        return False
+
+    def has_change_permission(self,request):
+        return False
+
+    def has_delete_permission(self,request):
+        return False
+
+admin.site.register(Receipt,ReceiptAdmin)
