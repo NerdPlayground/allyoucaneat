@@ -55,6 +55,21 @@ def login(request):
     return render(request,'custom_user/authentication.html',context)
 
 @login_required(login_url="custom_user:login")
+def profile(request):
+    context= {}
+    return render(request,"custom_user/profile.html",context)
+
+@login_required(login_url="custom_user:login")
+def edit_profile(request):
+    context= {}
+    return render(request,"custom_user/edit_profile.html",context)
+
+@login_required(login_url="custom_user:login")
+def delete_profile(request):
+    context= {}
+    return render(request,"delete.html",context)
+
+@login_required(login_url="custom_user:login")
 def logout(request):
     logout(request)
     return redirect("")
