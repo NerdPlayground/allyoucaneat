@@ -1,6 +1,55 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="add-product"></div>
+    <div id="add-product">
+        <form id="add-product-form" action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="product-name">Product Name</label><br/>
+                <input required id="product-name" name="product-name" type="text" placeholder="Enter Product Name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="product-contents-group">Contents</label>
+                <div id="product-contents-group">
+                    <div id="contents-section">
+                        <input
+                            id="content-input"
+                            name="content-input"
+                            type="text"
+                            placeholder="Enter Content"
+                            required
+                        />
+                    </div>
+                </div>
+                <button onclick="AddContent('product-contents-group')" type="button">Add Content</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-prices-group">Prices</label>
+                <div id="product-prices-group">
+                    <div id="price-section">
+                        <label for="price-type-input">Type: </label>
+                        <input
+                            id="price-type-input"
+                            name="price-type-input"
+                            type="text"
+                            placeholder="Enter Type"
+                            required
+                        /><label for="price-input">Price: </label>
+                        <input
+                            id="price-input"
+                            name="price-input"
+                            type="number"
+                            placeholder="Enter Price"
+                            required
+                        />
+                    </div>
+                </div>
+                <button onclick="AddPrice('product-prices-group')" type="button">Add Price</button> 
+            </div>
+            <input id="add-product-form-button" name="add-product-form-button" type="submit" value="Create Product">
+        </form>
+    </div>
 </main>
 {% endblock %}

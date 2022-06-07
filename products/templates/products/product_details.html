@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="purchase-product-details-container">
+        <h1>{{ product.name }}</h1>
+        <form id="purchase-product-details-form" action="" method="POST">
+            {% csrf_token %}
+            <div id="purchase-product-contents">
+                <h2>Contents</h2>
+                {% for key,value in product_contents.items %}
+                    {% if product.name == "Fruit Salad" %}
+                        <input
+                            id="{{value.id}}" name="product-contents"
+                            type="checkbox" value="{{value.id}}" checked
+                            onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
+                        />
+                    {% elif product.name == "Fruit Juice" %}
+                        <input
+                            id="{{value.id}}" name="product-contents"
+                            type="checkbox" value="{{value.id}}"
+                            onclick="RestrictOptions('purchase-product-details-form','product-contents')"
+                        />
+                    {% else %}
+                        <input id="{{value.id}}" name="product-contents" type="checkbox" value="{{value.id}}"/>
+                    {% endif %}
+                    <label for="{{value.id}}">{{value.name}}</label>
+                    <br/>
+                {% endfor %}
+            </div>
+            <div id="purchase-product-prices">
+                <h2>Prices</h2>
+                {% for key,value in product_prices.items %}
+                    <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
+                    <label for="{{value.id}}">{{value}}</label>
+                    <br/>
+                {% endfor %}
+            </div>
+            <input id="purchase-product-details-button" type="submit" value="Place Order"/>
+        </form>
+    </div>
+</main>
+{% endblock %}

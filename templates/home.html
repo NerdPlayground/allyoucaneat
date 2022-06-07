@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="home">
+        <h1>All You Can Eat</h1>
+        <button>
+            <a href="{% url 'user:login' %}" style="text-decoration:none;">
+                Welcome
+            </a>
+        </button>
+    </div>
+</main>
+{% endblock %}

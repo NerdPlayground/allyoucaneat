@@ -5,12 +5,18 @@
     <form id="registration-form" action="" method="POST">
         {% csrf_token %}
         {% for field in form %}
-            <div id="form-field">
+            <div class="form-group">
                 {{field.label}}<br/>
                 {{field}}
             </div>
         {% endfor %}
-        <input id="registration-button" type="submit" value="Register"/>
+        <input id="registration-button" class="form-button" type="submit" value="Register"/>
+        <div id="registered-user">
+            <p>
+                Already have an account?
+                <a href="{% url 'user:login' %}">Login here</a>
+            </p>
+        </div>
     </form>
 </main>
 {% endblock %}

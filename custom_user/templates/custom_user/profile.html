@@ -1,6 +1,26 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="user-profile"></div>
+    <div id="user-profile">
+        <form id="user-details" method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="profile-first-name">First Name:</label><br/>
+                <input id="profile-first-name" name="profile-first-name" type="text" value="{{user.first_name}}" oninput="SaveDetail('profile-button')" disabled/>
+                <button id="edit-first-name" type="button" onclick="EditDetail('profile-first-name')">Edit</button>
+            </div>
+            <div class="form-group">
+                <label for="profile-last-name">Last Name:</label><br/>
+                <input id="profile-last-name" name="profile-last-name" type="text" value="{{user.last_name}}" oninput="SaveDetail('profile-button')" disabled/>
+                <button id="edit-last-name" type="button" onclick="EditDetail('profile-last-name')">Edit</button>
+            </div>
+            <div class="form-group">
+                <label for="profile-email">Email:</label><br/>
+                <input id="profile-email" name="profile-email" type="email" value="{{user.email}}" oninput="SaveDetail('profile-button')" disabled/>
+                <button id="edit-email" type="button" onclick="EditDetail('profile-email')">Edit</button>
+            </div>
+            <input id="profile-button" class="form-button" type="submit" value="Save Details" disabled/>
+        </form>
+    </div>
 </main>
 {% endblock %}

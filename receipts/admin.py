@@ -3,11 +3,11 @@ from receipts.models import Receipt
 
 class ReceiptAdmin(admin.ModelAdmin):
     list_display= [
-        "id","order","customer",
-        "vendor","paid","created_on"
+        "id","order","customer","vendor",
+        "paid","ready","created_on"
     ]
-    search_fields= ["customer"]
-    list_filter= ["vendor"]
+    search_fields= ["customer","order"]
+    list_filter= ["paid","ready"]
 
     def has_add_permission(self,request):
         return False

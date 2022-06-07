@@ -1,11 +1,14 @@
 from django.urls import path
-from custom_user.views import register,login,profile,edit_profile,logout
+from custom_user.views import (
+    register,authenticate_user,
+    profile,logout_user,delete_profile
+)
 
-app_name= "custom_user"
+app_name= "user"
 urlpatterns= [
     path("register/",register,name="register"),
-    path("login/",login,name="login"),
+    path("login/",authenticate_user,name="login"),
     path("profile/",profile,name="profile"),
-    path("edit-profile/",edit_profile,name="edit-profile"),
-    path("logout/",logout,name="logout"),
+    path("logout/",logout_user,name="logout"),
+    path("delete-profile/",delete_profile,name="delete-profile"),
 ]

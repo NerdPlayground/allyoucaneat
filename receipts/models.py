@@ -23,4 +23,5 @@ class Receipt(models.Model):
         on_delete= models.DO_NOTHING
     )
     paid= models.BooleanField(default=False)
+    ready= models.BooleanField(default=False)
     created_on= models.DateTimeField(auto_now_add=True)

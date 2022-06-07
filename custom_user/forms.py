@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import Select
 from custom_user.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -16,7 +15,7 @@ class RegistrationForm(UserCreationForm):
         model= User
         fields= [
             "status","first_name","last_name",
-            "email","password1","password2"
+            "phone_number","email","password1","password2"
         ]
 
     def __init__(self, *args, **kwargs):
@@ -24,8 +23,7 @@ class RegistrationForm(UserCreationForm):
         self.fields['status'].widget.attrs.update(
             {
                 'id': 'status',
-                'autofocus': 'autofocus',
-                'placeholder': 'Select Status'
+                'autofocus': 'autofocus'
             }
         )
         self.fields['first_name'].widget.attrs.update(
@@ -44,6 +42,12 @@ class RegistrationForm(UserCreationForm):
             {
                 'id':'email', 
                 'placeholder': 'Enter email'
+            }
+        )
+        self.fields['phone_number'].widget.attrs.update(
+            {
+                'id':'phone_number', 
+                'placeholder': 'Enter phone number'
             }
         )
         self.fields['password1'].widget.attrs.update(

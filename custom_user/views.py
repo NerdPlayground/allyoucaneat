@@ -1,11 +1,25 @@
 from cmath import log
 from django.urls import reverse
 from django.contrib import messages
-from django.http import Http404,HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 from custom_user.forms import RegistrationForm,AuthenticationForm
+
+def redirect_user(user):
+    if user.customer:
+        return HttpResponseRedirect(reverse("products:products"))
+    elif user.sasapay_vendor or user.external_vendor:
+        return HttpResponseRedirect(reverse("vendors:customer-orders"))
+    elif user.is_staff:
+        return HttpResponseRedirect(reverse("products:all-products"))
+
+def home(request):
+    if request.user.is_authenticated:
+        return redirect_user(request.user)
+    context= {}
+    return render(request,"home.html",context)
 
 def register(request):
     form= RegistrationForm()
@@ -14,62 +28,74 @@ def register(request):
         if form.is_valid():
             user= form.save(commit=False)
             status= form.cleaned_data["status"]
+
             if status == "Customer":
                 user.customer= True
-                user.save()
-                return redirect("")
             elif status == "External Vendor":
                 user.external_vendor= True
-                user.save()
-                return redirect("")
             elif status == "SasaPay Vendor":
-                user.saspay_vendor= True
-                user.save()
-                return redirect("")
+                user.sasapay_vendor= True
             else:
-                messages.error("Error: Select existing status")
+                messages.error(request,"Error: Select existing status")
+            
+            user.username= user.id
+            user.save()
+            login(request,user)
+            return redirect_user(user)
         else:
-            messages.error("Error: Unable to register")
+            messages.error(request,"Error: Unable to register user")
     context= {"form":form}
     return render(request,'custom_user/registration.html',context)
 
-def login(request):
+def authenticate_user(request):
     if request.user.is_authenticated:
-        return redirect("")
+        return redirect_user(request.user)
     
     form= AuthenticationForm()
     if request.method == "POST":
         form= AuthenticationForm(request.POST)
         if form.is_valid():
-            username= form.cleaned_data["username"]
-            password= form.cleaned_data["password"]
+            username= request.POST.get("email")
+            password= request.POST.get("password")
             user= authenticate(username=username,password=password)
             if user is not None:
-                login(user)
-                return redirect("")
+                login(request,user)
+                return redirect_user(user)
             else:
-                messages.error("Error: User with provided credentials does not exist")
+                messages.error(request,"Error: User with provided credentials does not exist")
         else:
-            messages.error("Error: Unable to authenticate user")
+            messages.error(request,"Error: Unable to authenticate user")
     context= {"form":form}
     return render(request,'custom_user/authentication.html',context)
 
-@login_required(login_url="custom_user:login")
+@login_required(login_url="user:login")
 def profile(request):
-    context= {}
+    user= request.user
+    if request.method == 'POST':
+        edited_first_name= request.POST.get('profile-first-name')
+        user.first_name= edited_first_name if edited_first_name is not None else user.first_name
+
+        edited_last_name= request.POST.get('profile-last-name')
+        user.last_name= edited_last_name if edited_last_name is not None else user.last_name
+
+        edited_email= request.POST.get('profile-email')
+        user.email= edited_email if edited_email is not None else user.email
+        user.save()
+
+        return HttpResponseRedirect(reverse("user:profile"))
+    context= {"user":user}
     return render(request,"custom_user/profile.html",context)
 
-@login_required(login_url="custom_user:login")
-def edit_profile(request):
-    context= {}
-    return render(request,"custom_user/edit_profile.html",context)
-
-@login_required(login_url="custom_user:login")
+@login_required(login_url="user:login")
 def delete_profile(request):
-    context= {}
+    user= request.user
+    if request.method == "POST":
+        user.delete()
+        return HttpResponseRedirect(reverse("home"))
+    context= {"obj":user}
     return render(request,"delete.html",context)
 
-@login_required(login_url="custom_user:login")
-def logout(request):
+@login_required(login_url="user:login")
+def logout_user(request):
     logout(request)
-    return redirect("")
+    return redirect("home")

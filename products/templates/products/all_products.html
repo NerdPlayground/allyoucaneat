@@ -1,6 +1,56 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="all-products"></div>
+    <div id="all-products-container">
+        <div id="add-product">
+            <button id="add-product-button" type="button">
+            <a href="{% url 'products:add-product' %}">Add Product</a>
+            </button>
+        </div>
+        
+        {% for product,product_details in catalogue.items %}
+            <div id="product">
+                <h2>{{product.name}}</h2>
+                <button id="edit-product-button" type="button">
+                    <a href="{% url 'products:edit-product' product.id %}">Edit</a>
+                </button>
+                <button id="delete-product-button" type="button">
+                    <a href="{% url 'products:delete-product' product.id %}">Delete</a>
+                </button>
+                <hr/>
+                {% for product_detail in product_details %}
+                <div id="product-detail">
+                    {% if forloop.first %}
+                        <h3>Contents</h3>
+                        <ul id="detail-contents">
+                            {% for content,value in product_detail.items %}
+                                <li>{{value}}</li>
+                                <button id="edit-content-button" type="button">
+                                    <a href="{% url 'products:edit-content' value.id %}">Edit</a>
+                                </button>
+                                <button id="delete-content-button" type="button">
+                                    <a href="{% url 'products:delete-content' value.id %}">Delete</a>
+                                </button>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h3>Prices</h3>
+                        <ul id="detail-contents">
+                            {% for content,value in product_detail.items %}
+                                <li>{{value.type}} - {{value.value}}</li>
+                                <button id="edit-price-button" type="button">
+                                    <a href="{% url 'products:edit-price' value.id %}">Edit</a>
+                                </button>
+                                <button id="delete-price-button" type="button">
+                                    <a href="{% url 'products:delete-price' value.id %}">Delete</a>
+                                </button>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 </main>
 {% endblock %}

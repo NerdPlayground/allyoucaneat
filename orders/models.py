@@ -16,6 +16,11 @@ class Order(models.Model):
         "products.Content",
         related_name="orders",
     )
+    price= models.ForeignKey(
+        "products.Price",
+        related_name="price",
+        on_delete= models.DO_NOTHING
+    )
     customer= models.ForeignKey(
         "custom_user.User",
         related_name="orders",
@@ -23,3 +28,6 @@ class Order(models.Model):
     )
     paid= models.BooleanField(default=False)
     created_on= models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "%s's order" %(self.customer.first_name)

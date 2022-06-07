@@ -1,6 +1,19 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="pay-order"></div>
+    <div id="pay-order-container">
+        <form id="pay-order-form">
+            <div class="form-group">
+                <label for="verification-code">Verification Code: </label>
+                <input id="verification-code" type="text" name="verification-code" placeholder="Enter Verification Code"/>
+            </div>
+            <input id="pay-order-button" type="submit" value="Complete Payment"/>
+        </form>
+        <!-- <button id="-button" type="button">
+            <a href="{{request.META.HTTP_REFERER}}">
+                Back To Order
+            </a>
+        </button> -->
+    </div>
 </main>
 {% endblock %}

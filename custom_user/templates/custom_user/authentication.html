@@ -10,7 +10,13 @@
                 {{field}}
             </div>
         {% endfor %}
-        <input id="authentication-button" type="submit" value="Register"/>
+        <input id="authentication-button" type="submit" value="Login"/>
+        <div id="unregistered-user">
+            <p>
+                Don't have an account?
+                <a href="{% url 'user:register' %}">Sign up here</a>
+            </p>
+        </div>
     </form>
 </main>
 {% endblock %}

@@ -59,9 +59,10 @@ class User(AbstractUser,PermissionsMixin):
             'unique': _("A user with that username already exists."), 
         }, 
     ) 
-    first_name = models.CharField(_('first name'), max_length=150, blank=False)
-    last_name = models.CharField(_('last name'), max_length=150, blank=False)
-    email = models.EmailField(_('email address'), blank=False, unique=True) 
+    first_name = models.CharField(_('first name'),max_length=150,blank=False)
+    last_name = models.CharField(_('last name'),max_length=150,blank=False)
+    email = models.EmailField(_('email address'),blank=False,unique=True)
+    phone_number= models.CharField(_('phone number'),max_length=13,blank=False)
     is_staff = models.BooleanField( 
         _('staff status'), 
         default=False, 

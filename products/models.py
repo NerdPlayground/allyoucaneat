@@ -43,4 +43,4 @@ class Price(models.Model):
     )
 
     def __str__(self):
-        return "%s %i" %(self.type,self.value)
+        return "%s - %i" %(self.type,self.value)

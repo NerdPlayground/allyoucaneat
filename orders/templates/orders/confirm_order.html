@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="confirm-order-container">
+        <ul style="list-style-type: none;">
+            <li>Order: {{order.id}}</li>
+            <li>Product: {{order.product}}</li>
+            <li>Contents:
+                <ul>
+                    {% for content in contents %}
+                        <li>{{content.name}}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>Type: {{order.price.type}}</li>
+            <li>Price: {{order.price.value}}</li>
+        </ul>
+    </div>
+    <div id="confirm-order-container-buttons">
+        <button id="pay-order-button" type="button">
+            <a href="{% url 'orders:pay-order' order.id %}">
+                Pay Order
+            </a>
+        </button>
+        <button id="cancel-order-button" type="button">
+            <a href="{% url 'orders:delete-order' order.id %}">
+                Cancel Order
+            </a>
+        </button>
+    </div>
+</main>
+{% endblock %}

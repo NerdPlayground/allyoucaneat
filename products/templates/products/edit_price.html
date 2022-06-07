@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="edit-price-container">
+        <form id="edit-price-form" action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="edit-price-type">Type: </label>
+                <input id="edit-price-type" name="edit-price-type" type="text" value="{{price.type}}" required/>
+            </div>
+            <div class="form-group">
+                <label for="edit-price">Price: </label>
+                <input id="edit-price" name="edit-price" type="number" value="{{price.value}}" required/>
+            </div>
+            <input id="edit-price-form-button" name="edit-price-form-button" type="submit" value="Save Changes"/>
+        </form>
+    </div>
+</main>
+{% endblock %}
