@@ -3,8 +3,8 @@ from custom_user.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class RegistrationForm(UserCreationForm):
-    status= forms.ChoiceField(
-        label="Status",
+    role= forms.ChoiceField(
+        label="Role",
         choices=(
             ("Customer","Customer"),
             ("SasaPay Vendor","SasaPay Vendor"),
@@ -14,15 +14,15 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model= User
         fields= [
-            "status","first_name","last_name",
+            "role","first_name","last_name",
             "phone_number","email","password1","password2"
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['status'].widget.attrs.update(
+        self.fields['role'].widget.attrs.update(
             {
-                'id': 'status',
+                'id': 'role',
                 'autofocus': 'autofocus'
             }
         )
