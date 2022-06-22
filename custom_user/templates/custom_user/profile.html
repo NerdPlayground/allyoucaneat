@@ -19,6 +19,11 @@
                 <input id="profile-email" name="profile-email" type="email" value="{{user.email}}" oninput="SaveDetail('profile-button')" disabled/>
                 <button id="edit-email" type="button" onclick="EditDetail('profile-email')">Edit</button>
             </div>
+            <div class="form-group">
+                <label for="profile-phone-number">Phone Number:</label><br/>
+                <input id="profile-phone-number" name="profile-phone-number" type="text" value="{{user.phone_number}}" minlength="13" maxlength="13" oninput="SaveDetail('profile-button')" disabled/>
+                <button id="edit-phone-number" type="button" onclick="EditDetail('profile-phone-number')">Edit</button>
+            </div>
             <input id="profile-button" class="form-button" type="submit" value="Save Details" disabled/>
         </form>
     </div>

@@ -27,16 +27,16 @@ def register(request):
         form= RegistrationForm(request.POST)
         if form.is_valid():
             user= form.save(commit=False)
-            status= form.cleaned_data["status"]
+            role= form.cleaned_data["role"]
 
-            if status == "Customer":
+            if role == "Customer":
                 user.customer= True
-            elif status == "External Vendor":
+            elif role == "External Vendor":
                 user.external_vendor= True
-            elif status == "SasaPay Vendor":
+            elif role == "SasaPay Vendor":
                 user.sasapay_vendor= True
             else:
-                messages.error(request,"Error: Select existing status")
+                messages.error(request,"Error: Select existing role")
             
             user.username= user.id
             user.save()
@@ -55,7 +55,7 @@ def authenticate_user(request):
     if request.method == "POST":
         form= AuthenticationForm(request.POST)
         if form.is_valid():
-            username= request.POST.get("email")
+            username= request.POST.get("phone_number")
             password= request.POST.get("password")
             user= authenticate(username=username,password=password)
             if user is not None:
@@ -80,9 +80,13 @@ def profile(request):
 
         edited_email= request.POST.get('profile-email')
         user.email= edited_email if edited_email is not None else user.email
-        user.save()
 
-        return HttpResponseRedirect(reverse("user:profile"))
+        edited_phone_number= request.POST.get('profile-phone-number')
+        if len(edited_phone_number) == 13:
+            user.phone_number= edited_phone_number if edited_phone_number is not None else user.phone_number
+            user.save()
+            return HttpResponseRedirect(reverse("user:profile"))
+        
     context= {"user":user}
     return render(request,"custom_user/profile.html",context)
 

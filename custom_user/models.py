@@ -13,8 +13,8 @@ class MyUserManager(UserManager):
         if not username: 
             raise ValueError('The given username must be set')
 
-        if not email: 
-            raise ValueError('The given email must be set')
+        if not extra_fields.get("phone_number"): 
+            raise ValueError('The given phone number must be set')
          
         email = self.normalize_email(email) 
         username= self.model.normalize_username(username) 
@@ -23,14 +23,15 @@ class MyUserManager(UserManager):
         user.save(using=self._db) 
         return user 
 
-    def create_user(self, username, email, password=None, **extra_fields): 
+    def create_user(self, username, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False) 
         extra_fields.setdefault('is_superuser', False) 
         return self._create_user(username, email, password, **extra_fields) 
 
-    def create_superuser(self, username, email, password=None, **extra_fields): 
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True) 
         extra_fields.setdefault('is_superuser', True) 
+
         if extra_fields.get('is_staff') is not True: 
             raise ValueError('Superuser must have is_staff=True.') 
         if extra_fields.get('is_superuser') is not True: 
@@ -61,8 +62,8 @@ class User(AbstractUser,PermissionsMixin):
     ) 
     first_name = models.CharField(_('first name'),max_length=150,blank=False)
     last_name = models.CharField(_('last name'),max_length=150,blank=False)
-    email = models.EmailField(_('email address'),blank=False,unique=True)
-    phone_number= models.CharField(_('phone number'),max_length=13,blank=False)
+    email = models.EmailField(_('email address'),blank=True,unique=True)
+    phone_number= models.CharField(_('phone number'),max_length=13,blank=False,unique=True)
     is_staff = models.BooleanField( 
         _('staff status'), 
         default=False, 
@@ -101,7 +102,7 @@ class User(AbstractUser,PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now) 
     objects = MyUserManager()
     EMAIL_FIELD = 'email'
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):

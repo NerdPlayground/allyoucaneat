@@ -4,14 +4,14 @@ from custom_user.models import User
 class UserAdmin(admin.ModelAdmin):
     list_display= [
         "id","first_name","last_name",
-        "email","phone_number","is_active","is_staff",
+        "phone_number","is_active","is_staff",
         "customer","sasapay_vendor","external_vendor"
     ]
     list_filter= [
         "is_active","is_staff","customer",
         "sasapay_vendor","external_vendor"
     ]
-    search_fields= ["first_name","last_name","email","phone_number"]
+    search_fields= ["first_name","last_name","phone_number"]
 
     fieldsets=[
         ("Information",{"fields":["first_name","last_name","email","phone_number"]}),

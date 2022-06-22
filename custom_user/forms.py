@@ -15,7 +15,7 @@ class RegistrationForm(UserCreationForm):
         model= User
         fields= [
             "role","first_name","last_name",
-            "phone_number","email","password1","password2"
+            "phone_number","password1","password2"
         ]
 
     def __init__(self, *args, **kwargs):
@@ -38,12 +38,6 @@ class RegistrationForm(UserCreationForm):
                 'placeholder': 'Enter last name'
             }
         )
-        self.fields['email'].widget.attrs.update(
-            {
-                'id':'email', 
-                'placeholder': 'Enter email'
-            }
-        )
         self.fields['phone_number'].widget.attrs.update(
             {
                 'id':'phone_number', 
@@ -64,18 +58,18 @@ class RegistrationForm(UserCreationForm):
         )
 
 class AuthenticationForm(forms.Form):
-    email= forms.EmailField(label="Email")
+    phone_number= forms.CharField(label="Phone Number")
     password= forms.CharField(
         label="Password",
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
     )
     
-    email.widget.attrs.update(
+    phone_number.widget.attrs.update(
         {
-            'id':'email',
+            'id':'phone_number',
             'autofocus': 'autofocus',
-            'placeholder': 'Enter email'
+            'placeholder': 'Enter phone number'
         }
     )
     password.widget.attrs.update(
