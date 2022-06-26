@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="roles-container">
+        <form id="role-form" method="POST" action="">
+            {% csrf_token %}
+            {% for field in form %}
+                <div id="form-group">
+                    {{field.label}}<br/>
+                    {{field}}
+                </div>
+            {% endfor %}
+            <input id="roles-button" class="form-button" type="submit" value="Submit">
+        </form>
+    </div>
+</main>
+{% endblock %}

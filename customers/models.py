@@ -1,3 +1,5 @@
 from django.db import models
+from custom_user.models import User
 
-# Create your models here.
+class Customers(User):
+    pass

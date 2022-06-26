@@ -1,11 +1,13 @@
 from cmath import log
 from django.urls import reverse
 from django.contrib import messages
+from vendors.forms import VendorRegistration
+from customers.forms import CustomerRegistration
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-from custom_user.forms import RegistrationForm,AuthenticationForm
+from custom_user.forms import RoleForm,RegistrationForm,AuthenticationForm
 
 def redirect_user(user):
     if user.customer:
@@ -21,13 +23,41 @@ def home(request):
     context= {}
     return render(request,"home.html",context)
 
-def register(request):
+def roles(request):
+    form= RoleForm()
+    if request.method == 'POST':
+        form= RoleForm(request.POST)
+        if form.is_valid():
+            role= form.cleaned_data["role"]
+            if role in ["Customer","External Vendor","SasaPay Vendor"]:
+                return HttpResponseRedirect(reverse("user:register",args=(role,)))
+            else:
+                messages.error(request,"Error: Select existing role")
+        else:
+            messages.error(request,"Error: Unable to register user")
+    context= {"form":form}
+    return render(request,"custom_user/roles.html",context)
+
+def register_customer(request):
+    form= CustomerRegistration()
+    if request.method == "POST":
+        pass
+    context= {"form":form}
+    return render(request,"custom_user/register.html",context)
+
+def register_vendor(request):
+    form= VendorRegistration()
+    if request.method == "POST":
+        pass
+    context= {"form":form}
+    return render(request,"custom_user/register.html",context)
+
+def register(request,role):
     form= RegistrationForm()
     if request.method == 'POST':
         form= RegistrationForm(request.POST)
         if form.is_valid():
             user= form.save(commit=False)
-            role= form.cleaned_data["role"]
 
             if role == "Customer":
                 user.customer= True
@@ -82,10 +112,10 @@ def profile(request):
         user.email= edited_email if edited_email is not None else user.email
 
         edited_phone_number= request.POST.get('profile-phone-number')
-        if len(edited_phone_number) == 13:
-            user.phone_number= edited_phone_number if edited_phone_number is not None else user.phone_number
-            user.save()
-            return HttpResponseRedirect(reverse("user:profile"))
+        user.phone_number= edited_phone_number if edited_phone_number is not None else user.phone_number
+        user.save()
+        
+        return HttpResponseRedirect(reverse("user:profile"))
         
     context= {"user":user}
     return render(request,"custom_user/profile.html",context)

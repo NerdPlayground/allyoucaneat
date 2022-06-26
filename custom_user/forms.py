@@ -2,7 +2,7 @@ from django import forms
 from custom_user.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-class RegistrationForm(UserCreationForm):
+class RoleForm(UserCreationForm):
     role= forms.ChoiceField(
         label="Role",
         choices=(
@@ -11,13 +11,11 @@ class RegistrationForm(UserCreationForm):
             ("External Vendor","External Vendor"),
         )
     )
+
     class Meta:
         model= User
-        fields= [
-            "role","first_name","last_name",
-            "phone_number","password1","password2"
-        ]
-
+        fields= ["role"]
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['role'].widget.attrs.update(
@@ -26,6 +24,17 @@ class RegistrationForm(UserCreationForm):
                 'autofocus': 'autofocus'
             }
         )
+
+class RegistrationForm(UserCreationForm):
+    class Meta:
+        model= User
+        fields= [
+            "first_name","last_name",
+            "phone_number","password1","password2"
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update(
             {
                 'id':'first_name', 
