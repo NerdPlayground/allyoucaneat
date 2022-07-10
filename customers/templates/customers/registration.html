@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="customer-registration-container">
+        <form id="customer-registration-form" action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{field.label}}<br/>
+                    {{field}}
+                </div>
+            {% endfor %}
+            <input id="customer-registration-button" class="form-button"  type="submit" value="Register">
+        </form>
+    </div>
+</main>
+{% endblock %}

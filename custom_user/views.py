@@ -1,8 +1,6 @@
 from cmath import log
 from django.urls import reverse
 from django.contrib import messages
-from vendors.forms import VendorRegistration
-from customers.forms import CustomerRegistration
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
@@ -24,52 +22,25 @@ def home(request):
     return render(request,"home.html",context)
 
 def roles(request):
+    url_map={
+        "sasapay-vendor": "vendors",
+        "external-vendor": "vendors",
+        "customer": "customers"
+    }
+
     if request.method == 'POST':
-        if request.POST.get("user-roles") != None:
-            pass
+        user_role= request.POST.get("user-roles")
+        if user_role != None:
+            return HttpResponseRedirect(
+                reverse(
+                    "%s:register-%s"
+                    %(url_map[user_role],user_role)
+                )
+            )
         else:
             messages.error(request,"Error: Select existing role")
     context= {}
     return render(request,"custom_user/roles.html",context)
-
-def register_customer(request):
-    form= CustomerRegistration()
-    if request.method == "POST":
-        pass
-    context= {"form":form}
-    return render(request,"custom_user/register.html",context)
-
-def register_vendor(request):
-    form= VendorRegistration()
-    if request.method == "POST":
-        pass
-    context= {"form":form}
-    return render(request,"custom_user/register.html",context)
-
-def register(request,role):
-    form= RegistrationForm()
-    if request.method == 'POST':
-        form= RegistrationForm(request.POST)
-        if form.is_valid():
-            user= form.save(commit=False)
-
-            if role == "Customer":
-                user.customer= True
-            elif role == "External Vendor":
-                user.external_vendor= True
-            elif role == "SasaPay Vendor":
-                user.sasapay_vendor= True
-            else:
-                messages.error(request,"Error: Select existing role")
-            
-            user.username= user.id
-            user.save()
-            login(request,user)
-            return redirect_user(user)
-        else:
-            messages.error(request,"Error: Unable to register user")
-    context= {"form":form}
-    return render(request,'custom_user/registration.html',context)
 
 def authenticate_user(request):
     if request.user.is_authenticated:
