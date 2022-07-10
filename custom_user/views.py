@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-from custom_user.forms import RoleForm,RegistrationForm,AuthenticationForm
+from custom_user.forms import RegistrationForm,AuthenticationForm
 
 def redirect_user(user):
     if user.customer:
@@ -24,18 +24,12 @@ def home(request):
     return render(request,"home.html",context)
 
 def roles(request):
-    form= RoleForm()
     if request.method == 'POST':
-        form= RoleForm(request.POST)
-        if form.is_valid():
-            role= form.cleaned_data["role"]
-            if role in ["Customer","External Vendor","SasaPay Vendor"]:
-                return HttpResponseRedirect(reverse("user:register",args=(role,)))
-            else:
-                messages.error(request,"Error: Select existing role")
+        if request.POST.get("user-roles") != None:
+            pass
         else:
-            messages.error(request,"Error: Unable to register user")
-    context= {"form":form}
+            messages.error(request,"Error: Select existing role")
+    context= {}
     return render(request,"custom_user/roles.html",context)
 
 def register_customer(request):

@@ -4,12 +4,15 @@
     <div id="roles-container">
         <form id="role-form" method="POST" action="">
             {% csrf_token %}
-            {% for field in form %}
-                <div id="form-group">
-                    {{field.label}}<br/>
-                    {{field}}
-                </div>
-            {% endfor %}
+            <div id="form-group">
+                <label id="user-roles-label" for="user-roles">Select Role:</label>
+                <select id="user-roles" name="user-roles" required>
+                    <option value="" selected disabled>------------</option>
+                    <option value="customer">Customer</option>
+                    <option value="sasapay-vendor">SasaPay Vendor</option>
+                    <option value="external-vendor">External Vendor</option>
+                </select>
+            </div>
             <input id="roles-button" class="form-button" type="submit" value="Submit">
         </form>
     </div>

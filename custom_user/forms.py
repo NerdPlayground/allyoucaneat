@@ -2,29 +2,6 @@ from django import forms
 from custom_user.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-class RoleForm(UserCreationForm):
-    role= forms.ChoiceField(
-        label="Role",
-        choices=(
-            ("Customer","Customer"),
-            ("SasaPay Vendor","SasaPay Vendor"),
-            ("External Vendor","External Vendor"),
-        )
-    )
-
-    class Meta:
-        model= User
-        fields= ["role"]
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['role'].widget.attrs.update(
-            {
-                'id': 'role',
-                'autofocus': 'autofocus'
-            }
-        )
-
 class RegistrationForm(UserCreationForm):
     class Meta:
         model= User
