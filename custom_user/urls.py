@@ -1,7 +1,8 @@
 from django.urls import path
 from custom_user.views import (
     roles,authenticate_user,
-    profile,logout_user,delete_profile
+    profile,logout_user,
+    delete_profile
 )
 
 app_name= "user"

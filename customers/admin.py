@@ -13,7 +13,6 @@ class CustomersAdmin(admin.ModelAdmin):
     fieldsets=[
         ("Information",{"fields":["first_name","last_name","email","phone_number"]}),
         ("Status",{"fields":["is_active","is_staff","is_superuser"]}),
-        ("Category",{"fields":["customer","sasapay_vendor","external_vendor"]}),
     ]
 
     def has_add_permission(self,request):

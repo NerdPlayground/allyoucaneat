@@ -1,31 +1,34 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="user-profile">
-        <form id="user-details" method="POST" action="">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="profile-first-name">First Name:</label><br/>
-                <input id="profile-first-name" name="profile-first-name" type="text" value="{{user.first_name}}" oninput="SaveDetail('profile-button')" disabled/>
-                <button id="edit-first-name" type="button" onclick="EditDetail('profile-first-name')">Edit</button>
+    <div id="profile-container">
+        <div id="prodile-user-username">
+            Username: {{username}}
+        </div>
+        <div id="prodile-user-name">
+            Name: {{first_name}} {{last_name}}
+        </div>
+        <div id="prodile-user-email">
+            Email: {{email}}
+        </div>
+        <div id="prodile-user-phone-number">
+            Phone Number: {{phone_number}}
+        </div>
+        {% if vendor %}
+            <div id="prodile-user-business-name">
+                Business Name: {{business_name}}
             </div>
-            <div class="form-group">
-                <label for="profile-last-name">Last Name:</label><br/>
-                <input id="profile-last-name" name="profile-last-name" type="text" value="{{user.last_name}}" oninput="SaveDetail('profile-button')" disabled/>
-                <button id="edit-last-name" type="button" onclick="EditDetail('profile-last-name')">Edit</button>
+            <div id="prodile-user-till-number">
+                Till Number: {{till_number}}
             </div>
-            <div class="form-group">
-                <label for="profile-email">Email:</label><br/>
-                <input id="profile-email" name="profile-email" type="email" value="{{user.email}}" oninput="SaveDetail('profile-button')" disabled/>
-                <button id="edit-email" type="button" onclick="EditDetail('profile-email')">Edit</button>
+            <div id="edit-profile">
+                <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
             </div>
-            <div class="form-group">
-                <label for="profile-phone-number">Phone Number:</label><br/>
-                <input id="profile-phone-number" name="profile-phone-number" type="text" value="{{user.phone_number}}" minlength="13" maxlength="13" oninput="SaveDetail('profile-button')" disabled/>
-                <button id="edit-phone-number" type="button" onclick="EditDetail('profile-phone-number')">Edit</button>
+        {% else %}
+            <div id="edit-profile">
+                <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
             </div>
-            <input id="profile-button" class="form-button" type="submit" value="Save Details" disabled/>
-        </form>
+        {% endif %}
     </div>
 </main>
 {% endblock %}

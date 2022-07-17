@@ -1,11 +1,12 @@
-from cmath import log
 from django.urls import reverse
+from vendors.models import Vendor
 from django.contrib import messages
+from customers.models import Customers
+from custom_user.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-from custom_user.forms import RegistrationForm,AuthenticationForm
 
 def redirect_user(user):
     if user.customer:
@@ -66,23 +67,26 @@ def authenticate_user(request):
 @login_required(login_url="user:login")
 def profile(request):
     user= request.user
-    if request.method == 'POST':
-        edited_first_name= request.POST.get('profile-first-name')
-        user.first_name= edited_first_name if edited_first_name is not None else user.first_name
+    customer= user.customer
+    vendor= user.sasapay_vendor or user.external_vendor
+    user= (
+        Customers.objects.get(id=user.id) if customer else
+        Vendor.objects.get(id=user.id) if vendor else None
+    )
 
-        edited_last_name= request.POST.get('profile-last-name')
-        user.last_name= edited_last_name if edited_last_name is not None else user.last_name
-
-        edited_email= request.POST.get('profile-email')
-        user.email= edited_email if edited_email is not None else user.email
-
-        edited_phone_number= request.POST.get('profile-phone-number')
-        user.phone_number= edited_phone_number if edited_phone_number is not None else user.phone_number
-        user.save()
-        
-        return HttpResponseRedirect(reverse("user:profile"))
-        
-    context= {"user":user}
+    context= {
+        "username":user.username,
+        "first_name":user.first_name,
+        "last_name":user.last_name,
+        "email":user.email,
+        "phone_number":user.phone_number,
+        "vendor": False
+    }
+    if vendor:
+        context["vendor"]= True
+        context["business_name"]= user.business_name
+        context["till_number"]= user.till_number
+    
     return render(request,"custom_user/profile.html",context)
 
 @login_required(login_url="user:login")

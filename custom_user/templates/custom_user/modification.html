@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="modification-container">
+        <form id="modification-form" action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.first_name.label}}<br/>
+                <input id="id_first_name" name="first_name" type="text" value="{{user.first_name}}" required/>
+            </div>
+            <div class="form-group">
+                {{form.last_name.label}}<br/>
+                <input id="id_last_name" name="last_name" type="text" value="{{user.last_name}}" required/>
+            </div>
+            <div class="form-group">
+                {{form.email.label}}<br/>
+                <input id="id_email" name="email" type="text" value="{{user.email}}" required/>
+            </div>
+            <div class="form-group">
+                {{form.phone_number.label}}<br/>
+                <input id="id_phone_number" name="phone_number" type="text" value="{{user.phone_number}}" minlength=13 maxlength=13 required/>
+            </div>
+            {% if user.sasapay_vendor or user.external_vendor %}
+                <div class="form-group">
+                    {{form.business_name.label}}<br/>
+                    <input id="id_business_name" name="business_name" type="text" value="{{user.business_name}}" required/>
+                </div>
+                <div class="form-group">
+                    {{form.till_number.label}}<br/>
+                    <input id="id_till_number" name="till_number" type="text" value="{{user.till_number}}" required/>
+                </div>
+            {% endif %}
+            <input id="modification-button" class="form-button" type="submit" value="Save Details"/>
+        </form>
+    </div>
+</main>
+{% endblock %}
