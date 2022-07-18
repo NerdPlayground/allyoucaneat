@@ -31,7 +31,7 @@
                 <h2>Prices</h2>
                 {% for key,value in product_prices.items %}
                     <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
-                    <label for="{{value.id}}">{{value}}</label>
+                    <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
                     <br/>
                 {% endfor %}
             </div>

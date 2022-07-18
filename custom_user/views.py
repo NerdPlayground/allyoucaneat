@@ -12,9 +12,7 @@ def redirect_user(user):
     if user.customer:
         return HttpResponseRedirect(reverse("products:products"))
     elif user.sasapay_vendor or user.external_vendor:
-        return HttpResponseRedirect(reverse("vendors:customer-orders"))
-    elif user.is_staff:
-        return HttpResponseRedirect(reverse("products:all-products"))
+        return HttpResponseRedirect(reverse("products:my-shop"))
 
 def home(request):
     if request.user.is_authenticated:

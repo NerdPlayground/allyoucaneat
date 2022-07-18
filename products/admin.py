@@ -12,7 +12,10 @@ class ProductPrice(admin.TabularInline):
     fields= ["type","value"]
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display= ["id","name","product_contents","product_prices"]
+    list_display= [
+        "id","vendor","name",
+        "product_contents","product_prices"
+    ]
     search_fields= ["name"]
     inlines= [ProductContent,ProductPrice]
 
@@ -29,5 +32,14 @@ class ProductAdmin(admin.ModelAdmin):
             '\n',"<li style='list-style-type:none;'>{}</li>",
             (price for price in prices)
         )
+    
+    def has_add_permission(self,request):
+        return False
+    
+    def has_change_permission(self,request,obj=None):
+        return False
+    
+    def has_delete_permission(self,request,obj=None):
+        return True
 
 admin.site.register(Product,ProductAdmin)

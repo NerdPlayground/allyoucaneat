@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="all-products-container">
+    <div id="my-shop-container">
         <div id="add-product">
             <button id="add-product-button" type="button">
             <a href="{% url 'products:add-product' %}">Add Product</a>
@@ -24,7 +24,7 @@
                         <h3>Contents</h3>
                         <ul id="detail-contents">
                             {% for content,value in product_detail.items %}
-                                <li>{{value}}</li>
+                                <li>{{value.name}}</li>
                                 <button id="edit-content-button" type="button">
                                     <a href="{% url 'products:edit-content' value.id %}">Edit</a>
                                 </button>

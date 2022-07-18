@@ -26,7 +26,7 @@ def register_vendor(request,role):
             user.username= user.id
             user.save()
             login(request,user)
-            return HttpResponseRedirect(reverse("vendors:customer-orders"))
+            return HttpResponseRedirect(reverse("products:my-shop"))
         else:
             messages.error(request,"Error: Unable to register vendor")
     context= {"form":form}

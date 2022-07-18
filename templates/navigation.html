@@ -21,6 +21,12 @@
                 {% endif %}
             </div>
         {% elif request.user.external_vendor or request.user.sasapay_vendor %}
+            <div id="orders-link">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'vendors:customer-orders' %}">Orders</a>
+                {% endif %}
+            </div>
+
             <div id="receipts-link">
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'vendors:customer-receipts' %}">Receipts</a>
