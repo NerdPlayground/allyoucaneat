@@ -12,13 +12,16 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 from sasapay.models import RequestPaymentResponse,PaymentProcessResult
 
+def get_merchant_code(order):
+    return order.product.vendor.till_number
+
 def get_order(pk):
     return get_object_or_404(Order,pk=pk)
 
 def get_error_message(data):
     error_response= str()
-    for error_key,error_value in data:
-        error_response += "%s: %s\n" %(error_key,error_value)
+    for error_key,error_value in data.items():
+        error_response += "%s: %s, " %(error_key,error_value)
     return error_response
 
 @login_required(login_url="user:login")
@@ -50,16 +53,17 @@ def payment_process_results(request):
 @login_required(login_url="user:login")
 @is_customer
 def pay_order(request,pk):
-    order= get_order(pk)
     client_token= get_client_token()
     headers= {
         "Authorization": "Bearer %s" %client_token["access_token"]
     }
 
+    order= get_order(pk)
     payload={
-        "MerchantCode": settings.MERCHANT_CODE,
+        "MerchantCode": get_merchant_code(order),
+        "NetworkCode": settings.NETWORK_CODE,
         "PhoneNumber": request.user.phone_number,
-        "TransactionDesc": "Pay for %s" %(order.product),
+        "TransactionDesc": "Pay for %s" %(order.product.name),
         "AccountReference": str(order.id),
         "Currency": settings.CURRENCY,
         "Amount": order.price.value,
@@ -96,7 +100,7 @@ def complete_payment(request,pk):
     order= get_order(pk)
     context= {}
     if request.method == "POST":
-        request_payment_response= RequestPaymentResponse.objects.filter(
+        request_payment_response= RequestPaymentResponse.objects.get(
             MerchantRequestID= str(order.id),
         )
 
@@ -107,7 +111,7 @@ def complete_payment(request,pk):
 
         payload= {
             "CheckoutRequestID": request_payment_response.CheckoutRequestID,
-            "MerchantCode": settings.MERCHANT_CODE,
+            "MerchantCode": get_merchant_code(order),
             "VerificationCode": request.POST.get("verification-code"),
         }
 
@@ -119,6 +123,8 @@ def complete_payment(request,pk):
 
         data= json.loads(response.text)
         if response.status_code == 200:
+            order.paid= True
+            order.save()
             return HttpResponseRedirect(reverse("customers:track-orders"))
         else:
             data["Error Section"]= "Process Payment"

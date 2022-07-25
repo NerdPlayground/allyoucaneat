@@ -9,14 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 
-def get_product(pk):
-    return get_object_or_404(Product,pk=pk)
-
-def get_price(pk):
-    return get_object_or_404(Price,pk=pk)
-
-def get_content(pk):
-    return get_object_or_404(Content,pk=pk)
+def get_this_object(object_class,pk):
+    return get_object_or_404(object_class,pk=pk)
 
 def set_product_details(request,product):
     form_contents= request.POST.getlist("content-input")
@@ -83,7 +77,7 @@ def add_product(request):
 @is_vendor
 def edit_product(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    product= get_product(pk)
+    product= get_this_object(Product,pk)
     if vendor != product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -98,7 +92,7 @@ def edit_product(request,pk):
 @is_vendor
 def delete_product(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    product= get_product(pk)
+    product= get_this_object(Product,pk)
     if vendor != product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -111,7 +105,7 @@ def delete_product(request,pk):
 @is_vendor
 def edit_content(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    content= get_content(pk)
+    content= get_this_object(Content,pk)
     if vendor != content.product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -125,7 +119,7 @@ def edit_content(request,pk):
 @is_vendor
 def delete_content(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    content= get_content(pk)
+    content= get_this_object(Content,pk)
     if vendor != content.product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -138,7 +132,7 @@ def delete_content(request,pk):
 @is_vendor
 def edit_price(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    price= get_price(pk)
+    price= get_this_object(Price,pk)
     if vendor != price.product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -153,7 +147,7 @@ def edit_price(request,pk):
 @is_vendor
 def delete_price(request,pk):
     vendor= Vendor.objects.get(id=request.user.id)
-    price= get_price(pk)
+    price= get_this_object(Price,pk)
     if vendor != price.product.vendor:
         return HttpResponse("You are not allowed to access this page")
     if request.method == "POST":
@@ -172,7 +166,7 @@ def products(request):
 @login_required(login_url="user:login")
 @is_customer
 def product_details(request,pk):
-    product= get_product(pk)
+    product= get_this_object(Product,pk)
     product_details= get_product_catalogue([product])[product]
     product_contents= product_details[0]
     product_prices= product_details[1]

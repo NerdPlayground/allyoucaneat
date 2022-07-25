@@ -1,6 +1,24 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="track-orders"></div>
+    <div id="track-orders-container">
+        {% for order,contents in all_orders.items %}
+            <div id="undelivered-order-container">
+                <ul style="list-style-type: none;">
+                    <li>Order: {{order.id}}</li>
+                    <li>Product: {{order.product.name}}</li>
+                    <li>Contents:
+                        <ul>
+                            {% for content in contents %}
+                                <li>{{content.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>Type: {{order.price.type}}</li>
+                    <li>Price: {{order.price.value}}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
 </main>
 {% endblock %}

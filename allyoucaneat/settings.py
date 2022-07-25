@@ -144,17 +144,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL= "custom_user.User"
 
 # settings variables
-MERCHANT_CODE= config("MERCHANT_CODE")
 CURRENCY= config("CURRENCY")
 
 CLIENT_ID= config("CLIENT_ID")
 CLIENT_SECRET= config("CLIENT_SECRET")
 SASAPAY_HEAD_URL= config("SASAPAY_HEAD_URL")
 
+CALLBACK_URL= "%s" %(config("CALLBACK_URL"))
 TOKEN_URL= "%s%s" %(config("SASAPAY_HEAD_URL"),config("TOKEN_URL"))
-CALLBACK_URL= "%s%s" %(config("HEAD_URL"),config("CALLBACK_URL"))
 PAYMENT_REQUEST= "%s%s" %(config("SASAPAY_HEAD_URL"),config("PAYMENT_REQUEST"))
 PROCESS_PAYMENT= "%s%s" %(config("SASAPAY_HEAD_URL"),config("PROCESS_PAYMENT"))
+NETWORK_CODE= config("NETWORK_CODE")
 
 # allow external access
 CORS_ALLOW_ALL_ORIGINS= True

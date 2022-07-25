@@ -1,15 +1,16 @@
-import re
 from orders.models import Order
 from django.urls import reverse
+from vendors.models import Vendor
+from receipts.models import Receipt
+from products.models import Content
 from django.contrib import messages
+from customers.models import Customers
 from vendors.decorators import is_vendor
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from vendors.forms import VendorRegistration,ModificationForm
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-
-from vendors.models import Vendor 
 
 def register_vendor(request,role):
     form= VendorRegistration()
@@ -58,11 +59,46 @@ def modify_user(request):
 @login_required(login_url="user:login")
 @is_vendor
 def orders(request):
-    context= {}
+    orders= Order.objects.filter(paid=True,delivered=False)
+    all_orders= dict()
+    for order in orders:
+        contents= Content.objects.filter(orders=order)
+        all_orders[order]= contents
+    context= {"all_orders":all_orders}
     return render(request,"vendors/orders.html",context)
 
 @login_required(login_url="user:login")
 @is_vendor
+def deliver_order(request,pk):
+    order= Order.objects.get(id=pk)
+    order.delivered= True
+    order.save()
+    vendor= Vendor.objects.get(id=request.user.id)
+    customer= Customers.objects.get(id=order.customer.id)
+    receipt= Receipt.objects.create(
+        order=order,
+        vendor=vendor,
+        customer=customer,
+    )
+    receipt.save()
+
+    undelivered_orders= len(
+        Order.objects.filter(paid=True,delivered=False))
+    if undelivered_orders == 0:
+        return redirect(reverse("products:my-shop"))
+    elif undelivered_orders > 0:
+        return redirect(reverse("vendors:customers-orders"))
+
+@login_required(login_url="user:login")
+@is_vendor
 def receipts(request):
-    context= {}
+    vendor= Vendor.objects.get(id=request.user.id)
+    receipts= Receipt.objects.filter(vendor=vendor)
+
+    all_receipts= dict()
+    for receipt in receipts:
+        contents= Content.objects.filter(orders=receipt.order)
+        all_receipts[receipt]= contents
+    
+    context= {"all_receipts":all_receipts}
     return render(request,"vendors/receipts.html",context)

@@ -22,6 +22,4 @@ class Receipt(models.Model):
         related_name="vendor_receipts",
         on_delete= models.DO_NOTHING
     )
-    paid= models.BooleanField(default=False)
-    ready= models.BooleanField(default=False)
     created_on= models.DateTimeField(auto_now_add=True)

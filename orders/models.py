@@ -27,6 +27,7 @@ class Order(models.Model):
         on_delete= models.DO_NOTHING
     )
     paid= models.BooleanField(default=False)
+    delivered= models.BooleanField(default=False)
     created_on= models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

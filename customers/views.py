@@ -1,5 +1,7 @@
 from django.urls import reverse
 from orders.models import Order
+from receipts.models import Receipt
+from products.models import Content
 from django.contrib import messages
 from customers.models import Customers
 from customers.decorators import is_customer
@@ -42,12 +44,29 @@ def modify_user(request):
 
 @login_required(login_url="user:login")
 @is_customer
-def orders(request):
-    context= {}
-    return render(request,"customers/orders.html",context)
+def receipts(request):
+    customer= Customers.objects.get(id=request.user.id)
+    receipts= Receipt.objects.filter(customer=customer)
+    
+    all_receipts= dict()
+    for receipt in receipts:
+        contents= Content.objects.filter(orders=receipt.order)
+        all_receipts[receipt]= contents
+    
+    context= {"all_receipts":all_receipts}
+    return render(request,"customers/receipts.html",context)
 
 @login_required(login_url="user:login")
 @is_customer
 def track_orders(request):
-    context= {}
+    customer= Customers.objects.get(id=request.user.id)
+    receipts= Order.objects.filter(
+        customer=customer,
+        paid=True,delivered=False
+    )
+    all_orders= dict()
+    for order in receipts:
+        contents= Content.objects.filter(orders=order)
+        all_orders[order]= contents
+    context= {"all_orders":all_orders}
     return render(request,"customers/track_orders.html",context)

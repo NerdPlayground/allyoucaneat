@@ -5,11 +5,14 @@ from django.utils.html import format_html_join
 
 class OrderAdmin(admin.ModelAdmin):
     list_display= [
-        "id","product","order_contents",
-        "price","customer","paid","created_on"
+        "id","product","order_contents","order_price",
+        "customer","paid","delivered","created_on"
     ]
     search_fields= ["customer"]
-    list_filter= ["paid"]
+    list_filter= ["paid","delivered"]
+
+    def order_price(self,obj):
+        return obj.price.value
 
     def order_contents(self,obj):
         contents= Content.objects.filter(orders=obj.id).values_list("name")
@@ -17,6 +20,11 @@ class OrderAdmin(admin.ModelAdmin):
             '\n',"<li style='list-style-type:none;'>{}</li>",
             (content for content in contents)
         )
+    
+    fieldsets=[
+        ("Order Information",{"fields":["product","order_contents","order_price"]}),
+        ("Customer Information",{"fields":["customer","paid","delivered","created_on"]}),
+    ]
 
     def has_add_permission(self,request):
         return False
@@ -24,7 +32,7 @@ class OrderAdmin(admin.ModelAdmin):
     def has_change_permission(self,request,obj=None):
         return False
 
-    # def has_delete_permission(self,request,obj=None):
-    #     return False
+    def has_delete_permission(self,request,obj=None):
+        return True
 
 admin.site.register(Order,OrderAdmin)
