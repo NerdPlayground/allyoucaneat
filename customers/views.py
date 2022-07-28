@@ -47,25 +47,19 @@ def modify_user(request):
 def receipts(request):
     customer= Customers.objects.get(id=request.user.id)
     receipts= Receipt.objects.filter(customer=customer)
-    
-    all_receipts= dict()
-    for receipt in receipts:
-        contents= Content.objects.filter(orders=receipt.order)
-        all_receipts[receipt]= contents
-    
-    context= {"all_receipts":all_receipts}
+    context= {"receipts":receipts}
     return render(request,"customers/receipts.html",context)
 
 @login_required(login_url="user:login")
 @is_customer
 def track_orders(request):
     customer= Customers.objects.get(id=request.user.id)
-    receipts= Order.objects.filter(
+    orders= Order.objects.filter(
         customer=customer,
         paid=True,delivered=False
     )
     all_orders= dict()
-    for order in receipts:
+    for order in orders:
         contents= Content.objects.filter(orders=order)
         all_orders[order]= contents
     context= {"all_orders":all_orders}

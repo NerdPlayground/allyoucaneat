@@ -73,14 +73,25 @@ def deliver_order(request,pk):
     order= Order.objects.get(id=pk)
     order.delivered= True
     order.save()
+    
     vendor= Vendor.objects.get(id=request.user.id)
     customer= Customers.objects.get(id=order.customer.id)
+    raw_contents= Content.objects.filter(orders=order).values("name")
+    contents= list()
+    for content in raw_contents:
+        contents.append(content.get("name"))
+
     receipt= Receipt.objects.create(
-        order=order,
-        vendor=vendor,
+        product_name=order.product.name,
+        contents=contents,
+        product_type=order.price.type,
+        price=order.price.value,
         customer=customer,
+        vendor=vendor,
+        shop=vendor.business_name
     )
     receipt.save()
+    order.delete()
 
     undelivered_orders= len(
         Order.objects.filter(paid=True,delivered=False))
@@ -94,11 +105,5 @@ def deliver_order(request,pk):
 def receipts(request):
     vendor= Vendor.objects.get(id=request.user.id)
     receipts= Receipt.objects.filter(vendor=vendor)
-
-    all_receipts= dict()
-    for receipt in receipts:
-        contents= Content.objects.filter(orders=receipt.order)
-        all_receipts[receipt]= contents
-    
-    context= {"all_receipts":all_receipts}
+    context= {"receipts":receipts}
     return render(request,"vendors/receipts.html",context)

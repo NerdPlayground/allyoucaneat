@@ -2,21 +2,21 @@
 {% block content %}
 <main>
     <div id="receipts-container">
-        {% for receipt,contents in all_receipts.items %}
+        {% for receipt in receipts %}
             <div id="receipt-container">
                 <div id="receipt-order-container">
                     <ul style="list-style-type: none;">
-                        <li>Order: {{receipt.order.id}}</li>
-                        <li>Product: {{receipt.order.product.name}}</li>
+                        <li>Receipt: {{receipt.id}}</li>
+                        <li>Product: {{receipt.product_name}}</li>
                         <li>Contents:
                             <ul>
-                                {% for content in contents %}
-                                    <li>{{content.name}}</li>
+                                {% for content in receipt.contents %}
+                                    <li>{{content}}</li>
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li>Type: {{receipt.order.price.type}}</li>
-                        <li>Price: {{receipt.order.price.value}}</li>
+                        <li>Type: {{receipt.product_type}}</li>
+                        <li>Price: {{receipt.price}}</li>
                     </ul>
                 </div>
                 <div id="receipt-customer-container">
