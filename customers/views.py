@@ -63,4 +63,4 @@ def track_orders(request):
         contents= Content.objects.filter(orders=order)
         all_orders[order]= contents
     context= {"all_orders":all_orders}
-    return render(request,"customers/track_orders.html",context)
+    return render(request,"orders/undelivered_orders.html",context)

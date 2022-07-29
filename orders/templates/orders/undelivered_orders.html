@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+{% block content %}
+<main>
+    <div id="orders-container">
+        {% for order,contents in all_orders.items %}
+            <div id="undelivered-order-container">
+                <ul style="list-style-type: none;">
+                    <li>Order: {{order.id}}</li>
+                    <li>Product: {{order.product.name}}</li>
+                    <li>Contents:
+                        <ul>
+                            {% for content in contents %}
+                                <li>{{content.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>Type: {{order.price.type}}</li>
+                    <li>Price: {{order.price.value}}</li>
+                </ul>
+                {% if request.user.sasapay_vendor or request.user.external_vendor %}
+                    <div id="undelivered-order-container-buttons">
+                        <button id="deliver-order-button">
+                            <a href="{% url 'vendors:deliver-order' order.id %}">
+                                Deliver Order
+                            </a>
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div id="empty-container">
+                {% if request.user.sasapay_vendor or request.user.external_vendor %}
+                    There are no customer orders.
+                {% else %}
+                    You have not placed any orders.
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div id="orders-container-buttons">
+            <button id="back-button">
+                {% if request.user.sasapay_vendor or request.user.external_vendor %}
+                    <a href="{% url 'products:my-shop' %}">
+                        Back
+                    </a>
+                {% else %}
+                    <a href="{% url 'products:products' %}">
+                        Back
+                    </a>
+                {% endif %}
+            </button>
+        </div>
+    </div>
+</main>
+{% endblock %}

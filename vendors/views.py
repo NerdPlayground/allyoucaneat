@@ -65,7 +65,7 @@ def orders(request):
         contents= Content.objects.filter(orders=order)
         all_orders[order]= contents
     context= {"all_orders":all_orders}
-    return render(request,"vendors/orders.html",context)
+    return render(request,"orders/undelivered_orders.html",context)
 
 @login_required(login_url="user:login")
 @is_vendor
