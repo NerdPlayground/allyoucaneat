@@ -9,15 +9,15 @@
             {% endif %}
         </div>
         {% if request.user.customer %}
-            <div id="orders-link">
+            <div id="track-orders-link">
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'customers:receipts' %}">Receipts</a>
+                <a href="{% url 'customers:track-orders' %}">Track Orders</a>
                 {% endif %}
             </div>
 
-            <div id="track-orders-link">
+            <div id="orders-link">
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'customers:track-orders' %}">Track Orders</a>
+                    <a href="{% url 'customers:receipts' %}">Receipts</a>
                 {% endif %}
             </div>
         {% elif request.user.external_vendor or request.user.sasapay_vendor %}

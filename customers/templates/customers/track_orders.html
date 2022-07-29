@@ -18,7 +18,18 @@
                     <li>Price: {{order.price.value}}</li>
                 </ul>
             </div>
+        {% empty %}
+            <div id="empty-container">
+                You have not placed any orders.
+            </div>
         {% endfor %}
+        <div id="track-orders-container-buttons">
+            <button id="back-button">
+                <a href="{% url 'products:products' %}">
+                    Back
+                </a>
+            </button>
+        </div>
     </div>
 </main>
 {% endblock %}

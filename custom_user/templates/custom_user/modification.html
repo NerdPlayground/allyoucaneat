@@ -30,7 +30,12 @@
                     <input id="id_till_number" name="till_number" type="text" value="{{user.till_number}}" required/>
                 </div>
             {% endif %}
-            <input id="modification-button" class="form-button" type="submit" value="Save Details"/>
+            <div id="modification-container-buttons">
+                <input id="modification-button" class="form-button" type="submit" value="Save Details"/>
+                <button id="back-button" type="button">
+                    <a href="{% url 'user:profile' %}">Back</a>
+                </button>
+            </div>
         </form>
     </div>
 </main>

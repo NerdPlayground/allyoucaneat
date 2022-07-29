@@ -21,12 +21,22 @@
             <div id="prodile-user-till-number">
                 Till Number: {{till_number}}
             </div>
-            <div id="edit-profile">
-                <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
+            <div id="profile-container-buttons">
+                <button id="edit-profile-button">
+                    <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
+                </button>
+                <button id="back-button" type="button">
+                    <a href="{% url 'products:my-shop' %}">Back</a>
+                </button>
             </div>
         {% else %}
-            <div id="edit-profile">
-                <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
+            <div id="profile-container-buttons">
+                <button id="edit-profile-button">
+                    <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
+                </button>
+                <button id="back-button" type="button">
+                    <a href="{% url 'products:products' %}">Back</a>
+                </button>
             </div>
         {% endif %}
     </div>

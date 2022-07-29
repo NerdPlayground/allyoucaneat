@@ -26,7 +26,24 @@
                     Served By: {{receipt.vendor.first_name}} {{receipt.vendor.last_name}}
                 </div>
             </div>
+        {% empty %}
+            <div id="empty-container">
+                There are no available receipts.
+            </div>
         {% endfor %}
+        <div id="receipts-container-buttons">
+            {% if request.user.sasapay_vendor or request.user.external_vendor %}
+                <button id="back-button" type="button">
+                    <a href="{% url 'products:my-shop' %}">Back</a>
+                </button>
+            {% else %}
+            <div id="receipts-container-buttons">
+                <button id="back-button" type="button">
+                    <a href="{% url 'products:products' %}">Back</a>
+                </button>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </main>
 {% endblock %}

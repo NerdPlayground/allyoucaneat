@@ -17,15 +17,26 @@
                     <li>Type: {{order.price.type}}</li>
                     <li>Price: {{order.price.value}}</li>
                 </ul>
+                <div id="undelivered-order-container-buttons">
+                    <button id="deliver-order-button">
+                        <a href="{% url 'vendors:deliver-order' order.id %}">
+                            Deliver Order
+                        </a>
+                    </button>
+                </div>
             </div>
-            <div id="orders-container-buttons">
-                <button id="deliver-order-button">
-                    <a href="{% url 'vendors:deliver-order' order.id %}">
-                        Deliver Order
-                    </a>
-                </button>
+        {% empty %}
+            <div id="empty-container">
+                There are no customer orders.
             </div>
         {% endfor %}
+        <div id="orders-container-buttons">
+            <button id="back-button">
+                <a href="{% url 'products:my-shop' %}">
+                    Back
+                </a>
+            </button>
+        </div>
     </div>
 </main>
 {% endblock %}

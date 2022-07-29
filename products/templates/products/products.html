@@ -8,6 +8,10 @@
                     {{product.name}}
                 </a>
             </button>
+        {% empty %}
+            <div id="empty-container">
+                There are no available products.
+            </div>
         {% endfor %}
     </div>
 </main>
