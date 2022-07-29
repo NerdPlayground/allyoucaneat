@@ -98,7 +98,7 @@ def deliver_order(request,pk):
     if undelivered_orders == 0:
         return redirect(reverse("products:my-shop"))
     elif undelivered_orders > 0:
-        return redirect(reverse("vendors:customers-orders"))
+        return redirect(reverse("vendors:customer-orders"))
 
 @login_required(login_url="user:login")
 @is_vendor
