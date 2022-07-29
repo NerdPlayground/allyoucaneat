@@ -48,7 +48,7 @@ def receipts(request):
     customer= Customers.objects.get(id=request.user.id)
     receipts= Receipt.objects.filter(customer=customer)
     context= {"receipts":receipts}
-    return render(request,"customers/receipts.html",context)
+    return render(request,"receipts/receipts.html",context)
 
 @login_required(login_url="user:login")
 @is_customer

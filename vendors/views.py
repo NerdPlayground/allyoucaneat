@@ -106,4 +106,4 @@ def receipts(request):
     vendor= Vendor.objects.get(id=request.user.id)
     receipts= Receipt.objects.filter(vendor=vendor)
     context= {"receipts":receipts}
-    return render(request,"vendors/receipts.html",context)
+    return render(request,"receipts/receipts.html",context)
