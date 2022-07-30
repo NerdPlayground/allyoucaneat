@@ -17,10 +17,13 @@
         </ul>
     </div>
     <div id="confirm-order-container-buttons">
-        <button id="pay-order-button" type="button">
-            <a href="{% url 'orders:pay-order' order.id %}">
-                Pay Order
+        <button id="sasapay-pay-order-button" type="button">
+            <a href="{% url 'sasapay:pay-order' order.id %}">
+                Lipa na SasaPay
             </a>
+        </button>
+        <button id="mpesa-pay-order-button" type="button">
+            Lipa na Mpesa
         </button>
         <button id="cancel-order-button" type="button">
             <a href="{% url 'orders:delete-order' order.id %}">

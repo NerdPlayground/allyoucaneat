@@ -1,14 +1,14 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="pay-order-container">
-        <form id="pay-order-form" action="" method="POST">
+    <div id="sasapay-complete-payment-container">
+        <form id="sasapay-complete-payment-form" action="" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="verification-code">Verification Code: </label>
                 <input id="verification-code" type="text" name="verification-code" placeholder="Enter Verification Code"/>
             </div>
-            <input id="pay-order-button" type="submit" value="Complete Payment"/>
+            <input id="sasapay-complete-payment-button" type="submit" value="Complete Payment"/>
         </form>
     </div>
 </main>
