@@ -6,7 +6,7 @@ from django.conf import settings
 from products.models import Content
 from django.contrib import messages
 from customers.decorators import is_customer
-from custom_user.authentication import get_client_token
+from sasapay.authentication import get_client_token
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
