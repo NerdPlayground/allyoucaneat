@@ -14,6 +14,14 @@
                 </select>
             </div>
             <input id="roles-button" class="form-button" type="submit" value="Submit">
+            <div id="registered-user">
+                <p>
+                    Already have an account?
+                    <button id="registered-user-button">
+                        <a href="{% url 'user:login' %}">Login here</a>
+                    </button>
+                </p>
+            </div>
         </form>
     </div>
 </main>

@@ -1,44 +1,42 @@
 <div id="navigation-bar">
-    <div id="home-link">
-        <a href="{% url 'home' %}">Home</a>
+    <div id="home-buttons">
+        <button id="home-button">
+            <a href="{% url 'home' %}">Home</a>
+        </button>
     </div>
     {% if request.user.is_authenticated %}
-        <div id="profile-link">
-            {% if request.user.is_authenticated %}
+        <div id="authenticated-user-buttons">
+            <button id="profile-button">
                 <a href="{% url 'user:profile' %}">Profile</a>
-            {% endif %}
+            </button>
+            <button id="logout-button">
+                <a href="{% url 'user:logout' %}">Logout</a>
+            </button>
         </div>
         {% if request.user.customer %}
-            <div id="track-orders-link">
-                {% if request.user.is_authenticated %}
-                <a href="{% url 'customers:track-orders' %}">Track Orders</a>
-                {% endif %}
-            </div>
-
-            <div id="orders-link">
-                {% if request.user.is_authenticated %}
+            <div id="customer-buttons">
+                <button id="track-orders-button">
+                    <a href="{% url 'customers:track-orders' %}">Track Orders</a>
+                </button>
+                <button id="orders-button">
                     <a href="{% url 'customers:receipts' %}">Receipts</a>
-                {% endif %}
+                </button>
             </div>
         {% elif request.user.external_vendor or request.user.sasapay_vendor %}
-            <div id="orders-link">
-                {% if request.user.is_authenticated %}
+            <div id="vendors-buttons">
+                <button id="orders-button">
                     <a href="{% url 'vendors:customer-orders' %}">Orders</a>
-                {% endif %}
-            </div>
-
-            <div id="receipts-link">
-                {% if request.user.is_authenticated %}
+                </button>
+                <button id="receipts-button">
                     <a href="{% url 'vendors:customer-receipts' %}">Receipts</a>
-                {% endif %}
+                </button>
             </div>
         {% endif %}
-        <div id="logout-link">
-            <a href="{% url 'user:logout' %}">Logout</a>
-        </div>
     {% else %}
-        <div id="login-link">
-            <a href="{% url 'user:login' %}">Login</a>
+        <div id="unauthenticated-user-buttons">
+            <button id="login-button">
+                <a href="{% url 'user:login' %}">Login</a>
+            </button>
         </div>
     {% endif %}
 </div>
