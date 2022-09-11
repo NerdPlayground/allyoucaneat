@@ -1,0 +1,68 @@
+/* #delete-object-container,
+#delete-object-form,
+#delete-object-fields,
+#delete-object-fields .form-group,
+#delete-object-fields .form-group p,
+#delete-objects-button-container{
+    border: 1px solid black;
+    padding: 5px;
+} */
+
+#delete-object-container{
+    margin: 25px;
+}
+
+#delete-object-fields{
+    margin-bottom: 25px;
+}
+
+#delete-object-fields .form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+#delete-object-fields .form-group p{
+    margin: 0px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#delete-objects-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#delete-object-button,
+#revert-action-button{
+    border-radius: 20px;
+    width: 200px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+
+@media screen and not (min-width: 625px){
+    #delete-objects-button-container{
+        flex-direction: column;
+    }
+
+    #delete-object-button{
+        margin-bottom: 10px;
+    }
+
+    #delete-object-button,
+    #revert-action-button{
+        width: 100%;
+    }
+}

@@ -1,44 +1,51 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="profile-container">
-        <div id="prodile-user-username">
-            Username: {{username}}
+<div id="profile-container" class="top-container">
+    <div id="user-profile-details">
+        <div class="entry-container">
+            <label class="entry-label">Username:</label>
+            <div class="entry-value">{{username}}</div>
         </div>
-        <div id="prodile-user-name">
-            Name: {{first_name}} {{last_name}}
+        <hr/><div class="entry-container">
+            <label class="entry-label">Name:</label>
+            <div class="entry-value">{{first_name}} {{last_name}}</div>
         </div>
-        <div id="prodile-user-email">
-            Email: {{email}}
+        <hr/><div class="entry-container">
+            <label class="entry-label">Email:</label>
+            <div class="entry-value">{{email}}</div>
         </div>
-        <div id="prodile-user-phone-number">
-            Phone Number: {{phone_number}}
+        <hr/><div class="entry-container">
+            <label class="entry-label">Phone Number:</label>
+            <div class="entry-value">{{phone_number}}</div>
         </div>
+        <hr/>
         {% if vendor %}
-            <div id="prodile-user-business-name">
-                Business Name: {{business_name}}
+            <div class="entry-container">
+                <label class="entry-label">Business Name:</label>
+                <div class="entry-value">{{business_name}}</div>
             </div>
-            <div id="prodile-user-till-number">
-                Till Number: {{till_number}}
+            <hr/><div class="entry-container">
+                <label class="entry-label">Till Number:</label>
+                <div class="entry-value">{{till_number}}</div>
             </div>
-            <div id="profile-container-buttons">
-                <button id="edit-profile-button">
-                    <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
-                </button>
-                <button id="back-button" type="button">
-                    <a href="{% url 'products:my-shop' %}">Back</a>
-                </button>
-            </div>
-        {% else %}
-            <div id="profile-container-buttons">
-                <button id="edit-profile-button">
-                    <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
-                </button>
-                <button id="back-button" type="button">
-                    <a href="{% url 'products:products' %}">Back</a>
-                </button>
-            </div>
+            <hr/>
         {% endif %}
     </div>
-</main>
+    <div id="profile-buttons-container">
+        <button id="edit-profile-button">
+            {% if vendor %}
+                <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
+            {% else %}
+                <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
+            {% endif %}
+        </button>
+        <button id="profile-back-button" type="button">
+            {% if vendor %}
+                <a href="{% url 'products:my-shop' %}">Back</a>
+            {% else %}
+                <a href="{% url 'products:products' %}">Back</a>
+            {% endif %}
+        </button>
+    </div>
+</div>
 {% endblock %}

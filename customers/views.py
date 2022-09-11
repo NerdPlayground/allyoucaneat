@@ -5,6 +5,7 @@ from products.models import Content
 from django.contrib import messages
 from customers.models import Customers
 from customers.decorators import is_customer
+from receipts.functions import common_receipts
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
@@ -46,9 +47,7 @@ def modify_user(request):
 @is_customer
 def receipts(request):
     customer= Customers.objects.get(id=request.user.id)
-    receipts= Receipt.objects.filter(customer=customer)
-    context= {"receipts":receipts}
-    return render(request,"receipts/receipts.html",context)
+    return common_receipts(request,customer)
 
 @login_required(login_url="user:login")
 @is_customer

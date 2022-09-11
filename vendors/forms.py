@@ -16,7 +16,8 @@ class VendorRegistration(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields["first_name"].widget.attrs.update(
             {
-                "id":"first_name", 
+                "id":"first_name",
+                "autofocus": "autofocus",
                 "placeholder": "Enter first name"
             }
         )

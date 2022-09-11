@@ -1,56 +1,69 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="my-shop-container">
-        <div id="add-product">
-            <button id="add-product-button" type="button">
-            <a href="{% url 'products:add-product' %}">Add Product</a>
-            </button>
-        </div>
-        
-        {% for product,product_details in catalogue.items %}
-            <div id="product">
-                <h2>{{product.name}}</h2>
-                <button id="edit-product-button" type="button">
-                    <a href="{% url 'products:edit-product' product.id %}">Edit</a>
-                </button>
-                <button id="delete-product-button" type="button">
-                    <a href="{% url 'products:delete-product' product.id %}">Delete</a>
-                </button>
-                <hr/>
-                {% for product_detail in product_details %}
-                <div id="product-detail">
-                    {% if forloop.first %}
-                        <h3>Contents</h3>
-                        <ul id="detail-contents">
-                            {% for content,value in product_detail.items %}
-                                <li>{{value.name}}</li>
-                                <button id="edit-content-button" type="button">
-                                    <a href="{% url 'products:edit-content' value.id %}">Edit</a>
-                                </button>
-                                <button id="delete-content-button" type="button">
-                                    <a href="{% url 'products:delete-content' value.id %}">Delete</a>
-                                </button>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <h3>Prices</h3>
-                        <ul id="detail-contents">
-                            {% for content,value in product_detail.items %}
-                                <li>{{value.type}} - {{value.value}}</li>
-                                <button id="edit-price-button" type="button">
-                                    <a href="{% url 'products:edit-price' value.id %}">Edit</a>
-                                </button>
-                                <button id="delete-price-button" type="button">
-                                    <a href="{% url 'products:delete-price' value.id %}">Delete</a>
-                                </button>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+<div id="my-shop-container" class="top-container">
+    <div id="add-product-container">
+        <button id="add-product-button" type="button">
+            <a href="{% url 'products:add-product' %}">
+                Add Product
+            </a>
+        </button>
     </div>
-</main>
+    {% for product,product_details in catalogue.items %}
+        <div id="product-container">
+            <div id="product-details-container">
+                <h1 id="product-name">
+                    {{product.name}}
+                </h1>
+                <div id="product-details-buttons-container">
+                    <button id="edit-product-button" type="button">
+                        <a href="{% url 'products:edit-product' product.id %}">Edit</a>
+                    </button>
+                    <button id="delete-product-button" type="button">
+                        <a href="{% url 'products:delete-product' product.id %}">Delete</a>
+                    </button>
+                </div>
+            </div>
+            <form id="product-groups-container" method="POST" action="{% url 'products:edit-product-group' %}" autocomplete="off">
+                {% csrf_token %}
+                <div id="product-groups">
+                    {% for product_detail in product_details %}
+                        {% if forloop.first %}
+                            <div id="product-contents-container">
+                                <h2 id="product-contents-name">
+                                    Contents
+                                </h2>
+                                <div id="product-contents">
+                                    {% for content,value in product_detail.items %}
+                                        <div id="product-content-container">
+                                            <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
+                                            <label for="{{value.id}}">{{value.name}}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div id="product-prices-container">
+                                <h2 id="product-prices-name">
+                                    Prices
+                                </h2>
+                                <div id="product-prices">
+                                    {% for content,value in product_detail.items %}
+                                        <div id="product-price-container">
+                                            <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
+                                            <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="product-groups-buttons-container">
+                    <input id="edit-product-group-button" name="edit-product-group-button" type="submit" value="Edit"/>
+                    <input id="delete-product-group-button" name="delete-product-group-button" type="submit" value="Delete"/>
+                </div>
+            </form>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

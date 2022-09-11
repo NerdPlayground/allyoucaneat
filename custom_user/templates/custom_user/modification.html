@@ -1,42 +1,42 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="modification-container">
-        <form id="modification-form" action="" method="POST">
-            {% csrf_token %}
+<div id="modification-container" class="top-container">
+    <form id="modification-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="modification-fields-container" class="fields-container">
             <div class="form-group">
-                {{form.first_name.label}}<br/>
+                {{form.first_name.label_tag}}<br/>
                 <input id="id_first_name" name="first_name" type="text" value="{{user.first_name}}" required/>
             </div>
             <div class="form-group">
-                {{form.last_name.label}}<br/>
+                {{form.last_name.label_tag}}<br/>
                 <input id="id_last_name" name="last_name" type="text" value="{{user.last_name}}" required/>
             </div>
             <div class="form-group">
-                {{form.email.label}}<br/>
+                {{form.email.label_tag}}<br/>
                 <input id="id_email" name="email" type="text" value="{{user.email}}" required/>
             </div>
             <div class="form-group">
-                {{form.phone_number.label}}<br/>
+                {{form.phone_number.label_tag}}<br/>
                 <input id="id_phone_number" name="phone_number" type="text" value="{{user.phone_number}}" minlength=13 maxlength=13 required/>
             </div>
             {% if user.sasapay_vendor or user.external_vendor %}
                 <div class="form-group">
-                    {{form.business_name.label}}<br/>
+                    {{form.business_name.label_tag}}<br/>
                     <input id="id_business_name" name="business_name" type="text" value="{{user.business_name}}" required/>
                 </div>
                 <div class="form-group">
-                    {{form.till_number.label}}<br/>
+                    {{form.till_number.label_tag}}<br/>
                     <input id="id_till_number" name="till_number" type="text" value="{{user.till_number}}" required/>
                 </div>
             {% endif %}
-            <div id="modification-container-buttons">
-                <input id="modification-button" class="form-button" type="submit" value="Save Details"/>
-                <button id="back-button" type="button">
-                    <a href="{% url 'user:profile' %}">Back</a>
-                </button>
-            </div>
-        </form>
-    </div>
-</main>
+        </div>
+        <div id="modification-buttons-container" class="buttons-container">
+            <input id="modification-button" class="form-button" type="submit" value="Save Details"/>
+            <button id="modification-back-button" type="button">
+                <a href="{% url 'user:profile' %}">Back</a>
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

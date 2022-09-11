@@ -1,20 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="confirm-order-container">
-        <ul style="list-style-type: none;">
-            <li>Order: {{order.id}}</li>
-            <li>Product: {{order.product}}</li>
-            <li>Contents:
-                <ul>
-                    {% for content in contents %}
-                        <li>{{content.name}}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-            <li>Type: {{order.price.type}}</li>
-            <li>Price: {{order.price.value}}</li>
-        </ul>
+<div id="confirm-order-container" class="top-container">
+    <div id="order-container">
+        {% include "orders/order.html" %}
     </div>
     <div id="confirm-order-container-buttons">
         <button id="sasapay-pay-order-button" type="button">
@@ -31,5 +19,5 @@
             </a>
         </button>
     </div>
-</main>
+</div>
 {% endblock %}

@@ -1,3 +1,5 @@
+from math import prod
+from django.db.models import Q
 from django.urls import reverse
 from orders.models import Order
 from vendors.models import Vendor
@@ -13,7 +15,7 @@ def get_this_object(object_class,pk):
     return get_object_or_404(object_class,pk=pk)
 
 def set_product_details(request,product):
-    form_contents= request.POST.getlist("content-input")
+    form_contents= request.POST.getlist("new-product-content-value")
     for form_content in form_contents:
         content= Content.objects.create(
             name=form_content,
@@ -21,8 +23,8 @@ def set_product_details(request,product):
         )
         content.save()
     
-    form_price_types= request.POST.getlist("price-type-input")
-    form_prices= request.POST.getlist("price-input")
+    form_price_types= request.POST.getlist("new-product-price-type")
+    form_prices= request.POST.getlist("new-product-price-value")
     for c in range(len(form_price_types)):
         price= Price.objects.create(
             type= form_price_types[c],
@@ -68,6 +70,9 @@ def add_product(request):
             name=product_name,
         )
         product.save()
+        print()
+        print(request.POST)
+        print()
         set_product_details(request,product)
         return HttpResponseRedirect(reverse("products:my-shop"))
     context= {}
@@ -100,6 +105,29 @@ def delete_product(request,pk):
         return HttpResponseRedirect(reverse("products:my-shop"))
     context= {"obj":product}
     return render(request,"delete.html",context)
+
+@login_required(login_url="user:login")
+@is_vendor
+def edit_product_group(request):
+    if request.method == "POST":
+        product_group_value= request.POST.get('product-group-values')
+        edit_button= request.POST.get('edit-product-group-button')
+        delete_button= request.POST.get('delete-product-group-button')
+        if edit_button != None and delete_button == None:
+            try:
+                url_name= "products:edit-content"
+                product_object= Content.objects.get(id=product_group_value)
+            except Content.DoesNotExist:
+                url_name= "products:edit-price"
+                product_object= Price.objects.get(id=product_group_value)
+        elif delete_button != None and edit_button == None:
+            try:
+                url_name= "products:delete-content"
+                product_object= Content.objects.get(id=product_group_value)
+            except Content.DoesNotExist:
+                url_name= "products:delete-price"
+                product_object= Price.objects.get(id=product_group_value)
+        return HttpResponseRedirect(reverse(url_name,args=(product_object.id,)))
 
 @login_required(login_url="user:login")
 @is_vendor
@@ -159,7 +187,11 @@ def delete_price(request,pk):
 @login_required(login_url="user:login")
 @is_customer
 def products(request):
-    products= Product.objects.all()
+    query= request.GET.get('search-query')
+    search_query= query if query != None else ''
+    products= Product.objects.filter(
+        Q(name__icontains=search_query)
+    )
     context= {"products":products}
     return render(request,"products/products.html",context)
 

@@ -1,15 +1,22 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="edit-content-container">
-        <form id="edit-content-form" action="" method="POST">
-            {% csrf_token %}
+<div id="edit-content-container" class="top-container">
+    <form id="edit-content-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="edit-content-fields">
             <div class="form-group">
-                <label for="edit-content-name">Content Name</label>
+                <label for="edit-content-name">Content Name: </label>
                 <input id="edit-content-name" name="edit-content-name" type="text" value="{{content.name}}" required/>
             </div>
-            <input id="edit-content-form-button" name="edit-content-form-button" type="submit" value="Save Changes"/>
-        </form>
-    </div>
-</main>
+        </div>
+        <div id="edit-content-buttons-container">
+            <input id="edit-content-button" name="edit-content-button" type="submit" value="Save Changes"/>
+            <button id="edit-content-back-button">
+                <a href="{% url 'products:my-shop' %}">
+                    Back
+                </a>
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

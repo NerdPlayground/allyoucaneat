@@ -1,17 +1,22 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="vendor-registration-container">
-        <form id="vendor-registration-form" action="" method="POST">
-            {% csrf_token %}
+<div id="vendor-registration-container" class="top-container">
+    <form id="vendor-registration-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="vendor-registration-fields-container" class="fields-container">
             {% for field in form %}
                 <div class="form-group">
-                    {{field.label}}<br/>
+                    {{field.label_tag}}<br/>
                     {{field}}
                 </div>
             {% endfor %}
+        </div>
+        <div id="vendor-registration-buttons-container" class="buttons-container">
             <input id="vendor-registration-button" class="form-button"  type="submit" value="Register">
-        </form>
-    </div>
-</main>
+            <button id="customer-registration-back-button" type="button">
+                <a href="{% url 'user:roles' %}">Back</a>
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

@@ -1,0 +1,58 @@
+/* .entry-container,
+.entry-label,
+.entry-value,
+#confirm-order-container,
+#order-container,
+#confirm-order-container-buttons{
+    padding: 5px;
+    border: 1px solid black;
+} */
+
+#confirm-order-container{
+    margin: 25px;
+}
+
+#order-container{
+    margin-bottom: 25px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#confirm-order-container-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#sasapay-pay-order-button,
+#mpesa-pay-order-button,
+#cancel-order-button{
+    border-radius: 20px;
+    width: 150px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+@media screen and not (min-width: 650px){
+    #confirm-order-container-buttons{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #sasapay-pay-order-button,
+    #mpesa-pay-order-button,
+    #cancel-order-button{
+        width: 100%;
+    }
+
+    #sasapay-pay-order-button,
+    #mpesa-pay-order-button{
+        margin-bottom: 10px;
+    }
+}

@@ -1,11 +1,11 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="roles-container">
-        <form id="role-form" method="POST" action="">
-            {% csrf_token %}
-            <div id="form-group">
-                <label id="user-roles-label" for="user-roles">Select Role:</label>
+<div id="roles-container" class="top-container">
+    <form id="role-form" method="POST" autocomplete="off" action="">
+        {% csrf_token %}
+        <div id="role-fields-container">
+            <div class="form-group">
+                <label id="user-roles-label" for="user-roles">Select Role:</label><br/>
                 <select id="user-roles" name="user-roles" required>
                     <option value="" selected disabled>------------</option>
                     <option value="customer">Customer</option>
@@ -13,16 +13,18 @@
                     <option value="external-vendor">External Vendor</option>
                 </select>
             </div>
+        </div>
+        <div id="role-buttons-container">
             <input id="roles-button" class="form-button" type="submit" value="Submit">
-            <div id="registered-user">
-                <p>
-                    Already have an account?
-                    <button id="registered-user-button">
-                        <a href="{% url 'user:login' %}">Login here</a>
-                    </button>
-                </p>
-            </div>
-        </form>
+        </div>
+    </form>
+    <div id="registered-user-container">
+        <p>
+            Already have an account?
+            <button id="registered-user-button">
+                <a href="{% url 'user:login' %}">Login here</a>
+            </button>
+        </p>
     </div>
-</main>
+</div>
 {% endblock %}

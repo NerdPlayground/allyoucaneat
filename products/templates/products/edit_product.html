@@ -1,26 +1,35 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="edit-product-container">
-        <form id="edit-product-form" action="" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="edit-product-name">Product Name</label>
-                <input id="edit-product-name" name="edit-product-name" type="text" value="{{product.name}}" required/>
+<div id="edit-product-container" class="top-container">
+    <form id="edit-product-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="edit-product-feilds">
+            <div id="edit-product-name-container">
+                <div class="form-group">
+                    <label for="edit-product-name">Name:</label><br/>
+                    <input required id="edit-product-name" name="edit-product-name" type="text" value="{{product.name}}"/>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="product-contents-group">Contents</label>
-                <div id="product-contents-group"></div>
-                <button onclick="AddContent('product-contents-group')" type="button">Add Content</button>
+            <div id="edit-product-contents-container">
+                <label for="edit-product-contents">Contents:</label>
+                <div id="edit-product-contents"></div>
+                <div id="edit-product-contents-buttons-container">
+                    <button id="new-product-content-button" onclick="AddContent('edit-product-contents')" type="button">Add Content</button>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="product-prices-group">Prices</label>
-                <div id="product-prices-group"></div>
-                <button onclick="AddPrice('product-prices-group')" type="button">Add Price</button>
+            <div id="edit-product-prices-container">
+                <div id="edit-product-prices"></div>
+                <div id="edit-product-prices-buttons-container">
+                    <button id="new-product-price-button" onclick="AddPrice('edit-product-prices')" type="button">Add Price</button>
+                </div>
             </div>
-            <input id="edit-product-form-button" name="edit-product-form-button" type="submit" value="Save Changes"/>
-        </form>
-    </div>
-</main>
+        </div>
+        <div id="edit-product-buttons-container">
+            <input id="save-changes-button" name="save-changes-button" type="submit" value="Save Changes">
+            <button id="edit-product-back-button" type="button">
+                <a href="{% url 'products:my-shop' %}">Back</a>
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

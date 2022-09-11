@@ -1,0 +1,16 @@
+@import "navigation.css";
+@import "content.css";
+
+#general-container{
+    --content-width: 80%; /* 560px */
+    --navigation-width: 20%; /* 140px */
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-grow: 1;
+    overflow: auto;
+    border: 1px solid black;
+    max-width: 100%;
+    max-height: auto;
+    border-radius: inherit;
+}

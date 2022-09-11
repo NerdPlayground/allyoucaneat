@@ -1,0 +1,487 @@
+/*
+.form-group,
+.fields-container,
+.buttons-container,
+.form-group label,
+
+#authentication-container,
+#authentication-form,
+#authentication-fields-container,
+#authentication-buttons-container,
+#unregistered-user-container,
+#unregistered-user-container p,
+
+#roles-container,
+#role-form,
+#role-fields-container,
+#role-buttons-container,
+#registered-user-container,
+#registered-user-container p,
+
+#customer-registration-container,
+#customer-registration-form,
+#customer-registration-fields-container,
+#customer-registration-buttons-container,
+
+#vendor-registration-container,
+#vendor-registration-form,
+#vendor-registration-fields-container,
+#vendor-registration-buttons-container,
+
+#modification-container,
+#modification-form,
+#modification-fields-container,
+#modification-buttons-container,
+
+#sasapay-complete-payment-container,
+#sasapay-complete-payment-form,
+#sasapay-complete-payment-fields,
+#sasapay-complete-payment-buttons-container,
+
+#edit-content-container,
+#edit-content-form,
+#edit-content-fields,
+#edit-content-buttons-container,
+
+#edit-price-container,
+#edit-price-form,
+#edit-price-fields,
+#edit-price-buttons-container,
+
+#add-new-product-container,
+#add-new-product-form,
+#add-new-product-feilds,
+#new-product-name-container,
+#new-product-contents-container,
+#new-product-contents-container label,
+#new-product-contents,
+.new-product-content,
+.new-product-content-fields,
+.new-product-content-buttons,
+#new-product-contents-buttons-container,
+#new-product-prices-container,
+#new-product-prices-container label,
+#new-product-prices,
+.new-product-price,
+.new-product-price-fields,
+.new-product-price-buttons,
+#new-product-prices-buttons-container,
+#add-new-product-buttons-container,
+
+#edit-product-container,
+#edit-product-form,
+#edit-product-feilds,
+#edit-product-name-container,
+#edit-product-contents-container,
+#edit-product-contents-container label,
+#edit-product-contents,
+.edit-product-content,
+.edit-product-content-fields,
+.edit-product-content-buttons,
+#edit-product-contents-buttons-container,
+#edit-product-prices-container,
+#edit-product-prices-container label,
+#edit-product-prices,
+.edit-product-price,
+.edit-product-price-fields,
+.edit-product-price-buttons,
+#edit-product-prices-buttons-container,
+#edit-product-buttons-container
+{
+    padding: 5px;
+    border: 1px solid black;
+}
+*/
+
+#roles-container,
+#authentication-container,
+#customer-registration-container,
+#vendor-registration-container,
+#modification-container,
+#sasapay-complete-payment-container,
+#edit-content-container,
+#edit-price-container,
+#add-new-product-container,
+#edit-product-container{
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+}
+
+#customer-registration-form,
+#vendor-registration-form,
+#modification-form,
+#sasapay-complete-payment-form,
+#edit-content-form,
+#edit-price-form,
+#add-new-product-form,
+#edit-product-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sasapay-complete-payment-form,
+#edit-content-form,
+#edit-price-form{
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.fields-container,
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 450px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    max-height: auto;
+}
+
+#edit-price-container .fields-container,
+#edit-price-container .buttons-container{
+    margin-bottom: 0px;
+}
+
+.new-product-price,
+.new-product-content,
+.edit-product-price,
+.edit-product-content{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    border-bottom: 1px solid black;
+}
+
+.new-product-price .form-group,
+.new-product-content .form-group,
+.edit-product-price .form-group,
+.edit-product-content .form-group{
+    margin: 0px;
+}
+
+.new-product-price-fields,
+.new-product-content-fields,
+.edit-product-price-fields,
+.edit-product-content-fields{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.new-product-price-buttons,
+.new-product-content-buttons,
+.edit-product-price-buttons,
+.edit-product-content-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#sasapay-complete-payment-fields,
+#sasapay-complete-payment-buttons-container,
+#edit-content-fields,
+#edit-content-buttons-container,
+#add-new-product-feilds,
+#add-new-product-buttons-container,
+#edit-product-feilds,
+#edit-product-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    max-height: auto;
+}
+
+#add-new-product-feilds,
+#edit-product-feilds{
+    flex-direction: column;
+}
+
+#edit-content-buttons-container{
+    justify-content: space-evenly;
+}
+
+#new-product-name-container,
+#new-product-contents-container,
+#new-product-prices-container,
+#edit-product-name-container,
+#edit-product-contents-container,
+#edit-product-prices-container{
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#new-product-name-container,
+#edit-product-name-container{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#new-product-contents-container,
+#new-product-prices-container,
+#edit-product-contents-container,
+#edit-product-prices-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#new-product-prices-container,
+#edit-product-prices-container{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-group{
+    margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group select{
+    border-radius: 20px;
+    border-top-left-radius: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 200px;
+    max-width: 100%;
+    max-height: auto;
+}
+
+#verification-code,
+#edit-content-name{
+    border-radius: 20px;
+}
+
+#new-product-contents-buttons-container,
+#new-product-prices-buttons-container,
+#edit-product-contents-buttons-container,
+#edit-product-prices-buttons-container,
+#add-new-product-buttons-container,
+#edit-product-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#new-product-contents-buttons-container,
+#new-product-prices-buttons-container,
+#edit-product-contents-buttons-container,
+#edit-product-prices-buttons-container{
+    padding-top: 10px;
+    justify-content: center;
+}
+
+.new-product-price-buttons,
+.new-product-content-buttons,
+.edit-product-price-buttons,
+.edit-product-content-buttons{
+    padding: 10px 0px 10px 0px;
+}
+
+#roles-button,
+#authentication-button,
+#customer-registration-button,
+#customer-registration-back-button,
+#vendor-registration-button,
+#modification-button,
+#modification-back-button,
+#sasapay-complete-payment-button,
+#edit-content-button,
+#edit-content-back-button,
+#edit-price-button,
+#edit-price-back-button,
+#add-new-product-button,
+#add-new-product-back-button,
+#save-changes-button,
+#edit-product-back-button{
+    border-radius: 20px;
+    width: 200px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;   
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+#new-product-content-button,
+.remove-content-button,
+#new-product-price-button,
+.remove-price-button{
+    border-radius: 20px;
+    width: 150px;
+    height: 25px;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    background-color: white;
+    border-color: var(--body-background-color);
+}
+
+#registered-user-button,
+#unregistered-user-button{
+    background-color: white;
+    border-radius: 20px;
+    width: 150px;
+    height: 25px;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    padding-left: 10px;
+}
+
+@media screen and not (min-width: 625px){
+    #customer-registration-fields-container,
+    #vendor-registration-fields-container{
+        flex-direction: column;
+    }
+    
+    #customer-registration-fields-container .form-group label,
+    #customer-registration-fields-container .form-group input,
+    #vendor-registration-fields-container .form-group label,
+    #vendor-registration-fields-container .form-group input{
+        width: 100%;
+    }
+
+    #customer-registration-buttons-container,
+    #vendor-registration-buttons-container{
+        flex-direction: column;
+    }
+
+    #customer-registration-button,
+    #vendor-registration-button{
+        margin-bottom: 10px;
+    }
+
+    #customer-registration-button,
+    #customer-registration-back-button,
+    #vendor-registration-button,
+    #vendor-registration-back-button{
+        width: 100%;
+    }
+
+    .new-product-content-fields .form-group{
+        width: 100%;
+    }
+
+    .new-product-price-fields{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .new-product-price-fields .form-group{
+        margin-bottom: 10px;
+    }
+
+    #add-new-product-buttons-container,
+    #edit-product-buttons-container{
+        flex-direction: column;
+    }
+
+    #add-new-product-button,
+    #save-changes-button{
+        margin-bottom: 10px;
+    }
+
+    #add-new-product-button,
+    #add-new-product-back-button,
+    #save-changes-button,
+    #edit-product-back-button{
+        width: 100%;
+    }
+
+    #edit-price-fields{
+        flex-direction: column;
+    }
+
+    #edit-content-fields .form-group,
+    #edit-price-fields .form-group{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #edit-content-fields .form-group label,
+    #edit-content-fields .form-group input,
+    #edit-price-fields .form-group label,
+    #edit-price-fields .form-group input{
+        width: 100%;
+    }
+
+    #edit-content-fields .form-group input{
+        border-top-left-radius: 0px;
+    }
+
+    #edit-content-buttons-container,
+    #edit-price-buttons-container{
+        flex-direction: column;
+    }
+
+    #edit-content-button,
+    #edit-price-button{
+        margin-bottom: 10px;
+    }
+
+    #edit-content-button,
+    #edit-price-button,
+    #edit-content-back-button,
+    #edit-price-back-button{
+        width: 100%;
+    }
+}
+
+@media screen and not (min-width: 600px){
+    #modification-fields-container,
+    #modification-buttons-container{
+        flex-direction: column;
+    }
+
+    #modification-fields-container label,
+    #modification-fields-container input{
+        width: 100%;
+    }
+
+    #modification-buttons-container input,
+    #modification-buttons-container button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and not (min-width: 500px){
+    #sasapay-complete-payment-fields .form-group{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #sasapay-complete-payment-fields .form-group input,
+    #sasapay-complete-payment-fields .form-group label{
+        width: 100%;
+    }
+
+    #sasapay-complete-payment-fields .form-group input{
+        border-top-left-radius: 0px;
+    }
+}
+
+@media screen and not (min-width: 400px){
+    #unregistered-user-container p,
+    #registered-user-container p{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #unregistered-user-container p button,
+    #registered-user-container p button{
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,42 @@
+#home-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    flex-grow: 1;
+    max-width: 100%;
+    max-height: auto;
+    border-radius: inherit;
+}
+
+#home-container-title, #home-container-buttons{
+    margin: 0px 20px 0px 20px;
+    max-width: 100%;
+    max-height: auto;
+}
+
+#home-container-title{
+    margin-top: 20px;
+    text-align: center;
+}
+
+#applicaton-title{
+    margin: 0px;
+    font-size: 5rem;
+}
+
+#home-container-buttons{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#welcome-button{
+    align-self: center;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    max-width: 100%;
+    max-height: auto;
+    background-color: var(--body-background-color);
+}

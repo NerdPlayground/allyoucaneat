@@ -1,0 +1,55 @@
+/* .entry-container,
+.entry-label,
+.entry-value,
+#orders-container,
+#order-container,
+#order-buttons-container,
+#empty-container,
+#empty-container p,
+#orders-buttons-container{
+    border: 1px solid black;
+    padding: 5px;
+} */
+
+#orders-container{
+    margin: 25px;
+}
+
+#order-container{
+    margin-bottom: 25px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#orders-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#order-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#back-button,
+#deliver-order-button{
+    border-radius: 20px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+#deliver-order-button{
+    height: 25px;
+    font-weight: normal;
+    background-color: white;
+    border-color: var(--body-background-color);
+}

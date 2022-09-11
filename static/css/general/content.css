@@ -1,0 +1,38 @@
+@import "forms.css";
+@import "catalogue.css";
+@import "catalogue_product.css";
+@import "profile.css";
+@import "receipts.css";
+@import "confirm_order.css";
+@import "delete.css";
+@import "undelivered_orders.css";
+@import "my_shop.css";
+/* @import ""; */
+
+#content-container{
+    overflow: auto;
+    width: var(--content-width);
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+@media screen and not (min-width:600px){
+    #content-container{
+        width: 90%; /* 630px */
+    }
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: black;
+    border-radius: inherit;
+}
+
+::-webkit-scrollbar-track{
+    background-color: white;
+    border-radius: inherit;
+    border: 1px solid black;
+}

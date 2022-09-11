@@ -1,0 +1,122 @@
+/* .entry-container,
+.entry-label,
+.entry-value,
+#receipts-container,
+#sort-container,
+#sort-form,
+#sort-form-fields-container,
+#sort-form-period,
+#sort-form-shop,
+#sort-form-buttons-container,
+#apply-filters,
+#clear-filters,
+#receipt-order-container,
+#contents-container,
+#contents-list,
+#empty-container,
+#empty-container p,
+#receipts-buttons-container{
+    border: 1px solid black;
+} */
+
+#receipts-container{
+    margin: 25px;
+}
+
+#sort-container{
+    margin-bottom: 25px;
+}
+
+#sort-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#sort-form-fields-container{
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+}
+
+#sort-form-period,
+#sort-form-shop{
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-right: 12.5px;
+    width: 150px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;
+}
+
+#sort-form-buttons-container{
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#apply-filters,
+#clear-filters{
+    border-radius: 20px;
+    width: 75px;
+    height: auto;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+#receipt-order-container{
+    margin-bottom: 25px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#receipts-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#receipt-back-button{
+    border-radius: 20px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--body-background-color);
+}
+
+@media screen and not (min-width: 650px){
+    #sort-form{
+        flex-direction: column;
+    }
+
+    #sort-form-fields-container,
+    #sort-form-buttons-container{
+        width: 100%;
+    }
+
+    #sort-form-fields-container{
+        margin-bottom: 10px;
+    }
+
+    #sort-form-buttons-container{
+        justify-content: flex-start;
+    }
+
+    #apply-filters,
+    #clear-filters{
+        width: 150px;
+        height: 25px;
+        padding-left: 10px;
+        margin-right: 12.5px;
+    }
+}

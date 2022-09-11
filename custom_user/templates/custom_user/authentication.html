@@ -1,24 +1,27 @@
 {% extends "main.html" %}
-
 {% block content %}
-<main>
-    <form id="authentication-form" action="" method="POST">
+<div id="authentication-container" class="top-container">
+    <form id="authentication-form" action="" method="POST" autocomplete="off">
         {% csrf_token %}
-        {% for field in form %}
-            <div id="form-field">
-                {{field.label}}<br/>
-                {{field}}
-            </div>
-        {% endfor %}
-        <input id="authentication-button" type="submit" value="Login"/>
-        <div id="unregistered-user">
-            <p>
-                Don't have an account?
-                <button id="unregistered-user-button">
-                    <a href="{% url 'user:roles' %}">Sign up here</a>
-                </button>
-            </p>
+        <div id="authentication-fields-container">
+            {% for field in form %}
+                <div class="form-group">
+                    {{field.label_tag}}<br/>
+                    {{field}}
+                </div>
+            {% endfor %}
+        </div>
+        <div id="authentication-buttons-container">
+            <input id="authentication-button" type="submit" value="Login"/>
         </div>
     </form>
-</main>
+    <div id="unregistered-user-container">
+        <p>
+            Don't have an account?
+            <button id="unregistered-user-button">
+                <a href="{% url 'user:roles' %}">Sign up here</a>
+            </button>
+        </p>
+    </div>
+</div>
 {% endblock %}

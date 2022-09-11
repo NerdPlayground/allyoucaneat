@@ -1,0 +1,29 @@
+<div class="entry-container">
+    <label class="entry-label">Order:</label>
+    <div class="entry-value">{{order.id}}</div>
+</div>
+<hr/>
+<div class="entry-container">
+    <label class="entry-label">Product:</label>
+    <div class="entry-value">{{order.product}}</div>
+</div>
+<hr/>
+<div class="entry-container">
+    <label class="entry-label">Contents:</label>
+    <div class="entry-value">
+        {% for content in contents %}
+            {{content.name}}
+        {% endfor %}
+    </div>
+</div>
+<hr/>
+<div class="entry-container">
+    <label class="entry-label">Type:</label>
+    <div class="entry-value">{{order.price.type}}</div>
+</div>
+<hr/>
+<div class="entry-container">
+    <label class="entry-label">Price:</label>
+    <div class="entry-value">{{order.price.value}}</div>
+</div>
+<hr/>

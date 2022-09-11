@@ -1,19 +1,21 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="delete-object-container">
-        <form id="delete-object-form" action="" method="POST">
-            {% csrf_token %}
+<div id="delete-object-container" class="top-container">
+    <form id="delete-object-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="delete-object-fields">
             <div class="form-group">
                 <p>Delete {{obj}} ?</p>
             </div>
+        </div>
+        <div id="delete-objects-button-container">
             <input id="delete-object-button" type="submit" value="Confirm"/>
             <button id="revert-action-button" type="button">
                 <a href="{{request.META.HTTP_REFERER}}">
                     Cancel
                 </a>
             </button>
-        </form>
-    </div>
-</main>
+        </div>
+    </form>
+</div>
 {% endblock %}

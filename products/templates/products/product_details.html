@@ -1,47 +1,63 @@
 {% extends "main.html" %}
 {% block content %}
-<main>
-    <div id="purchase-product-details-container">
-        <h1>{{ product.name }}</h1>
-        <form id="purchase-product-details-form" action="" method="POST">
-            {% csrf_token %}
-            <div id="purchase-product-contents">
-                <h2>Contents</h2>
-                {% for key,value in product_contents.items %}
-                    {% if product.name == "Fruit Salad" %}
-                        <input
-                            id="{{value.id}}" name="product-contents"
-                            type="checkbox" value="{{value.id}}" checked
-                            onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
-                        />
-                    {% elif product.name == "Fruit Juice" %}
-                        <input
-                            id="{{value.id}}" name="product-contents"
-                            type="checkbox" value="{{value.id}}"
-                            onclick="RestrictOptions('purchase-product-details-form','product-contents')"
-                        />
-                    {% else %}
-                        <input id="{{value.id}}" name="product-contents" type="checkbox" value="{{value.id}}"/>
-                    {% endif %}
-                    <label for="{{value.id}}">{{value.name}}</label>
-                    <br/>
-                {% endfor %}
+<div id="purchase-product-details-container" class="top-container">
+    <div id="purchase-product-details">
+        <h1 id="purchase-product-name">
+            {{ product.name }}
+        </h1>
+    </div>
+    <form id="purchase-product-details-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="purchase-product-details-groups">
+            <div id="purchase-product-contents-container">
+                <h2 id="purchase-product-contents-name">
+                    Contents
+                </h2>
+                <div id="purchase-product-contents">
+                    {% for key,value in product_contents.items %}
+                        <div id="purchase-product-content-container">
+                            {% if product.name == "Fruit Salad" %}
+                                <input
+                                    required
+                                    id="{{value.id}}" name="product-contents"
+                                    type="checkbox" value="{{value.id}}" checked
+                                    onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
+                                />
+                            {% elif product.name == "Fruit Juice" %}
+                                <input
+                                    required
+                                    id="{{value.id}}" name="product-contents"
+                                    type="checkbox" value="{{value.id}}"
+                                    onclick="RestrictOptions('purchase-product-details-form','product-contents')"
+                                />
+                            {% else %}
+                                <input required id="{{value.id}}" name="product-contents" type="checkbox" value="{{value.id}}"/>
+                            {% endif %}
+                            <label for="{{value.id}}">{{value.name}}</label>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div id="purchase-product-prices">
-                <h2>Prices</h2>
-                {% for key,value in product_prices.items %}
-                    <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
-                    <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
-                    <br/>
-                {% endfor %}
+            <div id="purchase-product-prices-container">
+                <h2 id="purchase-product-prices-name">
+                    Prices
+                </h2>
+                <div id="purchase-product-prices">
+                    {% for key,value in product_prices.items %}
+                        <div id="purchase-product-price-container">
+                            <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
+                            <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <input id="purchase-product-details-button" type="submit" value="Place Order"/>
-        </form>
-        <div id="purchase-product-details-container-buttons">
-            <button id="back-button">
+        </div>
+        <div id="purchase-product-details-buttons-container">
+            <input id="purchase-product-button" type="submit" value="Place Order"/>
+            <button id="purchase-product-back-button">
                 <a href="{% url 'products:products' %}">Back</a>
             </button>
         </div>
-    </div>
-</main>
+    </form>
+</div>
 {% endblock %}

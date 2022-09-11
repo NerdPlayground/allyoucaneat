@@ -6,6 +6,7 @@ from products.models import Content
 from django.contrib import messages
 from customers.models import Customers
 from vendors.decorators import is_vendor
+from receipts.functions import common_receipts
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from vendors.forms import VendorRegistration,ModificationForm
@@ -104,6 +105,4 @@ def deliver_order(request,pk):
 @is_vendor
 def receipts(request):
     vendor= Vendor.objects.get(id=request.user.id)
-    receipts= Receipt.objects.filter(vendor=vendor)
-    context= {"receipts":receipts}
-    return render(request,"receipts/receipts.html",context)
+    return common_receipts(request,vendor)

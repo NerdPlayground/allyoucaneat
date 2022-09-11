@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-    <head>
-        <title>All You Can Eat</title>
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-    </head>
-
-    <body>
-        {% include "navigation.html" %}
-
-        {% if messages %}
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        {% endif %}
-
-        {% block content %} 
-        {% endblock %}
-        <script src="{% static 'js/script.js' %}"></script>
-    </body>
-</html>
+{% extends "core.html" %}
+{% block general %}
+    <div id="general-container">
+        <div id="navigation-bar">
+            {% include "navigation.html" %}
+        </div>
+        <div id="small-navigation-bar">
+            {% include "small-navigation.html" %}
+        </div>
+        <div id="content-container">
+            {% block content %}
+            {% endblock %}
+    
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

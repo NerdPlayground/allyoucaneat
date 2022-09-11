@@ -1,13 +1,17 @@
-{% extends "main.html" %}
-{% block content %}
-<main>
-    <div id="home">
-        <h1>All You Can Eat</h1>
-        <button>
-            <a href="{% url 'user:login' %}" style="text-decoration:none;">
-                Welcome
-            </a>
-        </button>
+{% extends "core.html" %}
+{% block home %}
+    <div id="home-container">
+        <div id="home-container-title">
+            <h1 id="applicaton-title">
+                All You Can Eat
+            </h1>
+        </div>
+        <div id="home-container-buttons">
+            <button id="welcome-button">
+                <a href="{% url 'user:login' %}">
+                    Welcome
+                </a>
+            </button>
+        </div>
     </div>
-</main>
 {% endblock %}

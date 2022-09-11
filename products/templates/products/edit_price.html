@@ -1,18 +1,27 @@
 {% extends "main.html" %}
 {% block content %}
 <main>
-    <div id="edit-price-container">
-        <form id="edit-price-form" action="" method="POST">
+    <div id="edit-price-container" class="top-container">
+        <form id="edit-price-form" action="" method="POST" autocomplete="off">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="edit-price-type">Type: </label>
-                <input id="edit-price-type" name="edit-price-type" type="text" value="{{price.type}}" required/>
+            <div id="edit-price-fields" class="fields-container">
+                <div class="form-group">
+                    <label for="edit-price-type">Type: </label><br/>
+                    <input id="edit-price-type" name="edit-price-type" type="text" value="{{price.type}}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="edit-price">Price: </label><br/>
+                    <input id="edit-price" name="edit-price" type="number" value="{{price.value}}" required/>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="edit-price">Price: </label>
-                <input id="edit-price" name="edit-price" type="number" value="{{price.value}}" required/>
+            <div id="edit-price-buttons-container" class="buttons-container">
+                <input id="edit-price-button" name="edit-price-button" type="submit" value="Save Changes"/>
+                <button id="edit-price-back-button">
+                    <a href="{% url 'products:my-shop' %}">
+                        Back
+                    </a>
+                </button>
             </div>
-            <input id="edit-price-form-button" name="edit-price-form-button" type="submit" value="Save Changes"/>
         </form>
     </div>
 </main>
