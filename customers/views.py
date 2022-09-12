@@ -13,6 +13,9 @@ from customers.forms import CustomerRegistration,ModificationForm
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 
 def register_customer(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("products:products"))
+
     form= CustomerRegistration()
     if request.method == "POST":
         form= CustomerRegistration(request.POST)

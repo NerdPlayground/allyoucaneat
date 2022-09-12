@@ -21,6 +21,9 @@ def home(request):
     return render(request,"home.html",context)
 
 def roles(request):
+    if request.user.is_authenticated:
+        return redirect_user(request.user)
+    
     url_map={
         "sasapay-vendor": "vendors",
         "external-vendor": "vendors",

@@ -14,6 +14,9 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 
 def register_vendor(request,role):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("products:my-shop"))
+    
     form= VendorRegistration()
     if request.method == "POST":
         form= VendorRegistration(request.POST)
