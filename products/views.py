@@ -214,10 +214,15 @@ def product_details(request,pk):
                     else "Error: The selected flavors exceed the maximum limit of 4"
                 )
                 return HttpResponseRedirect(reverse("products:product-details",args=(product.id,)))
-                
         elif product.name == "Fruit Salad":
             if len(product_contents) - len(selected_contents) > 1:
                 messages.error(request,"Error: The limit of contents to be removed is 1")
+                return HttpResponseRedirect(reverse("products:product-details",args=(product.id,)))
+        else:
+            if len(selected_contents) < 1:
+                messages.error(
+                    request,
+                    "Error: Select at least one content")
                 return HttpResponseRedirect(reverse("products:product-details",args=(product.id,)))
         
         order= Order.objects.create(

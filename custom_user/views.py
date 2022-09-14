@@ -40,7 +40,11 @@ def roles(request):
                 )
             )
         else:
-            messages.error(request,"Error: Select existing role")
+            messages.error(
+                request,
+                "Roles: The currently selected role does not exist.\n"
+                +"Choose an appropriate role from the list above."
+            )
     context= {}
     return render(request,"custom_user/roles.html",context)
 
@@ -59,9 +63,17 @@ def authenticate_user(request):
                 login(request,user)
                 return redirect_user(user)
             else:
-                messages.error(request,"Error: User with provided credentials does not exist")
+                messages.error(
+                    request,
+                    "Login: The details provided are incorrect.\n"
+                    +"Enter the registered phone number and password."
+                )
         else:
-            messages.error(request,"Error: Unable to authenticate user")
+            messages.error(
+                request,
+                "Login: The details provided are incorrect.\n"
+                +"Enter the registered phone number and password."
+            )
     context= {"form":form}
     return render(request,'custom_user/authentication.html',context)
 

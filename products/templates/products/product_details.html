@@ -18,20 +18,21 @@
                         <div id="purchase-product-content-container">
                             {% if product.name == "Fruit Salad" %}
                                 <input
-                                    required
                                     id="{{value.id}}" name="product-contents"
                                     type="checkbox" value="{{value.id}}" checked
                                     onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
                                 />
                             {% elif product.name == "Fruit Juice" %}
                                 <input
-                                    required
                                     id="{{value.id}}" name="product-contents"
                                     type="checkbox" value="{{value.id}}"
                                     onclick="RestrictOptions('purchase-product-details-form','product-contents')"
                                 />
                             {% else %}
-                                <input required id="{{value.id}}" name="product-contents" type="checkbox" value="{{value.id}}"/>
+                                <input
+                                    id="{{value.id}}" name="product-contents"
+                                    type="checkbox" value="{{value.id}}"
+                                />
                             {% endif %}
                             <label for="{{value.id}}">{{value.name}}</label>
                         </div>

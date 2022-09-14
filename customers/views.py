@@ -12,6 +12,24 @@ from django.shortcuts import render,redirect,get_object_or_404
 from customers.forms import CustomerRegistration,ModificationForm
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 
+def errors(form_errors):
+    labels= {
+        'first_name':"First Name",
+        'last_name':"Last Name",
+        'phone_number' : "Phone Number",
+        'password2':"Password",
+    }
+    
+    formatted_output= str()
+    for label in form_errors:
+        formatted_output += (labels[label] + ": ")
+        label_errors= form_errors[label]
+        for label_error in label_errors:
+            formatted_output += ("".join(label_error))
+        formatted_output += "\n\n"
+    
+    return formatted_output
+
 def register_customer(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("products:products"))
@@ -27,7 +45,11 @@ def register_customer(request):
             login(request,user)
             return HttpResponseRedirect(reverse("products:products"))
         else:
-            messages.error(request,"Error: Unable to register customer")
+            messages.error(
+                request,
+                "Registration: Unable to register Customer.\n"
+                +"Check if correct data has been provided in the available fields."
+            )
     context= {"form":form}
     return render(request,"customers/registration.html",context)
 

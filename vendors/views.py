@@ -27,13 +27,21 @@ def register_vendor(request,role):
             elif role == "external_vendor":
                 user.external_vendor= True
             else:
-                messages.error(request,"Error: Unable to register vendor")
+                messages.error(
+                    request,
+                    "Registration: The selected Vendor role does not exist.\n"
+                    +"Go back to the previous page and select the appropriate role from the list."
+                )
             user.username= user.id
             user.save()
             login(request,user)
             return HttpResponseRedirect(reverse("products:my-shop"))
         else:
-            messages.error(request,"Error: Unable to register vendor")
+            messages.error(
+                request,
+                "Registration: Unable to register Vendor.\n"
+                +"Check if correct data has been provided in the available fields."
+            )
     context= {"form":form}
     return render(request,"vendors/registration.html",context)
 

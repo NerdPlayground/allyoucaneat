@@ -109,12 +109,6 @@ input[type="checkbox"]{
     }
 }
 
-@media screen and not (min-width: 625px){
-    #top-container{
-        margin: 15px;
-    }
-}
-
 @media screen and not (min-width: 600px){
     #main-container{
         width: 100%;
