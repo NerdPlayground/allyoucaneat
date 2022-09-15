@@ -11,7 +11,7 @@
     width: var(--navigation-width);
 }
 
-@media screen and not (min-width:600px){
+@media screen and (max-width:600px){
     #navigation-bar{
         display: none;
     }

@@ -39,7 +39,7 @@
     background-color: var(--body-background-color);
 }
 
-@media screen and not (min-width: 650px){
+@media screen and (max-width: 650px){
     #confirm-order-container-buttons{
         flex-direction: column;
         justify-content: space-between;

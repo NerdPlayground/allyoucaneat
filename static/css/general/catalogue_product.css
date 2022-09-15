@@ -102,7 +102,7 @@
     background-color: var(--body-background-color);
 }
 
-@media screen and not (min-width:600px){
+@media screen and (max-width:600px){
     #purchase-product-details-container{
         margin: 15px;
     }
@@ -119,7 +119,7 @@
     }
 }
 
-@media screen and not (min-width:550px){
+@media screen and (max-width:550px){
     #purchase-product-details-buttons-container{
         display: flex;
         flex-direction: column;

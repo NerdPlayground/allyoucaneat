@@ -52,7 +52,7 @@
 }
 
 
-@media screen and not (min-width: 625px){
+@media screen and (max-width: 625px){
     #delete-objects-button-container{
         flex-direction: column;
     }

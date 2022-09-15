@@ -9,18 +9,18 @@
 @import "my_shop.css";
 /* @import ""; */
 
+/* #error-messages-container,
+#error-message,
+#error-message p{
+    border: 1px solid black;
+} */
+
 #content-container{
     overflow: auto;
     width: var(--content-width);
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
 }
-
-/* #error-messages-container,
-#error-message,
-#error-message p{
-    border: 1px solid black;
-} */
 
 #error-messages-container{
     padding: 10px;
@@ -57,13 +57,13 @@
     border: 1px solid black;
 }
 
-@media screen and not (min-width: 625px){
+@media screen and (max-width: 625px){
     #top-container{
         margin: 15px;
     }
 }
 
-@media screen and not (min-width:600px){
+@media screen and (max-width:600px){
     #content-container{
         width: 90%; /* 630px */
     }

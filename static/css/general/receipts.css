@@ -94,7 +94,7 @@
     background-color: var(--body-background-color);
 }
 
-@media screen and not (min-width: 650px){
+@media screen and (max-width: 650px){
     #sort-form{
         flex-direction: column;
     }
