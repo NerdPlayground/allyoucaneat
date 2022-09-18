@@ -81,7 +81,7 @@
 #delete-product-button{
     border-radius: 20px;
     width: 100px;
-    height: 25px;
+    height: 30px;
     max-width: 100%;
     max-height: auto;
     text-align: center;
@@ -138,10 +138,10 @@
 #edit-product-group-button,
 #delete-product-group-button{
     border-radius: 20px;
-    height: 25px;
+    width: 100px;
+    height: 30px;
     max-width: 100%;
     max-height: auto;
-    width: 100px;
     text-align: center;
     font-size: 16px;
     font-weight: normal;

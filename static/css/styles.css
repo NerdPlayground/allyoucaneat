@@ -1,11 +1,10 @@
 @import "home/home_content.css";
 @import "general/general_content.css";
-/* @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Rubik+Glitch&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Rubik+Glitch&display=swap');
 
 :root{
-    --body-background-color: #ffffff;
+    --body-background-color: #e0e0e0;
     /* #508762; */
     --main-background-color: #ffffff;
     /* #155F2E; */
