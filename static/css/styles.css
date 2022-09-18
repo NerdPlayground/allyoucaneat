@@ -1,12 +1,22 @@
 @import "home/home_content.css";
 @import "general/general_content.css";
+/* @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Rubik+Glitch&display=swap'); */
 
 :root{
-    --body-background-color: #1BAB51;
+    --body-background-color: #ffffff;
+    /* #508762; */
+    --main-background-color: #ffffff;
+    /* #155F2E; */
+    --buttons-background-color: #ffffff;
+    /* #5F1546; */
 }
 
-*{
+*:not(.exclude-format){
     box-sizing: border-box;
+    /* border: 1px solid black; */
+    font-family: 'Sriracha', cursive;
 }
 
 body{
@@ -21,11 +31,11 @@ body{
     --main-height: 525px;
     display: flex;
     flex-direction: column;
-    background-color: white;
     margin-top: 75px;
     border-radius: 20px;
     width: var(--main-width);
     height: var(--main-height);
+    background-color: var(--main-background-color);
 }
 
 a{

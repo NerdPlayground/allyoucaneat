@@ -11,17 +11,6 @@
     width: var(--navigation-width);
 }
 
-@media screen and (max-width:600px){
-    #navigation-bar{
-        display: none;
-    }
-
-    #small-navigation-bar{
-        display: block;
-        width: 10%; /* 70px */
-    }
-}
-
 #small-viewport-values{
     cursor: pointer;
 }
@@ -75,4 +64,15 @@
 #small-customer-buttons,
 #small-vendors-buttons{
     height: 100px;
+}
+
+@media screen and (max-width:600px){
+    #navigation-bar{
+        display: none;
+    }
+
+    #small-navigation-bar{
+        display: block;
+        width: 10%; /* 70px */
+    }
 }
