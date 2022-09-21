@@ -1,17 +1,12 @@
 {% extends "index.html" %}
 {% block home %}
     <div id="home-container">
-        <div id="home-container-title">
+        <div id="home-title-container">
             <h1 id="applicaton-title">
-                All You Can Eat
-            </h1>
-        </div>
-        <div id="home-container-buttons">
-            <button id="welcome-button">
                 <a href="{% url 'user:login' %}">
-                    Welcome
+                    All You Can Eat
                 </a>
-            </button>
+            </h1>
         </div>
     </div>
 {% endblock %}
