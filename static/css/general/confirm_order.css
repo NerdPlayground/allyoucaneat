@@ -12,13 +12,6 @@
     margin: 25px;
 }
 
-#order-container{
-    margin-bottom: 25px;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 10px;
-}
-
 #confirm-order-container-buttons{
     display: flex;
     flex-direction: row;
@@ -36,7 +29,6 @@
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    background-color: var(--body-background-color);
 }
 
 @media screen and (max-width: 650px){

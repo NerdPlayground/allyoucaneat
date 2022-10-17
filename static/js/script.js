@@ -30,7 +30,7 @@ function AddContent(element_id){
 
     const remove_content= document.createElement("button");
     remove_content.id= "remove-content-button-"+content_button_clicked_counter;
-    remove_content.setAttribute("class","remove-content-button");
+    remove_content.classList.add("remove-content-button","all-buttons");
     remove_content.innerText= "Remove";
     remove_content.setAttribute("type","button");
     remove_content.setAttribute(
@@ -106,7 +106,7 @@ function AddPrice(element_id){
 
     const remove_price= document.createElement("button");
     remove_price.id= "remove-price-button-"+price_button_clicked_counter;
-    remove_price.setAttribute("class","remove-price-button");
+    remove_price.classList.add("remove-price-button","all-buttons");
     remove_price.innerText= "Remove";
     remove_price.setAttribute("type","button");
     remove_price.setAttribute(

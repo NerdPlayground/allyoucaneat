@@ -2,11 +2,11 @@
 {% block content %}
 <div id="orders-container" class="top-container">
     {% for order,contents in all_orders.items %}
-        <div id="order-container">
+        <div class="order-container">
             {% include "orders/order.html" %}
             {% if request.user.sasapay_vendor or request.user.external_vendor %}
                 <div id="order-buttons-container">
-                    <button id="deliver-order-button">
+                    <button id="deliver-order-button" class="all-buttons">
                         <a href="{% url 'vendors:deliver-order' order.id %}">
                             Deliver Order
                         </a>
@@ -15,7 +15,7 @@
             {% endif %}
         </div>
     {% empty %}
-        <div id="empty-container">
+        <div class="empty-container">
             <p>
                 {% if request.user.sasapay_vendor or request.user.external_vendor %}
                     There are no customer orders.
@@ -26,7 +26,7 @@
         </div>
     {% endfor %}
     <div id="orders-buttons-container">
-        <button id="back-button">
+        <button id="back-button" class="all-buttons">
             {% if request.user.sasapay_vendor or request.user.external_vendor %}
                 <a href="{% url 'products:my-shop' %}">
                     Back

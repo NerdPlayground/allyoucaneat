@@ -2,7 +2,7 @@
 {% block content %}
 <div id="my-shop-container" class="top-container">
     <div id="add-product-container">
-        <button id="add-product-button" type="button">
+        <button id="add-product-button" type="button" class="all-buttons">
             <a href="{% url 'products:add-product' %}">
                 Add Product
             </a>
@@ -15,10 +15,10 @@
                     {{product.name}}
                 </h1>
                 <div id="product-details-buttons-container">
-                    <button id="edit-product-button" type="button">
+                    <button id="edit-product-button" type="button" class="all-buttons">
                         <a href="{% url 'products:edit-product' product.id %}">Edit</a>
                     </button>
-                    <button id="delete-product-button" type="button">
+                    <button id="delete-product-button" type="button" class="all-buttons">
                         <a href="{% url 'products:delete-product' product.id %}">Delete</a>
                     </button>
                 </div>
@@ -59,8 +59,8 @@
                     {% endfor %}
                 </div>
                 <div id="product-groups-buttons-container">
-                    <input id="edit-product-group-button" name="edit-product-group-button" type="submit" value="Edit"/>
-                    <input id="delete-product-group-button" name="delete-product-group-button" type="submit" value="Delete"/>
+                    <input id="edit-product-group-button" name="edit-product-group-button" type="submit" value="Edit" class="all-buttons"/>
+                    <input id="delete-product-group-button" name="delete-product-group-button" type="submit" value="Delete" class="all-buttons"/>
                 </div>
             </form>
         </div>

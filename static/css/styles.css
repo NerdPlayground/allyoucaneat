@@ -4,12 +4,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Rubik+Glitch&display=swap');
 
 :root{
-    --body-background-color: #e0e0e0;
-    /* #508762; */
-    --main-background-color: #ffffff;
-    /* #155F2E; */
-    --buttons-background-color: #ffffff;
-    /* #5F1546; */
+    --no-white-color: #DFDFDF;
+    --body-background-color: #1a1a1a;
+    --main-background-color: #373737;
+    --inner-gradient-color:#53efad;
+    --outer-gradient-color:#53e4ad;
+    --bright-color: linear-gradient(to bottom right,
+        var(--inner-gradient-color),var(--outer-gradient-color)
+    );
 }
 
 *:not(.exclude-format){
@@ -59,17 +61,42 @@ input[type="checkbox"]{
     cursor: pointer;
 }
 
-#empty-container{
+input[type="radio"],
+input[type="checkbox"]{
+    accent-color: var(--outer-gradient-color);
+}
+
+select,
+input[type="text"],
+input[type="password"],
+input[type="number"]{
+    border-color: transparent;
+    background-color: var(--no-white-color);
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus{
+    outline: none;
+}
+
+.all-buttons{
+    border: 1px solid var(--outer-gradient-color);
+    background-image: var(--bright-color);
+}
+
+.empty-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-radius: 20px;
     height: 50px;
     margin-bottom: 25px;
-    border: 1px solid black;
+    border: 1px solid var(--outer-gradient-color);
 }
 
-#empty-container p{
+.empty-container p{
     margin: 0px;
     text-align: center;
     font-size: 20px;
@@ -89,6 +116,13 @@ input[type="checkbox"]{
 
 .entry-value{
     width: 75%;
+}
+
+.order-container{
+    margin-bottom: 25px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid var(--outer-gradient-color);
 }
 
 @media screen and (min-width:1707px){

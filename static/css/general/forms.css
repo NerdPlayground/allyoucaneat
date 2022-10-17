@@ -126,7 +126,7 @@
 #edit-price-form{
     padding: 10px;
     border-radius: 20px;
-    border: 1px solid black;
+    border: 1px solid var(--outer-gradient-color);
 }
 
 .fields-container,
@@ -215,7 +215,7 @@
 #edit-product-prices-container{
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--outer-gradient-color);
 }
 
 #new-product-name-container,
@@ -309,7 +309,6 @@
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    background-color: var(--body-background-color);
 }
 
 #new-product-content-button,
@@ -325,7 +324,7 @@
     font-size: 16px;
     font-weight: normal;
     background-color: white;
-    border-color: var(--body-background-color);
+    border: 1px solid var(--outer-gradient-color);
 }
 
 #registered-user-button,

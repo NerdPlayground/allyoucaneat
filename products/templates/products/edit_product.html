@@ -14,19 +14,23 @@
                 <label for="edit-product-contents">Contents:</label>
                 <div id="edit-product-contents"></div>
                 <div id="edit-product-contents-buttons-container">
-                    <button id="new-product-content-button" onclick="AddContent('edit-product-contents')" type="button">Add Content</button>
+                    <button id="new-product-content-button" onclick="AddContent('edit-product-contents')" type="button" class="all-buttons">
+                        Add Content
+                    </button>
                 </div>
             </div>
             <div id="edit-product-prices-container">
                 <div id="edit-product-prices"></div>
                 <div id="edit-product-prices-buttons-container">
-                    <button id="new-product-price-button" onclick="AddPrice('edit-product-prices')" type="button">Add Price</button>
+                    <button id="new-product-price-button" onclick="AddPrice('edit-product-prices')" type="button" class="all-buttons">
+                        Add Price
+                    </button>
                 </div>
             </div>
         </div>
         <div id="edit-product-buttons-container">
-            <input id="save-changes-button" name="save-changes-button" type="submit" value="Save Changes">
-            <button id="edit-product-back-button" type="button">
+            <input id="save-changes-button" name="save-changes-button" type="submit" value="Save Changes" class="all-buttons"/>
+            <button id="edit-product-back-button" type="button" class="all-buttons">
                 <a href="{% url 'products:my-shop' %}">Back</a>
             </button>
         </div>

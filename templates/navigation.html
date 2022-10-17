@@ -1,36 +1,36 @@
 <div id="home-buttons">
-    <button class="navigation-bar" id="home-button">
+    <button class="navigation-bar all-buttons" id="home-button">
         <a href="{% url 'home' %}">Home</a>
     </button>
 </div>
 {% if request.user.is_authenticated %}
     <div id="authenticated-user-buttons">
-        <button class="navigation-bar" id="profile-button">
+        <button class="navigation-bar all-buttons" id="profile-button">
             <a href="{% url 'user:profile' %}">Profile</a>
         </button>
     </div>
     {% if request.user.customer %}
         <div id="customer-buttons">
-            <button class="navigation-bar" id="track-orders-button">
+            <button class="navigation-bar all-buttons" id="track-orders-button">
                 <a href="{% url 'customers:track-orders' %}">Orders</a>
             </button>
-            <button class="navigation-bar" id="orders-button">
+            <button class="navigation-bar all-buttons" id="orders-button">
                 <a href="{% url 'customers:receipts' %}">Receipts</a>
             </button>
         </div>
     {% elif request.user.external_vendor or request.user.sasapay_vendor %}
         <div id="vendors-buttons">
-            <button class="navigation-bar" id="orders-button">
+            <button class="navigation-bar all-buttons" id="orders-button">
                 <a href="{% url 'vendors:customer-orders' %}">Orders</a>
             </button>
-            <button class="navigation-bar" id="receipts-button">
+            <button class="navigation-bar all-buttons" id="receipts-button">
                 <a href="{% url 'vendors:customer-receipts' %}">Receipts</a>
             </button>
         </div>
     {% endif %}
 {% endif %}
 <div id="user-access-buttons">
-    <button class="navigation-bar" id="access-button">
+    <button class="navigation-bar all-buttons" id="access-button">
         {% if request.user.is_authenticated %}
             <a href="{% url 'user:logout' %}">Logout</a>
         {% else %}
@@ -39,7 +39,7 @@
     </button>
 </div>
 <div id="output-container">
-    <button id="viewport-values" type="button" class="navigation-bar" onclick="ViewPortValues()">
+    <button id="viewport-values" type="button" class="navigation-bar all-buttons" onclick="ViewPortValues()">
         View Port
     </button>
 </div>

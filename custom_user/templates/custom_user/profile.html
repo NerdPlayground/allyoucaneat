@@ -32,14 +32,14 @@
         {% endif %}
     </div>
     <div id="profile-buttons-container">
-        <button id="edit-profile-button">
+        <button id="edit-profile-button" class="all-buttons">
             {% if vendor %}
                 <a href="{% url 'vendors:edit-profile' %}">Edit Profile</a>
             {% else %}
                 <a href="{% url 'customers:edit-profile' %}">Edit Profile</a>
             {% endif %}
         </button>
-        <button id="profile-back-button" type="button">
+        <button id="profile-back-button" type="button" class="all-buttons">
             {% if vendor %}
                 <a href="{% url 'products:my-shop' %}">Back</a>
             {% else %}

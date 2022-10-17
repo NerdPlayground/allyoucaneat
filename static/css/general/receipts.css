@@ -66,14 +66,13 @@
     max-height: auto;
     text-align: center;
     font-weight: bold;
-    background-color: var(--body-background-color);
 }
 
 #receipt-order-container{
     margin-bottom: 25px;
-    border: 1px solid black;
     border-radius: 20px;
     padding: 10px;
+    border: 1px solid var(--outer-gradient-color);
 }
 
 #receipts-buttons-container{
@@ -91,7 +90,6 @@
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    background-color: var(--body-background-color);
 }
 
 @media screen and (max-width: 650px){

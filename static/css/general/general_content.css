@@ -9,8 +9,9 @@
     flex-direction: row;
     flex-grow: 1;
     overflow: auto;
-    border: 1px solid black;
+    border: 1px solid var(--main-background-color);
     max-width: 100%;
     max-height: auto;
     border-radius: inherit;
+    color:#9f9f9f;
 }

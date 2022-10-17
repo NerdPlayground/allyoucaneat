@@ -21,8 +21,8 @@
                 {% endif %}
             </div>
             <div id="sort-form-buttons-container">
-                <input id="apply-filters" type="submit" value="Apply"/>
-                <input id="clear-filters" type="reset" value="Clear"/>
+                <input id="apply-filters" type="submit" value="Apply" class="all-buttons"/>
+                <input id="clear-filters" type="reset" value="Clear" class="all-buttons"/>
             </div>
         </form>
     </div>
@@ -79,12 +79,12 @@
             <hr/>
         </div>
     {% empty %}
-        <div id="empty-container">
+        <div class="empty-container">
             <p>There are no available receipts.</p>
         </div>
     {% endfor %}
     <div id="receipts-buttons-container">
-        <button id="receipt-back-button" type="button">
+        <button id="receipt-back-button" type="button" class="all-buttons">
             {% if request.user.sasapay_vendor or request.user.external_vendor %}
                 <a href="{% url 'products:my-shop' %}">Back</a>
             {% else %}

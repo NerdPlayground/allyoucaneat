@@ -1,19 +1,19 @@
 {% extends "main.html" %}
 {% block content %}
 <div id="confirm-order-container" class="top-container">
-    <div id="order-container">
+    <div class="order-container">
         {% include "orders/order.html" %}
     </div>
     <div id="confirm-order-container-buttons">
-        <button id="sasapay-pay-order-button" type="button">
+        <button id="sasapay-pay-order-button" type="button" class="all-buttons">
             <a href="{% url 'sasapay:pay-order' order.id %}">
                 Lipa na SasaPay
             </a>
         </button>
-        <button id="mpesa-pay-order-button" type="button">
+        <button id="mpesa-pay-order-button" type="button" class="all-buttons">
             Lipa na Mpesa
         </button>
-        <button id="cancel-order-button" type="button">
+        <button id="cancel-order-button" type="button" class="all-buttons">
             <a href="{% url 'orders:delete-order' order.id %}">
                 Cancel Order
             </a>

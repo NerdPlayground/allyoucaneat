@@ -12,13 +12,13 @@
             {% endfor %}
         </div>
         <div id="authentication-buttons-container">
-            <input id="authentication-button" type="submit" value="Login"/>
+            <input id="authentication-button" type="submit" value="Login" class="all-buttons"/>
         </div>
     </form>
     <div id="unregistered-user-container">
         <p>
             Don't have an account?
-            <button id="unregistered-user-button">
+            <button id="unregistered-user-button" class="all-buttons">
                 <a href="{% url 'user:roles' %}">Sign up here</a>
             </button>
         </p>

@@ -1,6 +1,6 @@
 #navigation-bar,
 #small-navigation-bar{
-    border-right: 1px solid black;
+    border-right: 2px solid var(--body-background-color);
     width: var(--navigation-width);
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
@@ -9,6 +9,7 @@
 #small-navigation-bar{
     display: none;
     width: var(--navigation-width);
+    background-image: var(--bright-color);
 }
 
 #small-viewport-values{
@@ -24,9 +25,7 @@
 }
 
 .navigation-bar{
-    background-color: white;
     border-radius: 20px;
-    border: 1px solid black;
     width: 100px;
     height: 25px;
     max-width: 100%;
