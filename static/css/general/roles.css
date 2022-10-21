@@ -1,0 +1,87 @@
+#roles-container{
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+#role-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#role-fields-container{
+    margin-bottom: 10px;
+}
+
+#roles-button{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.custom-select{
+    height: auto;
+    width: 200px;
+    max-width: 100%;
+    position: relative;
+}
+
+.custom-select select{
+    display: none;
+}
+
+.select-selected{
+    border-radius: 20px 20px 0px 0px;
+    background-color: var(--main-background-color);
+    border-color: var(--outer-gradient-color) !important;
+}
+
+.select-selected:after{
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: transparent;
+    border-top-color: var(--outer-gradient-color);
+}
+
+.select-selected.select-arrow-active:after{
+    top: 7px;
+    border-color: transparent;
+    border-bottom-color: var(--outer-gradient-color);
+}
+
+.select-items div,.select-selected {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent;
+    cursor: pointer;
+    border-bottom-color: black;
+}
+
+.last-option{
+    border-radius: 0px 0px 20px 20px;
+    border-bottom-color: transparent !important;
+}
+
+.select-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 0px 0px 20px 20px;
+    border: 1px solid var(--outer-gradient-color);
+    border-top: none;
+    background-color: var(--main-background-color);
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: black;
+}

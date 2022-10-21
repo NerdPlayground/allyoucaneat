@@ -4,10 +4,9 @@
     <form id="role-form" method="POST" autocomplete="off" action="">
         {% csrf_token %}
         <div id="role-fields-container">
-            <div class="form-group">
-                <label id="user-roles-label" for="user-roles">Select Role:</label><br/>
+            <div class="custom-select">
                 <select id="user-roles" name="user-roles" required>
-                    <option value="" selected disabled>------------</option>
+                    <option value="" selected disabled>Select Role:</option>
                     <option value="customer">Customer</option>
                     <option value="sasapay-vendor">SasaPay Vendor</option>
                     <option value="external-vendor">External Vendor</option>

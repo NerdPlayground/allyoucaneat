@@ -35,19 +35,32 @@
 
 #sort-form-fields-container{
     width: 65%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
-#sort-form-period,
-#sort-form-shop{
-    border-radius: 20px;
+#sort-form-fields-container .custom-select{
+    width: 150px;
+    height: 30px;
+    max-width: 50%;
+    max-height: auto;
+    position: relative;
+}
+
+#sort-form-fields-container .select-selected{
     padding-left: 10px;
     margin-right: 12.5px;
     width: 150px;
     height: 30px;
     max-width: 100%;
     max-height: auto;
+}
+
+#sort-form-fields-container .select-selected,
+#sort-form-fields-container .select-items {
+    font-size: 12px;
 }
 
 #sort-form-buttons-container{
@@ -92,29 +105,33 @@
     font-weight: bold;
 }
 
-@media screen and (max-width: 650px){
+@media screen and (max-width: 700px){
     #sort-form{
-        flex-direction: column;
+        height: 70px;
     }
 
     #sort-form-fields-container,
     #sort-form-buttons-container{
-        width: 100%;
+        width: 50%;
+        flex-direction: column;
     }
 
     #sort-form-fields-container{
-        margin-bottom: 10px;
+        justify-content: center;
+    }
+
+    #sort-form-fields-container .custom-select{
+        margin-bottom: 5px;
+    }
+
+    #apply-filters,#clear-filters,
+    #sort-form-fields-container .custom-select,
+    #sort-form-fields-container .select-selected{
+        width: 100%;
+        max-width: 100%;
     }
 
     #sort-form-buttons-container{
-        justify-content: flex-start;
-    }
-
-    #apply-filters,
-    #clear-filters{
-        width: 150px;
-        height: 25px;
-        padding-left: 10px;
-        margin-right: 12.5px;
+        padding: 0px 10px;
     }
 }

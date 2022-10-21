@@ -1,3 +1,83 @@
+function display(element){
+    output_label=document.createElement("label");
+    label.innerHTML=element.innerHTML;
+    output_container=document.getElementById("output-container");
+    output_container.appendChild(output_label);
+}
+
+var
+	i, j, select_container,
+	select_item,custom_select_item,
+	select_options_container,select_option;
+
+select_container= document.getElementsByClassName("custom-select");
+for(i=0; i<select_container.length; i++){
+	select_item= select_container[i].getElementsByTagName("select")[0];
+
+	custom_select_item= document.createElement("div");
+	custom_select_item.setAttribute("class","select-selected");
+	custom_select_item.innerHTML= select_item.options[select_item.selectedIndex].innerHTML;
+	select_container[i].appendChild(custom_select_item);
+
+	select_options_container= document.createElement("div");
+	select_options_container.setAttribute("class","select-items select-hide");
+	for(j=1; j<select_item.length; j++){
+		select_option= document.createElement("div");
+		select_option.innerHTML= select_item.options[j].innerHTML;
+		select_option.addEventListener("click",function(e){
+			var
+				k,l,original_select_item,
+				previous_select_option,
+				similar_options;
+			
+			original_select_item= this.parentNode.parentNode.getElementsByTagName("select")[0];
+			previous_select_option= this.parentNode.previousSibling;
+			for(k=0; k<original_select_item.length; k++){
+				if(original_select_item.options[k].innerHTML==this.innerHTML){
+					original_select_item.selectedIndex=k;
+					previous_select_option.innerHTML=this.innerHTML;
+					similar_options=this.parentNode.getElementsByClassName("same-as-selected");
+					for(l=0; l<similar_options.length; l++){
+						similar_options[l].removeAttribute("class");
+					}
+					this.setAttribute("class", "same-as-selected");
+					break;
+				}
+			}
+			previous_select_option.click();
+		});
+        if((j+1)==select_item.length)
+            select_option.setAttribute("class","last-option");
+        select_options_container.appendChild(select_option);
+	}
+	select_container[i].appendChild(select_options_container);
+
+	custom_select_item.addEventListener("click",function(e){
+		e.stopPropagation();
+		closeAllSelect(this);
+		this.nextSibling.classList.toggle("select-hide");
+		this.classList.toggle("select-arrow-active");
+	});
+}
+
+function closeAllSelect(element){
+	var
+		i,indexes=[],
+		custom_select_items,
+		select_options_containers;
+
+	select_options_containers=document.getElementsByClassName("select-items");
+	custom_select_items=document.getElementsByClassName("select-selected");
+	for(i=0; i<custom_select_items.length; i++){
+		if(custom_select_items[i]==element) indexes.push(i);
+		else custom_select_items[i].classList.remove("select-arrow-active");
+	}
+	for(i=0; i<select_options_containers.length; ++i){
+		if(indexes.indexOf(i)) select_options_containers[i].classList.add("select-hide");
+	}
+}
+document.addEventListener("click", closeAllSelect);
+
 let content_button_clicked_counter= 0;
 function AddContent(element_id){
     ++content_button_clicked_counter;
