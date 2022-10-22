@@ -140,6 +140,10 @@
     max-height: auto;
 }
 
+#authentication-fields-container{
+    margin-bottom: 20px;
+}
+
 #edit-price-container .fields-container,
 #edit-price-container .buttons-container{
     margin-bottom: 0px;
