@@ -2,11 +2,7 @@
 {% block content %}
 <div id="products-catalogue-container" class="top-container">
     <div id="search-bar-container">
-        <form id="search-bar" method="GET" action="" autocomplete="off">
-            <label>
-                <input id="search-query" name="search-query" type="search" placeholder="Search..."/>
-            </label>
-        </form>
+        {% include "search.html" %}
     </div>
     <div id="catalogue-container">
         {% for product in products %}

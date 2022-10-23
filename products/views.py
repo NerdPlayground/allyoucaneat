@@ -55,7 +55,12 @@ def get_product_catalogue(products):
 @is_vendor
 def my_shop(request):
     vendor= Vendor.objects.get(id=request.user.id)
-    products= Product.objects.filter(vendor=vendor)
+    query= request.GET.get('search-query')
+    search_query= query if query != None else ''
+    products= Product.objects.filter(
+        Q(name__icontains=search_query),
+        vendor=vendor
+    )
     context= {"catalogue":get_product_catalogue(products)}
     return render(request,"products/my_shop.html",context)
 

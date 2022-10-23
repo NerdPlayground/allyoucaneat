@@ -2,6 +2,7 @@
 {% block content %}
 <div id="my-shop-container" class="top-container">
     <div id="add-product-container">
+        {% include "search.html" %}
         <button id="add-product-button" type="button" class="all-buttons">
             <a href="{% url 'products:add-product' %}">
                 Add Product
