@@ -69,7 +69,7 @@ input[type="checkbox"]{
 select,
 input[type="text"],
 input[type="password"],
-input[type="number"],
+input[type="numeric"],
 input[type="search"]{
     border-color: transparent;
     background-color: var(--no-white-color);
@@ -78,7 +78,7 @@ input[type="search"]{
 select:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="number"]:focus,
+input[type="numeric"]:focus,
 input[type="search"]:focus{
     outline: none;
 }
