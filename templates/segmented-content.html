@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% block segmented-content %}
+<div id="segmented-content">
+    <div id="filter-container">
+        {% block filter %}
+        {% endblock %}
+    </div>
+    <div id="modified-content-container">
+        {% block content %}
+        {% endblock %}
+        {% include "errors.html" %}
+    </div>
+    <div id="pagination-container">
+        {% block pagination %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

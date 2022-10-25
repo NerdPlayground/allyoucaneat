@@ -5,6 +5,7 @@ from orders.models import Order
 from vendors.models import Vendor
 from django.contrib import messages
 from products.decorators import is_vendor
+from django.core.paginator import Paginator
 from customers.decorators import is_customer
 from products.models import Product,Price,Content
 from django.contrib.auth.decorators import login_required
@@ -61,7 +62,13 @@ def my_shop(request):
         Q(name__icontains=search_query),
         vendor=vendor
     )
-    context= {"catalogue":get_product_catalogue(products)}
+    paginator= Paginator(products,1)
+    page_number= request.GET.get("page")
+    page= paginator.get_page(page_number)
+    context= {
+        "page":page,
+        "catalogue":get_product_catalogue(page)
+    }
     return render(request,"products/my_shop.html",context)
 
 @login_required(login_url="user:login")
@@ -197,7 +204,10 @@ def products(request):
     products= Product.objects.filter(
         Q(name__icontains=search_query)
     )
-    context= {"products":products}
+    paginator= Paginator(products,5)
+    page_number= request.GET.get("page")
+    page= paginator.get_page(page_number)
+    context= {"page":page}
     return render(request,"products/products.html",context)
 
 @login_required(login_url="user:login")

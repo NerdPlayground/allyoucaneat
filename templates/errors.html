@@ -1,0 +1,9 @@
+{% if messages %}
+<div id="error-messages-container">
+    {% for message in messages %}
+    <div id="error-message">
+        <p>{{message|linebreaksbr}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

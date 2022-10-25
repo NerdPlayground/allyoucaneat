@@ -1,11 +1,14 @@
-{% extends "main.html" %}
+{% extends "segmented-content.html" %}
+{% block filter %}
+<div id="search-bar-container">
+    {% include "search.html" %}
+</div>
+{% endblock %}
+
 {% block content %}
 <div id="products-catalogue-container" class="top-container">
-    <div id="search-bar-container">
-        {% include "search.html" %}
-    </div>
     <div id="catalogue-container">
-        {% for product in products %}
+        {% for product in page %}
             <div id="catalogue-product">
                 <a href="{% url 'products:product-details' product.id %}">
                     <div id="display-product-name">
@@ -20,4 +23,8 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block pagination %}
+{% include "pagination.html" %}
 {% endblock %}

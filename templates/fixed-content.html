@@ -1,0 +1,8 @@
+{% extends "main.html" %}
+{% block fixed-content %}
+<div id="content-container">
+    {% block content %}
+    {% endblock %}
+    {% include "errors.html" %}
+</div>
+{% endblock %}

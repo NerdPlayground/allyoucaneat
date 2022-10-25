@@ -1,36 +1,38 @@
-{% extends "main.html" %}
-{% block content %}
-<div id="receipts-container" class="top-container">
-    <div id="sort-container">
-        <form id="sort-form" action="" method="GET">
-            <div id="sort-form-fields-container">
-                <div class="custom-select">
-                    <select id="sort-form-period" name="sort-form-period">
+{% extends "segmented-content.html" %}
+{% block filter %}
+<div id="sort-container" class="top-container">
+    <form id="sort-form" action="" method="GET">
+        <div id="sort-form-fields-container">
+            <div id="select-period" class="custom-select">
+                <select id="sort-form-period" name="sort-form-period">
+                    <option value="all">All</option>
+                    <option value="today">Today</option>
+                    <option value="this-week">This Week</option>
+                    <option value="this-month">This Month</option>
+                    <option value="this-year">This Year</option>
+                </select>
+            </div>
+            {% if request.user.customer %}
+                <div id="select-shop" class="custom-select">
+                    <select id="sort-form-shop" name="sort-form-shop">
                         <option value="all">All</option>
-                        <option value="today">Today</option>
-                        <option value="this-week">This Week</option>
-                        <option value="this-month">This Month</option>
-                        <option value="this-year">This Year</option>
+                        {% for shop in shops %}
+                        <option value="{{shop}}">{{shop}}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                {% if request.user.customer %}
-                    <div class="custom-select">
-                        <select id="sort-form-shop" name="sort-form-shop">
-                            <option value="all">All</option>
-                            {% for shop in shops %}
-                            <option value="{{shop}}">{{shop}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                {% endif %}
-            </div>
-            <div id="sort-form-buttons-container">
-                <input id="apply-filters" type="submit" value="Apply" class="all-buttons"/>
-                <input id="clear-filters" type="reset" value="Clear" class="all-buttons"/>
-            </div>
-        </form>
-    </div>
-    {% for receipt in receipts %}
+            {% endif %}
+        </div>
+        <div id="sort-form-buttons-container">
+            <input id="apply-filters" type="submit" value="Apply" class="all-buttons"/>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="receipts-container" class="top-container">
+    {% for receipt in page %}
         <div id="receipt-order-container">
             <div class="entry-container">
                 <label class="entry-label">Receipt:</label>
@@ -97,4 +99,8 @@
         </button>
     </div>
 </div>
+{% endblock %}
+
+{% block pagination %}
+{% include "pagination.html" %}
 {% endblock %}

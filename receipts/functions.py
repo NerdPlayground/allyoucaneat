@@ -3,6 +3,7 @@ from django.db.models import Q
 from vendors.models import Vendor
 from django.shortcuts import render
 from receipts.models import Receipt
+from django.core.paginator import Paginator
 from django.utils.timezone import make_aware
 
 def common_receipts(request,user):
@@ -39,8 +40,11 @@ def common_receipts(request,user):
             vendor=user
         ).order_by("-created_on")
     
+    paginator= Paginator(receipts,5)
+    page_number= request.GET.get("page")
+    page= paginator.get_page(page_number)
     context= {
-        "receipts": receipts,
+        "page": page,
         "shops": business_names,
     }
     return render(request,"receipts/receipts.html",context)

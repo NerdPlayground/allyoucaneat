@@ -7,19 +7,10 @@
         <div id="small-navigation-bar">
             {% include "small-navigation.html" %}
         </div>
-        <div id="content-container">
-            {% block content %}
-            {% endblock %}
+        {% block fixed-content %}
+        {% endblock %}
 
-            {% if messages %}
-                <div id="error-messages-container">
-                    {% for message in messages %}
-                        <div id="error-message">
-                            <p>{{message|linebreaksbr}}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
+        {% block segmented-content %}
+        {% endblock %}
     </div>
 {% endblock %}

@@ -15,7 +15,7 @@
 #search-bar-container{
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    margin: 20px 25px 5px 25px;
 }
 
 #catalogue-container{
