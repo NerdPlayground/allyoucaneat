@@ -15,26 +15,30 @@
                 </h2>
                 <div id="purchase-product-contents">
                     {% for key,value in product_contents.items %}
-                        <div id="purchase-product-content-container">
-                            {% if product.name == "Fruit Salad" %}
-                                <input
-                                    id="{{value.id}}" name="product-contents"
-                                    type="checkbox" value="{{value.id}}" checked
-                                    onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
-                                />
-                            {% elif product.name == "Fruit Juice" %}
-                                <input
-                                    id="{{value.id}}" name="product-contents"
-                                    type="checkbox" value="{{value.id}}"
-                                    onclick="RestrictOptions('purchase-product-details-form','product-contents')"
-                                />
-                            {% else %}
-                                <input
-                                    id="{{value.id}}" name="product-contents"
-                                    type="checkbox" value="{{value.id}}"
-                                />
-                            {% endif %}
-                            <label for="{{value.id}}">{{value.name}}</label>
+                        <div id="purchase-product-content-container" class="item-container">
+                            <div class="input-container">
+                                {% if product.name == "Fruit Salad" %}
+                                    <input
+                                        id="{{value.id}}" name="product-contents"
+                                        type="checkbox" value="{{value.id}}" checked
+                                        onclick="RemoveOption('{{value.id}}','purchase-product-details-form','product-contents')"
+                                    />
+                                {% elif product.name == "Fruit Juice" %}
+                                    <input
+                                        id="{{value.id}}" name="product-contents"
+                                        type="checkbox" value="{{value.id}}"
+                                        onclick="RestrictOptions('purchase-product-details-form','product-contents')"
+                                    />
+                                {% else %}
+                                    <input
+                                        id="{{value.id}}" name="product-contents"
+                                        type="checkbox" value="{{value.id}}"
+                                    />
+                                {% endif %}
+                            </div>
+                            <div class="label-container">
+                                <label for="{{value.id}}">{{value.name}}</label>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -45,9 +49,13 @@
                 </h2>
                 <div id="purchase-product-prices">
                     {% for key,value in product_prices.items %}
-                        <div id="purchase-product-price-container">
-                            <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
-                            <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                        <div id="purchase-product-price-container" class="item-container">
+                            <div class="input-container">
+                                <input id="{{value.id}}" name="product-prices" type="radio" value="{{value.id}}" required/>
+                            </div>
+                            <div class="label-container">
+                                <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

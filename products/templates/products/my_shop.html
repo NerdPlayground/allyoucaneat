@@ -38,9 +38,13 @@
                                 </h2>
                                 <div id="product-contents">
                                     {% for content,value in product_detail.items %}
-                                        <div id="product-content-container">
-                                            <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
-                                            <label for="{{value.id}}">{{value.name}}</label>
+                                        <div id="product-content-container" class="item-container">
+                                            <div class="input-container">
+                                                <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
+                                            </div>
+                                            <div class="label-container">
+                                                <label for="{{value.id}}">{{value.name}}</label>
+                                            </div>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -52,9 +56,13 @@
                                 </h2>
                                 <div id="product-prices">
                                     {% for content,value in product_detail.items %}
-                                        <div id="product-price-container">
-                                            <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
-                                            <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                                        <div id="product-price-container" class="item-container">
+                                            <div class="input-container">
+                                                <input id="{{value.id}}" name="product-group-values" type="radio" value="{{value.id}}" required/>
+                                            </div>
+                                            <div class="label-container">
+                                                <label for="{{value.id}}">{{value.type}} - {{value.value}}</label>
+                                            </div>
                                         </div>
                                     {% endfor %}
                                 </div>

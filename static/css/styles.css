@@ -132,6 +132,16 @@ input[type="search"]:focus{
     width: 70%;
 }
 
+.item-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-container,
+.label-container{
+    display: inline-block;
+}
+
 .order-container{
     margin-bottom: 25px;
     border-radius: 20px;
