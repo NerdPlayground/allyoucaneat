@@ -157,6 +157,8 @@ CALLBACK_URL= "%s" %(config("CALLBACK_URL"))
 TOKEN_URL= "%s%s" %(config("SASAPAY_HEAD_URL"),config("TOKEN_URL"))
 PAYMENT_REQUEST= "%s%s" %(config("SASAPAY_HEAD_URL"),config("PAYMENT_REQUEST"))
 PROCESS_PAYMENT= "%s%s" %(config("SASAPAY_HEAD_URL"),config("PROCESS_PAYMENT"))
+TRANSACTION_STATUS= "%s%s" %(config("SASAPAY_HEAD_URL"),config("TRANSACTION_STATUS"))
+VERIFY_TRANSACTION= "%s%s" %(config("SASAPAY_HEAD_URL"),config("VERIFY_TRANSACTION"))
 NETWORK_CODE= config("NETWORK_CODE")
 
 # allow external access

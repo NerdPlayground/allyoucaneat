@@ -79,8 +79,7 @@ def receipts(request):
 def track_orders(request):
     customer= Customers.objects.get(id=request.user.id)
     orders= Order.objects.filter(
-        customer=customer,
-        paid=True,delivered=False
+        customer=customer,delivered=False
     )
     all_orders= dict()
     for order in orders:

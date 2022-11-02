@@ -1,5 +1,9 @@
 from django.contrib import admin
-from sasapay.models import RequestPaymentResponse,PaymentProcessResult
+from sasapay.models import (
+    RequestPaymentResponse,
+    PaymentProcessResult,
+    TransactionDetails
+)
 
 @admin.register(RequestPaymentResponse)
 class RequestPaymentResponseAdmin(admin.ModelAdmin):
@@ -34,3 +38,22 @@ class PaymentProcessResultAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self,request,obj=None):
         return False
+
+@admin.register(TransactionDetails)
+class TransactionDetailsAdmin(admin.ModelAdmin):
+    list_display= [
+        "id","TransactionType","TransactionDate",
+        "MerchantRequestID","CheckoutId","TransactionAmount",
+        "Paid","AmountPaid","PaidDate","SourceChannel",
+        "DestinationChannel","TransID"
+    ]
+    search_fields= ["CheckoutId"]
+
+    def has_add_permission(self,request):
+        return False
+
+    def has_change_permission(self,request,obj=None):
+        return False
+
+    def has_delete_permission(self,request,obj=None):
+        return False    

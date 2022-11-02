@@ -10,7 +10,7 @@ from sasapay.authentication import get_client_token
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-from sasapay.models import RequestPaymentResponse,PaymentProcessResult
+from sasapay.models import RequestPaymentResponse,PaymentProcessResult,TransactionDetails
 
 def get_merchant_code(order):
     return order.product.vendor.till_number
@@ -27,50 +27,46 @@ def get_error_message(data):
 @login_required(login_url="user:login")
 @is_customer
 def pay_order(request,pk):
+    client_token= get_client_token()
+    headers= {
+        "Authorization": "Bearer %s" %client_token["access_token"]
+    }
+
     order= get_order(pk)
-    order.paid= True
-    order.save()
-    return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
-    # client_token= get_client_token()
-    # headers= {
-    #     "Authorization": "Bearer %s" %client_token["access_token"]
-    # }
+    payload={
+        "MerchantCode": get_merchant_code(order),
+        "NetworkCode": settings.NETWORK_CODE,
+        "PhoneNumber": request.user.phone_number,
+        "TransactionDesc": "Pay for %s" %(order.product.name),
+        "AccountReference": str(order.id),
+        "Currency": settings.CURRENCY,
+        "Amount": order.price.value,
+        "CallBackURL": settings.CALLBACK_URL
+    }
 
-    # order= get_order(pk)
-    # payload={
-    #     "MerchantCode": get_merchant_code(order),
-    #     "NetworkCode": settings.NETWORK_CODE,
-    #     "PhoneNumber": request.user.phone_number,
-    #     "TransactionDesc": "Pay for %s" %(order.product.name),
-    #     "AccountReference": str(order.id),
-    #     "Currency": settings.CURRENCY,
-    #     "Amount": order.price.value,
-    #     "CallBackURL": settings.CALLBACK_URL
-    # }
-
-    # response= requests.post(
-    #     settings.PAYMENT_REQUEST,
-    #     headers= headers,
-    #     json= payload
-    # )
+    response= requests.post(
+        settings.PAYMENT_REQUEST,
+        headers= headers,
+        json= payload
+    )
     
-    # data= json.loads(response.text)
-    # if response.status_code == 200:
-    #     request_payment_response= RequestPaymentResponse(
-    #         status= data.get("status"),
-    #         detail= data.get("detail"),
-    #         PaymentGateway= data.get("PaymentGateway"),
-    #         MerchantRequestID= data.get("MerchantRequestID"),
-    #         CheckoutRequestID= data.get("CheckoutRequestID"),
-    #         ResponseCode= data.get("ResponseCode"),
-    #         ResponseDescription= data.get("ResponseDescription"),
-    #         CustomerMessage= data.get("CustomerMessage")
-    #     )
-    #     request_payment_response.save()
-    #     return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
-    # else:
-    #     data["Error Section"]= "Payment Request"
-    #     return HttpResponse(get_error_message(data))
+    data= json.loads(response.text)
+    if response.status_code == 200:
+        request_payment_response= RequestPaymentResponse(
+            status= data.get("status"),
+            detail= data.get("detail"),
+            PaymentGateway= data.get("PaymentGateway"),
+            MerchantRequestID= data.get("MerchantRequestID"),
+            CheckoutRequestID= data.get("CheckoutRequestID"),
+            ResponseCode= data.get("ResponseCode"),
+            ResponseDescription= data.get("ResponseDescription"),
+            CustomerMessage= data.get("CustomerMessage")
+        )
+        request_payment_response.save()
+        return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
+    else:
+        data["Error Section"]= "Payment Request"
+        return HttpResponse(get_error_message(data))
 
 @login_required(login_url="user:login")
 @is_customer
@@ -78,37 +74,118 @@ def complete_payment(request,pk):
     order= get_order(pk)
     context= {}
     if request.method == "POST":
-        return HttpResponseRedirect(reverse("customers:track-orders"))
-        # request_payment_response= RequestPaymentResponse.objects.get(
-        #     MerchantRequestID= str(order.id),
-        # )
+        request_payment_response= RequestPaymentResponse.objects.get(
+            MerchantRequestID= str(order.id),
+        )
 
-        # client_token= get_client_token()
-        # headers= {
-        #     "Authorization": "Bearer %s" %client_token["access_token"]
-        # }
+        client_token= get_client_token()
+        headers= {
+            "Authorization": "Bearer %s" %client_token["access_token"]
+        }
 
-        # payload= {
-        #     "CheckoutRequestID": request_payment_response.CheckoutRequestID,
-        #     "MerchantCode": get_merchant_code(order),
-        #     "VerificationCode": request.POST.get("verification-code"),
-        # }
+        payload= {
+            "CheckoutRequestID": request_payment_response.CheckoutRequestID,
+            "MerchantCode": get_merchant_code(order),
+            "VerificationCode": request.POST.get("verification-code"),
+        }
 
-        # response= requests.post(
-        #     settings.PROCESS_PAYMENT,
-        #     headers= headers,
-        #     json= payload
-        # )
+        response= requests.post(
+            settings.PROCESS_PAYMENT,
+            headers= headers,
+            json= payload
+        )
 
-        # data= json.loads(response.text)
-        # if response.status_code == 200:
-        #     order.paid= True
-        #     order.save()
-        #     return HttpResponseRedirect(reverse("customers:track-orders"))
-        # else:
-        #     data["Error Section"]= "Process Payment"
-        #     return HttpResponse(get_error_message(data))
+        data= json.loads(response.text)
+        if response.status_code == 200:
+            if data["status"] == True:
+                return HttpResponseRedirect(reverse("sasapay:transaction-status",args=(order.id,)))
+            else:
+                messages.error(
+                    request,
+                    data["detail"]
+                    +" Please ensure you enter the required verification code"
+                    +" to complete the payment for your order."
+                )
+        else:
+            data["Error Section"]= "Process Payment"
+            return HttpResponse(get_error_message(data))
     return render(request,"orders/pay_order.html",context)
+
+@login_required(login_url="user:login")
+@is_customer
+def transaction_status(request,pk):
+    order= get_order(pk)
+    request_payment_response= RequestPaymentResponse.objects.get(
+        MerchantRequestID= str(order.id),
+    )
+
+    client_token= get_client_token()
+    headers= {
+        "Authorization": "Bearer %s" %client_token["access_token"]
+    }
+    payload= {
+        "MerchantCode": get_merchant_code(order),
+        "CheckoutRequestId": request_payment_response.CheckoutRequestID,
+    }
+
+    response= requests.post(
+        settings.TRANSACTION_STATUS,
+        headers= headers,
+        json= payload
+    )
+
+    data= json.loads(response.text)
+    if response.status_code == 200:
+        response_data= data["data"]
+        transaction_details= TransactionDetails.objects.create(
+            TransactionType=response_data["TransactionType"],
+            TransactionDate=response_data["TransactionDate"],
+            MerchantRequestID= str(order.id),
+            CheckoutId=response_data["CheckoutId"],
+            TransactionAmount=response_data["TransactionAmount"],
+            Paid=response_data["Paid"],
+            AmountPaid=response_data["AmountPaid"],
+            PaidDate=response_data["PaidDate"],
+            SourceChannel=response_data["SourceChannel"],
+            DestinationChannel=response_data["DestinationChannel"],
+            TransID=response_data["TransID"]
+        )
+        return HttpResponseRedirect(reverse("sasapay:verify-transaction",args=(order.id,)))
+    else:
+        data["Error Section"]= "Transaction Status"
+        return HttpResponse(get_error_message(data))
+
+@login_required(login_url="user:login")
+@is_customer
+def verify_transaction(request,pk):
+    order= get_order(pk)
+    transaction_details= TransactionDetails.objects.get(
+        MerchantRequestID= str(order.id),
+    )
+
+    client_token= get_client_token()
+    headers= {
+        "Authorization": "Bearer %s" %client_token["access_token"]
+    }
+    payload={
+        "MerchantCode": get_merchant_code(order),
+        "TransactionCode": transaction_details.TransID,
+    }
+
+    response= requests.post(
+        settings.VERIFY_TRANSACTION,
+        headers= headers,
+        json= payload
+    )
+
+    data= json.loads(response.text)
+    if response.status_code == 200:
+        order.paid= True
+        order.save()
+        return HttpResponseRedirect(reverse("customers:track-orders"))
+    else:
+        data["Error Section"]= "Verify Transaction"
+        return HttpResponse(get_error_message(data))
 
 def payment_process_results(request):
     data= request.data

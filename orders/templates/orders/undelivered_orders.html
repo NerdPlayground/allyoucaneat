@@ -4,15 +4,22 @@
     {% for order,contents in all_orders.items %}
         <div class="order-container">
             {% include "orders/order.html" %}
-            {% if request.user.sasapay_vendor or request.user.external_vendor %}
-                <div id="order-buttons-container">
+            <div id="order-buttons-container">
+                {% if request.user.sasapay_vendor or request.user.external_vendor %}
                     <button id="deliver-order-button" class="all-buttons">
                         <a href="{% url 'vendors:deliver-order' order.id %}">
                             Deliver Order
                         </a>
                     </button>
-                </div>
-            {% endif %}
+                {% endif %}
+                {% if not order.paid %}
+                    <button id="complete-pending-order-button" class="all-buttons">
+                        <a href="{% url 'sasapay:complete-payment' order.id %}">
+                            Complete Payment
+                        </a>
+                    </button>
+                {% endif %}
+            </div>
         </div>
     {% empty %}
         <div class="empty-container">

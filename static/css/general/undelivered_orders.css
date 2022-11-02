@@ -28,7 +28,8 @@
 }
 
 #back-button,
-#deliver-order-button{
+#deliver-order-button,
+#complete-pending-order-button{
     border-radius: 20px;
     height: 30px;
     max-width: 100%;
@@ -39,7 +40,8 @@
     font-weight: bold;
 }
 
-#deliver-order-button{
+#deliver-order-button,
+#complete-pending-order-button{
     height: 25px;
     font-weight: normal;
 }
