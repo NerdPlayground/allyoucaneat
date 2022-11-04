@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import django_heroku
+import dj_database_url
 from pathlib import Path
 from decouple import config
 
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',    
 ]
 
 ROOT_URLCONF = 'allyoucaneat.urls'
@@ -133,10 +135,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
-STATICFILES_DIRS= [
-    BASE_DIR/'static'
-]
+STATIC_ROOT= BASE_DIR/'staticfiles'
+STATICFILES_DIRS= [BASE_DIR/'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -166,3 +166,9 @@ CORS_ALLOW_ALL_ORIGINS= True
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
+
+# Configure Database
+DATABASE_URL = config("DATABASE_URL")
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+}
