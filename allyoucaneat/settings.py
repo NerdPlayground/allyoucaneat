@@ -29,7 +29,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG",True)
 
 ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS= ["allyoucaneat.up.railway.app"]
+CSRF_TRUSTED_ORIGINS= ["https://allyoucaneat.up.railway.app"]
 
 
 # Application definition
