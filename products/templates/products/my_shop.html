@@ -76,6 +76,10 @@
                 </div>
             </form>
         </div>
+    {% empty %}
+        <div class="empty-container">
+            <p>There are no products in your shop.</p>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}
