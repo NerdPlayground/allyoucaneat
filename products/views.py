@@ -82,9 +82,6 @@ def add_product(request):
             name=product_name,
         )
         product.save()
-        print()
-        print(request.POST)
-        print()
         set_product_details(request,product)
         return HttpResponseRedirect(reverse("products:my-shop"))
     context= {}
