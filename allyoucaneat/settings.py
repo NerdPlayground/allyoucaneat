@@ -90,16 +90,16 @@ WSGI_APPLICATION = 'allyoucaneat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dballyoucaneat',
-        'USER': 'postgres',
-        'PASSWORD': 'PostgreSQL23!@#',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dballyoucaneat',
+#         'USER': 'postgres',
+#         'PASSWORD': 'PostgreSQL23!@#',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -169,7 +169,26 @@ CORS_ALLOW_ALL_ORIGINS= True
 django_heroku.settings(locals())
 
 # Configure Database
-DATABASE_URL = config("DATABASE_URL")
-DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-}
+# DATABASE_URL = config("DATABASE_URL")
+# DATABASES = {
+#     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+# }
+
+# Switch Databases
+DEVELOPMENT_MODE= config("DEVELOPMENT_MODE")
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dballyoucaneat',
+            'USER': 'postgres',
+            'PASSWORD': 'PostgreSQL23!@#',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+else:
+    DATABASE_URL = config("DATABASE_URL")
+    DATABASES = {
+        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+    }
