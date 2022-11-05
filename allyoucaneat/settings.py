@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import sys
 import django_heroku
 import dj_database_url
 from pathlib import Path
@@ -26,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG",True)
+DEBUG = config("DEBUG",True,cast=bool)
 
 ALLOWED_HOSTS = []
 CSRF_TRUSTED_ORIGINS= ["https://allyoucaneat.up.railway.app"]
@@ -85,21 +86,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'allyoucaneat.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'dballyoucaneat',
-#         'USER': 'postgres',
-#         'PASSWORD': 'PostgreSQL23!@#',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -168,15 +154,10 @@ CORS_ALLOW_ALL_ORIGINS= True
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
 
-# Configure Database
-# DATABASE_URL = config("DATABASE_URL")
-# DATABASES = {
-#     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-# }
-
 # Switch Databases
-DEVELOPMENT_MODE= config("DEVELOPMENT_MODE")
-if DEVELOPMENT_MODE is True:
+DEVELOPMENT_MODE= config("DEVELOPMENT_MODE",cast=bool)
+if DEVELOPMENT_MODE:
+    # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
