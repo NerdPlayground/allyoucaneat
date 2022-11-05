@@ -5,7 +5,8 @@ from django.utils.html import format_html_join
 
 class OrderAdmin(admin.ModelAdmin):
     list_display= [
-        "id","product","order_contents","order_price",
+        "id","product","order_contents",
+        "order_price","extra_instructions",
         "customer","paid","delivered","created_on"
     ]
     search_fields= ["customer"]
@@ -22,7 +23,7 @@ class OrderAdmin(admin.ModelAdmin):
         )
     
     fieldsets=[
-        ("Order Information",{"fields":["product","order_contents","order_price"]}),
+        ("Order Information",{"fields":["product","order_contents","order_price","extra_instructions"]}),
         ("Customer Information",{"fields":["customer","paid","delivered","created_on"]}),
     ]
 

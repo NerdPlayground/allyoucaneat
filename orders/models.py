@@ -26,6 +26,7 @@ class Order(models.Model):
         related_name="orders",
         on_delete= models.DO_NOTHING
     )
+    extra_instructions= models.TextField(null=True,blank=True)
     paid= models.BooleanField(default=False)
     delivered= models.BooleanField(default=False)
     created_on= models.DateTimeField(auto_now_add=True)

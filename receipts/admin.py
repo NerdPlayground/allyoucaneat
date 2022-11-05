@@ -4,13 +4,14 @@ from receipts.models import Receipt
 class ReceiptAdmin(admin.ModelAdmin):
     list_display= [
         "id","product_name","contents",
-        "product_type","price","customer",
-        "vendor","shop","created_on"
+        "product_type","price","extra_instructions",
+        "customer","vendor","shop","created_on"
     ]
     search_fields= ["customer","vendor"]
     fieldsets= [
         ("Product Details",{"fields":[
-            "product_name","contents","product_type","price"]}),
+            "product_name","contents",
+            "product_type","price","extra_instructions"]}),
         ("Interaction Details",{"fields":[
             "customer","vendor","shop","created_on"]})
     ]

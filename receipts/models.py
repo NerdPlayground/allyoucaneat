@@ -12,6 +12,7 @@ class Receipt(models.Model):
     contents= ArrayField(models.CharField(max_length=255))
     product_type= models.CharField(max_length=255)
     price= models.IntegerField()
+    extra_instructions= models.TextField(null=True,blank=True)
     customer= models.ForeignKey(
         "customers.Customers",
         related_name="receipts",

@@ -98,6 +98,7 @@ def deliver_order(request,pk):
         contents=contents,
         product_type=order.price.type,
         price=order.price.value,
+        extra_instructions=order.extra_instructions,
         customer=customer,
         vendor=vendor,
         shop=vendor.business_name

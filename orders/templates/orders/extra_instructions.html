@@ -1,0 +1,20 @@
+{% extends "fixed-content.html" %}
+{% block content %}
+    <div id="extra-instructions-container" class="top-container">
+        <form id="extra-instructions-form" method="POST" action="" autocomplete="off">
+            {% csrf_token %}
+            <div id="extra-instructions-fields">
+                <label for="extra-instructions">
+                    Do you have any extra instructions for your order?
+                </label>
+                <textarea id="extra-instructions" name="extra-instructions"></textarea>
+            </div>
+            <div id="extra-instructions-buttons-container">
+                <input id="extra-instructions-button" type="submit" value="Place Order" class="all-buttons"/>
+                <button id="extra-instructions-back-button" class="all-buttons">
+                    <a href="{% url 'products:product-details' product.id %}">Back</a>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

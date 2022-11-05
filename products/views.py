@@ -210,6 +210,13 @@ def products(request):
 @login_required(login_url="user:login")
 @is_customer
 def product_details(request,pk):
+    previous_page= request.META["HTTP_REFERER"]
+    if "order/extra-instructions" in previous_page:
+        current_order= Order.objects.get(
+            id=previous_page[previous_page[0:-1].rfind("/")+1:-1]
+        )
+        current_order.delete()
+    
     product= get_this_object(Product,pk)
     product_details= get_product_catalogue([product])[product]
     product_contents= product_details[0]
@@ -245,7 +252,7 @@ def product_details(request,pk):
         for content in selected_contents:
             order.contents.add(Content.objects.get(id=content))
         order.save()
-        return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
+        return HttpResponseRedirect(reverse("orders:extra-instructions",args=(order.id,)))
     context= {
         "product":product,
         "product_contents":product_contents,

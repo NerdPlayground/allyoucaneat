@@ -15,6 +15,18 @@ def get_order(pk):
 
 @login_required(login_url="user:login")
 @is_customer
+def extra_instructions(request,pk):
+    order= get_order(pk)
+    if request.method == "POST":
+        extra_instructions= request.POST.get("extra-instructions")
+        order.extra_instructions=extra_instructions
+        order.save()
+        return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
+    context= {"product":order.product}
+    return render(request,"orders/extra_instructions.html",context)
+
+@login_required(login_url="user:login")
+@is_customer
 def confirm_order(request,pk):
     order= get_order(pk)
     contents= Content.objects.filter(orders=order)
