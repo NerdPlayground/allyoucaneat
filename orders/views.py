@@ -19,7 +19,7 @@ def extra_instructions(request,pk):
     order= get_order(pk)
     if request.method == "POST":
         extra_instructions= request.POST.get("extra-instructions")
-        order.extra_instructions=extra_instructions
+        order.extra_instructions=extra_instructions if extra_instructions != "" else None
         order.save()
         return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
     context= {"product":order.product}
