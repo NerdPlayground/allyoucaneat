@@ -1,0 +1,56 @@
+<div id="receipt-order-fields">
+    <div class="entry-container">
+        <label class="entry-label">Receipt:</label>
+        <div class="entry-value">{{receipt.id}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Date:</label>
+        <div class="entry-value">{{receipt.created_on}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Shop:</label>
+        <div class="entry-value">{{receipt.shop}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Product:</label>
+        <div class="entry-value">{{receipt.product_name}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Contents:</label>
+        <div class="entry-value">
+            {% for content in receipt.contents %}
+                {{content}},
+            {% endfor %}
+        </div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Type:</label>
+        <div class="entry-value">{{receipt.product_type}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Price:</label>
+        <div class="entry-value">{{receipt.price}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Extra Instructions:</label>
+        <div class="entry-value">{{receipt.extra_instructions}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Ordered By:</label>
+        <div class="entry-value">{{receipt.customer.first_name}} {{receipt.customer.last_name}}</div>
+    </div>
+    <hr/>
+    <div class="entry-container">
+        <label class="entry-label">Served By:</label>
+        <div class="entry-value">{{receipt.vendor.first_name}} {{receipt.vendor.last_name}}</div>
+    </div>
+    <hr/>
+</div>
