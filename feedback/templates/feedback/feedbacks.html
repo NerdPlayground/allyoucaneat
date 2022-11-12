@@ -1,0 +1,62 @@
+{% extends "segmented-content.html" %}
+{% block filter %}
+{% include "sort.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="feedbacks-container">
+        {% for feedback in page %}
+            <div id="feedback-container">
+                <div id="feedback-fields-container">
+                    {% if request.user.sasapay_vendor or request.user.external_vendor %}
+                        <div class="entry-container">
+                            <label class="entry-label">From Customer:</label>
+                            <div class="entry-value">{{feedback.customer.first_name}} {{feedback.customer.last_name}}</div>
+                        </div>
+                        <hr/>
+                    {% elif request.user.customer %}
+                        <div class="entry-container">
+                            <label class="entry-label">To Vendor:</label>
+                            <div class="entry-value">{{feedback.vendor.first_name}} {{feedback.vendor.last_name}}</div>
+                        </div>
+                        <hr/>
+                        <div class="entry-container">
+                            <label class="entry-label">Shop:</label>
+                            <div class="entry-value">{{feedback.shop}}</div>
+                        </div>
+                        <hr/>
+                    {% endif %}
+                    <div class="entry-container">
+                        <label class="entry-label">Date:</label>
+                        <div class="entry-value">{{feedback.created_on}}</div>
+                    </div>
+                    <hr/>
+                    <div class="entry-container">
+                        <label class="entry-label">Content:</label>
+                        <div class="entry-value">{{feedback.content}}</div>
+                    </div>
+                    <hr/>
+                </div>
+                <div id="feedback-buttons-container">
+                    <button id="display-receipt-button" class="all-buttons">
+                        <a href="{% url 'receipts:receipt' feedback.receipt.id %}">
+                            Receipt
+                        </a>
+                    </button>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-container">
+                {% if request.user.customer %}
+                    <p>You have not given any feedback.</p>
+                {% elif request.user.sasapay_vendor or request.user.external_vendor %}
+                    <p>There are no feedbacks on your products.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block pagination %}
+{% include "pagination.html" %}
+{% endblock %}

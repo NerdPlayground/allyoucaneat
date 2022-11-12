@@ -1,0 +1,21 @@
+{% extends "fixed-content.html" %}
+{% block content %}
+    <div id="single-receipt-container" class="top-container">
+        <div id="receipt-container">
+            {% include "receipt.html" %}
+        </div>
+        <div id="receipt-buttons-container">
+            <button id="receipt-back-button" class="all-buttons">
+                {% if request.user.sasapay_vendor or request.user.external_vendor%}
+                    <a href="{% url 'feedbacks:customer-feedbacks' %}">
+                        Go Back
+                    </a>
+                {% elif request.user.customer %}
+                    <a href="{% url 'feedbacks:feedbacks' %}">
+                        Go Back
+                    </a>
+                {% endif %}
+            </button>
+        </div>
+    </div>
+{% endblock %}

@@ -7,60 +7,16 @@
 <div id="receipts-container" class="top-container">
     {% for receipt in page %}
         <div id="receipt-order-container">
-            <div class="entry-container">
-                <label class="entry-label">Receipt:</label>
-                <div class="entry-value">{{receipt.id}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Date:</label>
-                <div class="entry-value">{{receipt.created_on}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Shop:</label>
-                <div class="entry-value">{{receipt.shop}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Product:</label>
-                <div class="entry-value">{{receipt.product_name}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Contents:</label>
-                <div class="entry-value">
-                    {% for content in receipt.contents %}
-                        {{content}},
-                    {% endfor %}
+            {% include "receipt.html" %}
+            {% if current_day == receipt.created_on|date:"j" %}
+                <div id="receipt-order-buttons-container">
+                    <button id="add-feedback-button" class="all-buttons">
+                        <a href="{% url 'feedbacks:add-feedback' receipt.id %}">
+                            Give Your Feedback
+                        </a>
+                    </button>
                 </div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Type:</label>
-                <div class="entry-value">{{receipt.product_type}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Price:</label>
-                <div class="entry-value">{{receipt.price}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Extra Instructions:</label>
-                <div class="entry-value">{{receipt.extra_instructions}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Ordered By:</label>
-                <div class="entry-value">{{receipt.customer.first_name}} {{receipt.customer.last_name}}</div>
-            </div>
-            <hr/>
-            <div class="entry-container">
-                <label class="entry-label">Served By:</label>
-                <div class="entry-value">{{receipt.vendor.first_name}} {{receipt.vendor.last_name}}</div>
-            </div>
-            <hr/>
+            {% endif %}
         </div>
     {% empty %}
         <div class="empty-container">
@@ -68,7 +24,7 @@
         </div>
     {% endfor %}
     <div id="receipts-buttons-container">
-        <button id="receipt-back-button" type="button" class="all-buttons">
+        <button id="receipts-back-button" type="button" class="all-buttons">
             {% if request.user.sasapay_vendor or request.user.external_vendor %}
                 <a href="{% url 'products:my-shop' %}">Back</a>
             {% else %}

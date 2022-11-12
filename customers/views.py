@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.urls import reverse
 from orders.models import Order
 from receipts.models import Receipt
@@ -73,6 +74,7 @@ def modify_user(request):
 def receipts(request):
     customer= Customers.objects.get(id=request.user.id)
     context= sort_content(request,customer,Receipt)
+    context["current_day"]=str(datetime.today().day)
     return render(request,"receipts/receipts.html",context)
 
 @login_required(login_url="user:login")

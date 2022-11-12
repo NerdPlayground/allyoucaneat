@@ -1,0 +1,22 @@
+{% extends "fixed-content.html" %}
+{% block content %}
+<div id="add-feeback-container">
+    <form id="add-feeback-form" action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div id="add-feedback-fields-container">
+            <label for="feedback">
+                What's your feedback for this order?
+            </label>
+            <textarea id="feedback" name="feedback"></textarea>
+        </div>
+        <div id="add-feedback-buttons-container">
+            <input id="feedback-button" type="submit" value="Submit" class="all-buttons"/>
+            <button id="feedback-back-button" class="all-buttons">
+                <a href="{% url 'customers:receipts' %}">
+                    Back
+                </a>
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

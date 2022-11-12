@@ -17,6 +17,9 @@
             <span class="material-symbols-outlined" id="small-orders-button">
                 <a href="{% url 'customers:receipts' %}" class="exclude-format">receipt</a>
             </span>
+            <span class="material-symbols-outlined" id="small-feedbacks-button">
+                <a href="{% url 'feedbacks:feedbacks' %}" class="exclude-format">reviews</a>
+            </span>
         </div>
     {% elif request.user.external_vendor or request.user.sasapay_vendor %}
         <div id="small-vendors-buttons">
@@ -25,6 +28,9 @@
             </span>
             <span class="material-symbols-outlined" id="small-receipts-button">
                 <a href="{% url 'vendors:customer-receipts' %}" class="exclude-format">receipt</a>
+            </span>
+            <span class="material-symbols-outlined" id="small-customer-feedbacks-button">
+                <a href="{% url 'feedbacks:customer-feedbacks' %}" class="exclude-format">reviews</a>
             </span>
         </div>
     {% endif %}

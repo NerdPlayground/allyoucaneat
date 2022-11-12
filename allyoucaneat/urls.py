@@ -26,5 +26,7 @@ urlpatterns = [
     path("vendors/",include("vendors.urls")),
     path("order/",include("orders.urls")),
     path("sasapay/",include("sasapay.urls")),
+    path("feedbacks/",include("feedback.urls")),
+    path("receipts/",include("receipts.urls")),
     # path("/",include(".urls")),
 ]

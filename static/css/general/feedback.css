@@ -1,0 +1,69 @@
+/* #add-feeback-container,
+#add-feeback-form,
+#add-feedback-fields-container,
+#feedback,
+#add-feedback-buttons-container,
+#feedback-button,
+#feedback-back-button,
+#feedbacks-container,
+#feedback-container,
+#feedback-fields-container,
+#feedback-buttons-container{
+    border: 1px solid red;
+} */
+
+#feedbacks-container,
+#add-feeback-container{
+    margin: 25px;
+}
+
+#add-feeback-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#add-feedback-fields-container{
+    margin-bottom: 10px;
+}
+
+#feedback{
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border-radius: 0px 0px 20px 20px;
+}
+
+#add-feedback-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#feedback-button,
+#feedback-back-button,
+#display-receipt-button{
+    border-radius: 20px;
+    width: 200px;
+    height: 30px;
+    max-width: 100%;
+    max-height: auto;   
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#feedback-container{
+    margin-bottom: 25px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid var(--outer-gradient-color);
+}
+
+#feedback-buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+

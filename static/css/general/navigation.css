@@ -62,7 +62,7 @@
 #vendors-buttons,
 #small-customer-buttons,
 #small-vendors-buttons{
-    height: 100px;
+    height: 150px;
 }
 
 @media screen and (max-width:600px){

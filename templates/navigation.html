@@ -14,8 +14,11 @@
             <button class="navigation-bar all-buttons" id="track-orders-button">
                 <a href="{% url 'customers:track-orders' %}">Orders</a>
             </button>
-            <button class="navigation-bar all-buttons" id="orders-button">
+            <button class="navigation-bar all-buttons" id="receipts-button">
                 <a href="{% url 'customers:receipts' %}">Receipts</a>
+            </button>
+            <button class="navigation-bar all-buttons" id="feedbacks-button">
+                <a href="{% url 'feedbacks:feedbacks' %}">Feedbacks</a>
             </button>
         </div>
     {% elif request.user.external_vendor or request.user.sasapay_vendor %}
@@ -25,6 +28,9 @@
             </button>
             <button class="navigation-bar all-buttons" id="receipts-button">
                 <a href="{% url 'vendors:customer-receipts' %}">Receipts</a>
+            </button>
+            <button class="navigation-bar all-buttons" id="customer-feedbacks-button">
+                <a href="{% url 'feedbacks:customer-feedbacks' %}">Feedbacks</a>
             </button>
         </div>
     {% endif %}
