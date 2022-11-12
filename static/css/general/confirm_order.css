@@ -19,10 +19,9 @@
 }
 
 #sasapay-pay-order-button,
-#mpesa-pay-order-button,
 #cancel-order-button{
     border-radius: 20px;
-    width: 150px;
+    width: 200px;
     height: 30px;
     max-width: 100%;
     max-height: auto;
@@ -38,13 +37,11 @@
     }
 
     #sasapay-pay-order-button,
-    #mpesa-pay-order-button,
     #cancel-order-button{
         width: 100%;
     }
 
-    #sasapay-pay-order-button,
-    #mpesa-pay-order-button{
+    #sasapay-pay-order-button{
         margin-bottom: 10px;
     }
 }
