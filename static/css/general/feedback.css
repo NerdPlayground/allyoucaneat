@@ -67,3 +67,14 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 600px){
+    #add-feedback-buttons-container{
+        flex-direction: column;
+    }
+
+    #feedback-button,
+    #feedback-back-button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
