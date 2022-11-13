@@ -193,12 +193,12 @@ def verify_transaction(request,pk):
 
     data= json.loads(response.text)
     if response.status_code == 200:
-        if data["statusCode"] == 0:
+        if data["status"] == True:
             order.paid= True
             order.save()
             return HttpResponseRedirect(reverse("customers:track-orders"))
         else:
-            messages.error(request,data["detail"])
+            messages.error(request,data["message"])
             return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
     else:
         data["Error Section"]= "Verify Transaction"
