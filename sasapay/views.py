@@ -65,8 +65,14 @@ def pay_order(request,pk):
         request_payment_response.save()
         return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
     else:
-        data["Error Section"]= "Payment Request"
-        return HttpResponse(get_error_message(data))
+        messages.error(
+            request,
+            data["message"]
+            +" Dial *626# or download the app from"
+            +" Google Play Store or App Store"
+            +" to get started."
+        )
+        return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
 
 @login_required(login_url="user:login")
 @is_customer
