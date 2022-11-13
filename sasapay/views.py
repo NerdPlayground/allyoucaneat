@@ -52,18 +52,21 @@ def pay_order(request,pk):
     
     data= json.loads(response.text)
     if response.status_code == 200:
-        request_payment_response= RequestPaymentResponse(
-            status= data.get("status"),
-            detail= data.get("detail"),
-            PaymentGateway= data.get("PaymentGateway"),
-            MerchantRequestID= data.get("MerchantRequestID"),
-            CheckoutRequestID= data.get("CheckoutRequestID"),
-            ResponseCode= data.get("ResponseCode"),
-            ResponseDescription= data.get("ResponseDescription"),
-            CustomerMessage= data.get("CustomerMessage")
-        )
-        request_payment_response.save()
-        return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
+        if data["status"] == True:
+            request_payment_response= RequestPaymentResponse(
+                status= data.get("status"),
+                detail= data.get("detail"),
+                PaymentGateway= data.get("PaymentGateway"),
+                MerchantRequestID= data.get("MerchantRequestID"),
+                CheckoutRequestID= data.get("CheckoutRequestID"),
+                ResponseCode= data.get("ResponseCode"),
+                ResponseDescription= data.get("ResponseDescription"),
+                CustomerMessage= data.get("CustomerMessage")
+            )
+            request_payment_response.save()
+            return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
+        else:
+            messages.error(request,data["detail"])
     else:
         messages.error(
             request,
@@ -72,7 +75,7 @@ def pay_order(request,pk):
             +" Google Play Store or App Store"
             +" to get started."
         )
-        return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
+    return HttpResponseRedirect(reverse("orders:confirm-order",args=(order.id,)))
 
 @login_required(login_url="user:login")
 @is_customer
@@ -142,21 +145,25 @@ def transaction_status(request,pk):
 
     data= json.loads(response.text)
     if response.status_code == 200:
-        response_data= data["data"]
-        transaction_details= TransactionDetails.objects.create(
-            TransactionType=response_data["TransactionType"],
-            TransactionDate=response_data["TransactionDate"],
-            MerchantRequestID= str(order.id),
-            CheckoutId=response_data["CheckoutId"],
-            TransactionAmount=response_data["TransactionAmount"],
-            Paid=response_data["Paid"],
-            AmountPaid=response_data["AmountPaid"],
-            PaidDate=response_data["PaidDate"],
-            SourceChannel=response_data["SourceChannel"],
-            DestinationChannel=response_data["DestinationChannel"],
-            TransID=response_data["TransID"]
-        )
-        return HttpResponseRedirect(reverse("sasapay:verify-transaction",args=(order.id,)))
+        if data["status"] == True:
+            response_data= data["data"]
+            transaction_details= TransactionDetails.objects.create(
+                TransactionType=response_data["TransactionType"],
+                TransactionDate=response_data["TransactionDate"],
+                MerchantRequestID= str(order.id),
+                CheckoutId=response_data["CheckoutId"],
+                TransactionAmount=response_data["TransactionAmount"],
+                Paid=response_data["Paid"],
+                AmountPaid=response_data["AmountPaid"],
+                PaidDate=response_data["PaidDate"],
+                SourceChannel=response_data["SourceChannel"],
+                DestinationChannel=response_data["DestinationChannel"],
+                TransID=response_data["TransID"]
+            )
+            return HttpResponseRedirect(reverse("sasapay:verify-transaction",args=(order.id,)))
+        else:
+            messages.error(request,data["message"])
+            return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
     else:
         data["Error Section"]= "Transaction Status"
         return HttpResponse(get_error_message(data))
@@ -186,9 +193,13 @@ def verify_transaction(request,pk):
 
     data= json.loads(response.text)
     if response.status_code == 200:
-        order.paid= True
-        order.save()
-        return HttpResponseRedirect(reverse("customers:track-orders"))
+        if data["statusCode"] == 0:
+            order.paid= True
+            order.save()
+            return HttpResponseRedirect(reverse("customers:track-orders"))
+        else:
+            messages.error(request,data["detail"])
+            return HttpResponseRedirect(reverse("sasapay:complete-payment",args=(order.id,)))
     else:
         data["Error Section"]= "Verify Transaction"
         return HttpResponse(get_error_message(data))
