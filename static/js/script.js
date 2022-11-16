@@ -33,21 +33,21 @@ for(i=0; i<select_container.length; i++){
 			original_select_item= this.parentNode.parentNode.getElementsByTagName("select")[0];
 			previous_select_option= this.parentNode.previousSibling;
 			for(k=0; k<original_select_item.length; k++){
-				if(original_select_item.options[k].innerHTML==this.innerHTML){
-					original_select_item.selectedIndex=k;
-					previous_select_option.innerHTML=this.innerHTML;
-					similar_options=this.parentNode.getElementsByClassName("same-as-selected");
-					for(l=0; l<similar_options.length; l++){
-						similar_options[l].removeAttribute("class");
-					}
-					this.setAttribute("class", "same-as-selected");
-					break;
-				}
+                if(original_select_item.options[k].innerHTML==this.innerHTML){  
+                    original_select_item.selectedIndex=k;
+                    previous_select_option.innerHTML=this.innerHTML;
+                    similar_options=this.parentNode.getElementsByClassName("same-as-selected");
+                    for(l=0; l<similar_options.length; l++){
+                        similar_options[l].classList.remove("same-as-selected");
+                    }
+                    this.classList.add("same-as-selected");
+                    break;
+                }
 			}
 			previous_select_option.click();
 		});
         if((j+1)==select_item.length)
-            select_option.setAttribute("class","last-option");
+            select_option.classList.add("last-option");
         select_options_container.appendChild(select_option);
 	}
 	select_container[i].appendChild(select_options_container);

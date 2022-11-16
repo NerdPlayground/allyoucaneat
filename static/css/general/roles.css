@@ -35,6 +35,7 @@
     border-color: var(--outer-gradient-color) !important;
 }
 
+/*
 .select-selected:after{
     position: absolute;
     content: "";
@@ -51,7 +52,7 @@
     top: 7px;
     border-color: transparent;
     border-bottom-color: var(--outer-gradient-color);
-}
+} */
 
 .select-items div,.select-selected {
     padding: 8px 16px;
@@ -82,6 +83,7 @@
     display: none;
 }
 
-.select-items div:hover, .same-as-selected {
-    background-color: black;
+.same-as-selected,
+.select-items div:hover{
+    background-color: var(--body-background-color);
 }
