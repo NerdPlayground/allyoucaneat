@@ -192,3 +192,17 @@ input[type="search"]:focus{
         width: 100%;
     }
 }
+
+
+
+/* MOBILE PHONES */
+
+@media screen and (min-device-width: 280px) and (max-device-width: 1024px){
+    body{
+        height: 97vh;
+    }
+
+    #main-container{
+        height: 100%;
+    }
+}
