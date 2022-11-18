@@ -12,6 +12,11 @@
     background-image: var(--bright-color);
 }
 
+#small-navigation-bar svg{
+    width: 20px;
+    height: 20px;
+}
+
 #small-viewport-values{
     cursor: pointer;
 }
