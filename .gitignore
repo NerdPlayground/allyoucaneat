@@ -1,6 +1,7 @@
 blank.txt
 sketchpad.txt
 database.json
+commands.sh
 
 # Byte-compiled / optimized / DLL files 
 __pycache__/ 
