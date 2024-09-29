@@ -6,7 +6,7 @@ from products.models import Content
 from django.contrib import messages
 from customers.models import Customers
 from vendors.decorators import is_vendor
-from common.functions import sort_content
+from pocket.functions import sort_content
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from vendors.forms import VendorRegistration,ModificationForm

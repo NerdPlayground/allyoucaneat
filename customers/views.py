@@ -5,7 +5,7 @@ from receipts.models import Receipt
 from products.models import Content
 from django.contrib import messages
 from customers.models import Customers
-from common.functions import sort_content
+from pocket.functions import sort_content
 from customers.decorators import is_customer
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
