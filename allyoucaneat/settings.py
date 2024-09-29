@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'receipts',
     'sasapay',
     'feedback',
-    # '',
+    'pocket',
 ]
 
 MIDDLEWARE = [
